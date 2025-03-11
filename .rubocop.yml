@@ -1,0 +1,8 @@
+plugins: rubocop-rails
+
+Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/devise.rb'
