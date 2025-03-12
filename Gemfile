@@ -53,7 +53,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
 
   # RSpec testing framework for Ruby on Rails [https://github.com/rspec/rspec-rails]
-  gem 'rspec-rails', '~> 7.0.0'
+  gem 'rspec-rails', '~> 7.1.1'
 
   # factory_bot is a fixtures replacement [https://github.com/thoughtbot/factory_bot_rails]
   gem 'factory_bot_rails', '~> 6.4'
