@@ -4,6 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Homes', type: :request do
   describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
+    it 'should get index' do
+      get home_index_path
+      assert_response :success
+    end
   end
 end
