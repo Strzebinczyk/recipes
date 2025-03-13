@@ -6,10 +6,10 @@ class StepsController < ApplicationController
   end
 
   def destroy
-    step = Step.find(params[:id])
-    step.destroy
+    @step = Step.find(params[:id])
+    @step.destroy
   rescue ActiveRecord::RecordNotFound
-    step = Step.new(id: params[:id])
+    @step = Step.new(id: params[:id])
   ensure
     respond_to do |format|
       format.turbo_stream
@@ -33,6 +33,6 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit(:position, :instructions)
+    params.require(:step).permit(:id, :position, :instructions)
   end
 end

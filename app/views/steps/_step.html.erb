@@ -6,6 +6,6 @@
     <%= ff.label :instructions %><br>
     <%= ff.text_field :instructions %>
     <%= ff.hidden_field :id %>
-    <%= button_tag "Delete step", formaction: step_path(turbo_id_for(step)), method: :delete %>
+    <%= button_tag "Delete step", formaction: step_path(turbo_id_for(step)), formmethod: :delete %>
   </fieldset>
 <% end %>
