@@ -1,0 +1,32 @@
+<% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+    <ul>
+      <% @recipe.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @recipe do |f| %>
+  <div class="field">
+    <%= f.label :name, 'Recipe name:'%><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: 'Name' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :serving,  'Serving:' %><br />
+    <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ingredients, 'Ingredient list:'%><br />
+    <%= f.text_field :ingredients, autocomplete: 'Ingredients' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add" %>
+  </div>
+<% end %>
