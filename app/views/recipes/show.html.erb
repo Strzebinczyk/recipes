@@ -1,6 +1,10 @@
 <h1><%= @recipe.name %></h1>
 
-<%= render @recipe.steps %>
+<ul>
+    <% @recipe.steps.each do |step| %>
+      <li><%= step.instructions %></li>
+    <% end %>
+  </ul>
 
 <ul>
   <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>

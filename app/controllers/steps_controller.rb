@@ -1,9 +1,4 @@
 class StepsController < ApplicationController
-  # def create
-  #   @recipe = Recipe.find(params[:article_id])
-  #   @step = @recipe.steps.create(step_params)
-  # end
-
   def new
     respond_to do |format|
       format.turbo_stream
@@ -18,6 +13,20 @@ class StepsController < ApplicationController
   ensure
     respond_to do |format|
       format.turbo_stream
+    end
+  end
+
+  def edit
+    @step = Step.find(params[:id])
+  end
+
+  def update
+    @step = Step.find(params[:id])
+
+    if @step.update(step_params)
+      redirect_to @step
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

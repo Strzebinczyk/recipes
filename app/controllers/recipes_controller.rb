@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   def index
     @recipes = Recipe.all
   end
@@ -18,10 +18,12 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.build(recipe_params)
 
-    if @recipe.save
-      redirect_to @recipe
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @recipe.save
+        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -32,10 +34,20 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
 
-    if @recipe.update(recipe_params)
-      redirect_to @recipe
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @recipe.update(recipe_params)
+        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @recipe.destroy
+
+    respond_to do |format|
+      format.html { redirect_to home_index_path, notice: 'Recipe was successfully destroyed.' }
     end
   end
 
