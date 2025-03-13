@@ -45,6 +45,6 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.expect(recipe: %i[name serving ingredients])
+    params.require(:recipe).permit([:name, :serving, :ingredients, { steps_attributes: %i[id position instructions] }])
   end
 end

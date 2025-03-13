@@ -26,6 +26,18 @@
     <%= f.text_field :ingredients, autocomplete: 'Ingredients' %>
   </div>
 
+  <%= f.fields_for :steps, @recipe.steps + [Step.new] do |u| %>
+    <div class="field">
+      <%= u.label :position %><br />
+      <%= u.number_field :position %>
+    </div>
+
+    <div class="field">
+      <%= u.label :instructions %><br />
+      <%= u.text_field :instructions %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Add" %>
   </div>
