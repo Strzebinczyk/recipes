@@ -1,0 +1,3 @@
+<%= turbo_stream.append :steps do %>
+  <%= render partial: "steps/step_form", locals: { step: Step.new } %>
+<% end %>

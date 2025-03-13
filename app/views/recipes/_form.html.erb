@@ -26,17 +26,12 @@
     <%= f.text_field :ingredients, autocomplete: 'Ingredients' %>
   </div>
 
-  <%= f.fields_for :steps, @recipe.steps + [Step.new] do |u| %>
-    <div class="field">
-      <%= u.label :position %><br />
-      <%= u.number_field :position %>
-    </div>
-
-    <div class="field">
-      <%= u.label :instructions %><br />
-      <%= u.text_field :instructions %>
-    </div>
-  <% end %>
+  <div id="steps">
+    <%= render @recipe.steps %>
+  </div>
+  <div>
+    <%= link_to "Add a step", new_step_path, data: { turbo_stream: true } %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Add" %>
