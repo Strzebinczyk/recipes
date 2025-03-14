@@ -1,4 +1,5 @@
-plugins: rubocop-rails
+plugins: 
+ - rubocop-rails
 
 Documentation:
   Enabled: false
