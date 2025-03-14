@@ -2,9 +2,6 @@
 
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
-  def index
-    @recipes = Recipe.all
-  end
 
   def show
     @recipe = Recipe.find(params[:id])

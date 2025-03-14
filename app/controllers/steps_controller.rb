@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StepsController < ApplicationController
   def new
     respond_to do |format|

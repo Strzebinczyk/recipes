@@ -42,6 +42,11 @@ end
 RSpec.configure do |config|
   config.include ::Support::SessionHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.before(:each, type: :request) do
+    Rails.application.reload_routes_unless_loaded
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
