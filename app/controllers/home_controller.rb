@@ -7,6 +7,6 @@ class HomeController < ApplicationController
   private
 
   def load_recipes
-    @recipes = Recipe.order('created_at desc').limit(5)
+    @recent_recipes = Recipe.order('created_at desc').limit(5)
   end
 end
