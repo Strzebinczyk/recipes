@@ -28,7 +28,7 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'creates recipe successfully' do
-        post '/recipes', params: { recipe: {
+        post recipes_path, params: { recipe: {
           name: 'Valid recipe',
           serving: 2,
           ingredients: 'Fish and garlic'
@@ -43,14 +43,14 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'bad request when book data is empty' do
-        post '/recipes', params: { recipe: {} }
+        post recipes_path, params: { recipe: {} }
         expect(response).to have_http_status(:bad_request)
       end
     end
 
     context 'when user is not authenticated' do
       it 'creates recipe successfully' do
-        post '/recipes', params: { recipe: {
+        post recipes_path, params: { recipe: {
           name: 'Valid recipe',
           serving: 2,
           ingredients: 'Fish and garlic'
@@ -76,7 +76,7 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'updates recipe successfully' do
-        put "/recipes/#{recipe.id}", params: { id: recipe.id, recipe: {
+        put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
           ingredients: 'Garlic and water'
@@ -91,7 +91,7 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'should not update recipe when recipe id is not found' do
-        put '/recipe/2', params: { id: 2, recipe: {
+        put recipe_path(2), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
           ingredients: 'Garlic and water'
@@ -100,19 +100,20 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'recipe not updated when details not provided' do
-        put "/recipes/#{recipe.id}", params: { id: recipe.id, recipe: {} }
+        put recipe_path(recipe.id), params: { recipe: {} }
         expect(response).to have_http_status(:bad_request)
       end
     end
 
     context 'when user is not authenticated' do
       it 'should not update recipe ' do
-        put "/recipe/#{recipe.id}", params: { id: recipe.id, recipe: {
+        put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
           ingredients: 'Garlic and water'
         } }
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -124,22 +125,21 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'delete recipe successfully' do
-        delete "/recipes/#{recipe.id}"
+        delete recipe_path(recipe.id)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(home_index_path)
       end
 
       it 'should not delete recipe when recipe id is not found' do
-        delete '/recipes/2'
-
+        delete recipe_path(2)
         expect(response).to have_http_status(:not_found)
       end
     end
 
     context 'when user is not authenticated' do
       it 'should not delete recipe ' do
-        put "/recipes/#{recipe.id}"
+        put recipe_path(recipe.id)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(new_user_session_path)
