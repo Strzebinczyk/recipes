@@ -11,16 +11,16 @@ RSpec.describe Recipe, type: :model do
 
   it 'is not valid without a name' do
     recipe2 = build(:recipe, name: nil)
-    expect(recipe2).to_not be_valid
+    expect(recipe2).not_to be_valid
   end
 
   it 'is not valid without a serve quantity' do
     recipe2 = build(:recipe, serving: nil)
-    expect(recipe2).to_not be_valid
+    expect(recipe2).not_to be_valid
   end
 
   it 'is not valid without ingredients' do
     recipe2 = build(:recipe, ingredients: nil)
-    expect(recipe2).to_not be_valid
+    expect(recipe2).not_to be_valid
   end
 end

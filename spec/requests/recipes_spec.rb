@@ -7,14 +7,14 @@ RSpec.describe 'Recipes', type: :request do
   let(:user) { create(:user) }
 
   describe 'GET /recipes/:id' do
-    it 'should get recipe show page' do
+    it 'gets recipe show page' do
       get recipe_path(recipe)
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'GET /recipes/new' do
-    it 'should get new recipe page' do
+    it 'gets new recipe page' do
       sign_in user
       get new_recipe_path
       expect(response).to have_http_status(:ok)
@@ -27,7 +27,7 @@ RSpec.describe 'Recipes', type: :request do
         sign_in user
       end
 
-      it 'creates recipe successfully' do
+      it 'creates recipe successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         post recipes_path, params: { recipe: {
           name: 'Valid recipe',
           serving: 2,
@@ -35,7 +35,7 @@ RSpec.describe 'Recipes', type: :request do
         } }
 
         recipe = Recipe.last
-        expect(recipe).to be
+        expect(recipe).to be_present
         expect(recipe.name).to eq('Valid recipe')
         expect(recipe.serving).to eq(2)
         expect(recipe.ingredients).to eq('Fish and garlic')
@@ -49,7 +49,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     context 'when user is not authenticated' do
-      it 'creates recipe successfully' do
+      it 'creates recipe successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         post recipes_path, params: { recipe: {
           name: 'Valid recipe',
           serving: 2,
@@ -62,7 +62,7 @@ RSpec.describe 'Recipes', type: :request do
   end
 
   describe 'GET /recipes/:id/edit' do
-    it 'should get recipe edit page' do
+    it 'gets recipe edit page' do
       sign_in user
       get edit_recipe_path(recipe)
       expect(response).to have_http_status(:ok)
@@ -75,14 +75,14 @@ RSpec.describe 'Recipes', type: :request do
         sign_in user
       end
 
-      it 'updates recipe successfully' do
+      it 'updates recipe successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
           ingredients: 'Garlic and water'
         } }
         recipe = Recipe.last
-        expect(recipe).to be
+        expect(recipe).to be_present
         expect(recipe.name).to eq('Updated recipe')
         expect(recipe.serving).to eq(10)
         expect(recipe.ingredients).to eq('Garlic and water')
@@ -90,7 +90,7 @@ RSpec.describe 'Recipes', type: :request do
         expect(response).to redirect_to(recipe_path(recipe))
       end
 
-      it 'should not update recipe when recipe id is not found' do
+      it 'does not update recipe when recipe id is not found' do # rubocop:disable RSpec/ExampleLength
         put recipe_path(2), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
@@ -106,7 +106,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     context 'when user is not authenticated' do
-      it 'should not update recipe ' do
+      it 'does not update recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
@@ -124,21 +124,21 @@ RSpec.describe 'Recipes', type: :request do
         sign_in user
       end
 
-      it 'delete recipe successfully' do
+      it 'delete recipe successfully' do # rubocop:disable RSpec/MultipleExpectations
         delete recipe_path(recipe.id)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(home_index_path)
       end
 
-      it 'should not delete recipe when recipe id is not found' do
+      it 'does not delete recipe when recipe id is not found' do
         delete recipe_path(2)
         expect(response).to have_http_status(:not_found)
       end
     end
 
     context 'when user is not authenticated' do
-      it 'should not delete recipe ' do
+      it 'does not delete recipe' do # rubocop:disable RSpec/MultipleExpectations
         put recipe_path(recipe.id)
 
         expect(response).to have_http_status(:found)

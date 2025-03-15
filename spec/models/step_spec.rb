@@ -11,6 +11,6 @@ RSpec.describe Step, type: :model do
 
   it 'is not valid without instructions' do
     step2 = build(:step, instructions: nil)
-    expect(step2).to_not be_valid
+    expect(step2).not_to be_valid
   end
 end

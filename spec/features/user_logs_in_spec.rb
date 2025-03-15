@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'User logs in' do
   scenario 'with valid email and password' do
-    @user1 = create(:user)
-    log_in_with @user1.email, @user1.password
+    user1 = create(:user)
+    log_in_with user1.email, user1.password
 
     expect(page).to have_content('Sign out')
   end

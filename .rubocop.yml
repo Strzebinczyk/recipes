@@ -1,5 +1,7 @@
 plugins: 
  - rubocop-rails
+ - rubocop-capybara
+ - rubocop-rspec
 
 Documentation:
   Enabled: false
