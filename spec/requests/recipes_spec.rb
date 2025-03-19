@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Recipes', type: :request do
   let(:recipe) { create(:recipe) }
-  let(:step) { create(:step) }
   let(:user) { create(:user) }
+  let(:recipe_with_steps) { create(:recipe_with_steps) }
 
   describe 'GET /recipes/:id' do
     it 'gets recipe show page' do
@@ -122,22 +122,16 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'edits an existing step in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-        post recipes_path, params: { recipe: {
-          name: 'Valid recipe',
-          serving: 2,
-          ingredients: 'Fish and garlic',
-          steps_attributes: [instructions: 'Boil water']
+        step = recipe_with_steps.steps.first
+        put recipe_path(recipe_with_steps.id), params: { recipe: {
+          steps_attributes: [id: step.id, instructions: 'Updated step']
         } }
-        recipe = Recipe.last
-        step = Step.last
-        put recipe_path(recipe.id), params: { recipe: {
-          steps_attributes: [instructions: 'Updated step']
-        } }
-        expect(step).to be_present
+
+        expect(step.reload).to be_present
         expect(step.instructions).to eq('Updated step')
-        expect(step.recipe_id).to eq(recipe.id)
+        expect(step.recipe_id).to eq(recipe_with_steps.id)
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(recipe_path(recipe))
+        expect(response).to redirect_to(recipe_path(recipe_with_steps))
       end
 
       it 'does not update recipe when recipe id is not found' do # rubocop:disable RSpec/ExampleLength
@@ -175,10 +169,22 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'delete recipe successfully' do # rubocop:disable RSpec/MultipleExpectations
+        recipe_id = recipe.id
         delete recipe_path(recipe.id)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(home_index_path)
+        expect { Recipe.find(recipe_id) }.to raise_exception(ActiveRecord::RecordNotFound)
+      end
+
+      it "deletes recipe with it's steps" do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+        step_id = recipe_with_steps.steps.first.id
+        recipe_id = recipe_with_steps.id
+        delete recipe_path(recipe_with_steps.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(home_index_path)
+        expect { Recipe.find(recipe_id) }.to raise_exception(ActiveRecord::RecordNotFound)
+        expect { Step.find(step_id) }.to raise_exception(ActiveRecord::RecordNotFound)
       end
 
       it 'does not delete recipe when recipe id is not found' do
