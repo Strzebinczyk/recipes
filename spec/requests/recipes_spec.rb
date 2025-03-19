@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Recipes', type: :request do
   let(:recipe) { create(:recipe) }
+  let(:step) { create(:step) }
   let(:user) { create(:user) }
 
   describe 'GET /recipes/:id' do
@@ -42,6 +43,21 @@ RSpec.describe 'Recipes', type: :request do
         expect(response).to redirect_to(recipe_path(recipe))
       end
 
+      it 'creates a recipe with steps' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          ingredients: 'Fish and garlic',
+          steps_attributes: [instructions: 'Boil water']
+        } }
+        recipe = Recipe.last
+        step = Step.last
+        expect(step).to be_present
+        expect(step.instructions).to eq('Boil water')
+        expect(step.recipe_id).to eq(recipe.id)
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
       it 'bad request when book data is empty' do
         post recipes_path, params: { recipe: {} }
         expect(response).to have_http_status(:bad_request)
@@ -49,7 +65,7 @@ RSpec.describe 'Recipes', type: :request do
     end
 
     context 'when user is not authenticated' do
-      it 'creates recipe successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      it 'redirects to log in page' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         post recipes_path, params: { recipe: {
           name: 'Valid recipe',
           serving: 2,
@@ -86,6 +102,40 @@ RSpec.describe 'Recipes', type: :request do
         expect(recipe.name).to eq('Updated recipe')
         expect(recipe.serving).to eq(10)
         expect(recipe.ingredients).to eq('Garlic and water')
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'adds a step in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        put recipe_path(recipe.id), params: { recipe: {
+          name: 'Updated recipe',
+          steps_attributes: [instructions: 'Boil a pot of water']
+        } }
+        recipe = Recipe.last
+        step = Step.last
+        expect(step).to be_present
+        expect(recipe.name).to eq('Updated recipe')
+        expect(step.instructions).to eq('Boil a pot of water')
+        expect(step.recipe_id).to eq(recipe.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'edits an existing step in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          ingredients: 'Fish and garlic',
+          steps_attributes: [instructions: 'Boil water']
+        } }
+        recipe = Recipe.last
+        step = Step.last
+        put recipe_path(recipe.id), params: { recipe: {
+          steps_attributes: [instructions: 'Updated step']
+        } }
+        expect(step).to be_present
+        expect(step.instructions).to eq('Updated step')
+        expect(step.recipe_id).to eq(recipe.id)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end

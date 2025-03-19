@@ -4,13 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'Steps', type: :request do
   let(:step) { create(:step) }
-  let(:recipe) { create(:recipe) }
   let(:user) { create(:user) }
 
   describe 'GET /steps/new' do
     it 'gets new step partial' do
       sign_in user
-      get new_step_path(format: :turbo_stream)
+      get new_step_path(format: :turbo_stream, subaction: :refresh)
       expect(response).to have_http_status(:ok)
     end
   end
@@ -34,7 +33,7 @@ RSpec.describe 'Steps', type: :request do
     end
 
     context 'when user is not authenticated' do
-      it 'does not delete step' do
+      it 'does not delete step' do # rubocop:disable RSpec/MultipleExpectations
         delete step_path(step.id, format: :turbo_stream)
 
         expect(response).to have_http_status(:found)

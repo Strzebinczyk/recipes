@@ -5,6 +5,6 @@ class Step < ApplicationRecord
   belongs_to :recipe
 
   before_create do
-    self.position = recipe.steps.last.&position.to_i + 1
+    self.position = recipe.steps.last&.position.to_i + 1
   end
 end
