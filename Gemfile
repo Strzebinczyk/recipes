@@ -51,8 +51,10 @@ group :development, :test do
 
   # A RuboCop extension focused on enforcing Rails best practices and coding conventions. [https://docs.rubocop.org/rubocop-rails/cops_rails.html]
   gem 'rubocop-capybara', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec_rails', require: false
 
   # RSpec testing framework for Ruby on Rails [https://github.com/rspec/rspec-rails]
   gem 'rspec-rails', '~> 7.1.1'
