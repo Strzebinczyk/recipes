@@ -5,10 +5,10 @@ require 'rails_helper'
 RSpec.describe 'User adds recipe' do
   include Warden::Test::Helpers
   Warden.test_mode!
-  let!(:user) { create(:user) }
+
+  let(:user) { create(:user) }
 
   before do
-    # log_in_with(user.email, 'blahblah')
     login_as(user, scope: :user, run_callbacks: false)
     visit new_recipe_path
   end

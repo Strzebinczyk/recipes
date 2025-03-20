@@ -1,5 +1,6 @@
 <h1><%= @recipe.name %></h1>
-
+<h4><%= @recipe.serving %></h4>
+<h4><%= @recipe.ingredients %></h4>
 <ul>
     <% @recipe.steps.each do |step| %>
       <li><%= step.instructions %></li>
