@@ -61,6 +61,8 @@ group :development, :test do
 
   # factory_bot is a fixtures replacement [https://github.com/thoughtbot/factory_bot_rails]
   gem 'factory_bot_rails', '~> 6.4'
+
+  gem 'warden'
 end
 
 group :development do
