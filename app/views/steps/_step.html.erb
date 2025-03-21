@@ -1,10 +1,9 @@
 <%= fields_for "recipe[steps_attributes][#{turbo_id_for(step)}]", step do |ff| %>
-  <fieldset id="<%= turbo_id_for(step) %>">
-    <div>
-      <%= ff.label :instructions %>
-      <%= ff.text_field :instructions %>
-    </div>
+  <fieldset id="<%= turbo_id_for(step) %>" data-controller="delete-step">
+    <%= ff.label :instructions %>
+    <%= ff.text_field :instructions %>
     <%= ff.hidden_field :id %>
-    <%= button_tag "Delete step", formaction: step_path(turbo_id_for(step)), formmethod: :delete %>
+    <%= ff.hidden_field :_destroy, class: "destroy-step" %>
+    <%= link_to "Delete step", "", data: {action: "click->delete-step#delete"} %>
   </fieldset>
 <% end %>
