@@ -41,9 +41,9 @@ RSpec.describe 'User adds recipe' do
       click_link 'Add a step'
       find_all(:field).last.set('Chop sausage')
       click_button 'Submit'
+      expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Chop sausage')
-      expect(page).to have_content('Recipe was successfully created.')
     end
   end
 

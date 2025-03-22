@@ -15,7 +15,7 @@ RSpec.describe 'User edits recipe' do
   end
 
   describe 'With valid data' do
-    scenario 'with editing multiple steps' do
+    scenario 'with editing multiple steps' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
       find_field('Ingredient list').set 'Updated ingredients'
@@ -32,17 +32,16 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content('Recipe was successfully updated.')
     end
 
-    scenario 'with deleting a step', :js do
-      find_all(:field)[3].set('First updated instruction')
-      # Unable to find button that is not disabled
-      # binding.irb
-      find_all(:button).first.click_button
+    scenario 'with deleting a step', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      find_all(:link)[2].click
+      find_all(:link)[2].click
+      find_all(:link)[2].click
       click_button 'Submit'
       expect(page).not_to have_content('First updated instruction')
       expect(page).to have_content('Recipe was successfully updated.')
     end
 
-    scenario 'with adding a step', :js do
+    scenario 'with adding a step', :js do # rubocop:disable RSpec/MultipleExpectations
       click_link 'Add a step'
       find_all(:field).last.set('Additional step')
       click_button 'Submit'
