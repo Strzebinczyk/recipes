@@ -13,3 +13,15 @@
 .hidden {
   display: none;
 }
+
+.field {
+ padding: 2px;
+}
+
+fieldset {
+  border: 0px;
+  padding-block: 0px;
+  padding-inline: 0px;
+  margin: 0;
+  margin-inline: 0px;
+}
