@@ -1,0 +1,12 @@
+name: "Ruby on Rails CI"
+on: push
+jobs:
+  testing:
+    steps:
+      - uses: browser-actions/setup-chrome@v1
+      - run: chrome --version
+      - uses: actions/checkout@v4
+      # other steps follow
+      # Update the rails testing step to make sure system tests are being run
+      - name: Run tests
+        run: bin/rails test:all
