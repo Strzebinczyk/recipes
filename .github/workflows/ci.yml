@@ -57,6 +57,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "172.16.18.16 example.test" | sudo tee -a /etc/hosts
+          sudo echo "172.16.18.16 example2.test" | sudo tee -a /etc/hosts
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git pkg-config google-chrome-stable
 
