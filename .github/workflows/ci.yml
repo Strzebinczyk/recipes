@@ -69,10 +69,14 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Install dependencies
+        run: |
+          gem install selenium-webdriver headless
+
       - name: Run tests
         env:
           RAILS_ENV: test
-          REDIS_URL: redis://localhost:6379/0
+          #REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare spec
 
       - name: Keep screenshots from failed system tests
