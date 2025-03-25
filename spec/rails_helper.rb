@@ -20,6 +20,30 @@ require 'capybara/rails'
 require_relative './support/session_helpers'
 Capybara.server = :puma
 
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w[--headless --disable-gpu] },
+    'goog:loggingPrefs': {
+      browser: 'ALL'
+    }
+  )
+
+  options = ::Selenium::WebDriver::Chrome::Options.new
+
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--window-size=1400,1400')
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    desired_capabilities: capabilities,
+    options: options
+  )
+end
+
+Capybara.default_driver = :headless_chrome
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

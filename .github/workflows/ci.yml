@@ -69,10 +69,6 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install dependencies
-        run: |
-          gem install selenium-webdriver headless
-
       - name: Run tests
         env:
           RAILS_ENV: test
