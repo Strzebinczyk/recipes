@@ -15,7 +15,17 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'database_cleaner/active_record'
+require 'capybara/rspec'
+require 'capybara/rails'
 require_relative './support/session_helpers'
+Capybara.server = :puma
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new app, browser: :chrome,
+                                      options: Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu])
+end
+
+Capybara.javascript_driver = :chrome
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -42,6 +52,20 @@ end
 RSpec.configure do |config|
   config.include ::Support::SessionHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Warden::Test::Helpers, type: :feature
+
+  config.before(:each, type: :system) do
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+  end
+
+  config.before(:each, type: :request) do
+    Rails.application.reload_routes_unless_loaded
+  end
+
+  config.before(type: :feature) do
+    Warden.test_mode!
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
@@ -51,7 +75,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -80,7 +104,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
+  config.around do |example|
     DatabaseCleaner.cleaning do
       example.run
     end

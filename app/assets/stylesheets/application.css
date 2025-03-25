@@ -8,3 +8,19 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+     *= require reset
+
+    */
+
+
+.hidden {
+  display: none;
+}
+
+
+fieldset {
+  border: 0px;
+  padding: 0px;
+}

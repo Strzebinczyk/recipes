@@ -1,2 +1,13 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<% if user_signed_in? %>
+  <%= link_to "Add recipe", new_recipe_path%>
+<% end %></p>
+
+<h1>Latest recipes</h1>
+
+<ul>
+  <% @recent_recipes.each do |recipe| %>
+    <li>
+      <%= link_to recipe.name, recipe %>
+    </li>
+  <% end %>
+</ul>
