@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'User adds recipe' do
-  include Warden::Test::Helpers
-  Warden.test_mode!
-
   let(:user) { create(:user) }
 
   before do
@@ -18,7 +15,9 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+
       click_button 'Submit'
+
       expect(page).to have_content('Recipe was successfully created.')
     end
 
@@ -27,7 +26,9 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
       fill_in 'Instructions', with: 'Boil water'
+
       click_button 'Submit'
+
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Recipe was successfully created.')
     end
@@ -37,10 +38,14 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+
       click_link 'Add a step'
+
       find_all(:field)[-2].set('Boil water')
       find_all(:field).last.set('Chop sausage')
+
       click_button 'Submit'
+
       expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Chop sausage')
@@ -51,21 +56,27 @@ RSpec.describe 'User adds recipe' do
     scenario 'Without a recipe name' do
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+
       click_button 'Submit'
+
       expect(page).to have_content("Name can't be blank")
     end
 
     scenario 'Without a serving quantity' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+
       click_button 'Submit'
+
       expect(page).to have_content("Serving can't be blank")
     end
 
     scenario 'Without ingredients' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
+
       click_button 'Submit'
+
       expect(page).to have_content("Ingredients can't be blank")
     end
   end

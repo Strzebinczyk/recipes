@@ -2,6 +2,7 @@
 
 class HomeController < ApplicationController
   before_action :load_recipes, only: :index
+
   def index; end
 
   private

@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe Step, type: :model do
-  let(:step1) { create(:step) }
+  let(:step) { create(:step) }
 
   it 'is valid with valid attributes' do
-    expect(step1).to be_valid
+    expect(step).to be_valid
   end
 
   it 'is not valid without instructions' do
-    step2 = build(:step, instructions: nil)
-    expect(step2).not_to be_valid
+    step = build(:step, instructions: nil)
+    expect(step).not_to be_valid
   end
 end

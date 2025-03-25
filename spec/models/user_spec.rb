@@ -3,24 +3,24 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user1) { create(:user) }
+  let(:user) { create(:user) }
 
   it 'is valid with valid attributes' do
-    expect(user1).to be_valid
+    expect(user).to be_valid
   end
 
   it 'has a unique email' do
-    user2 = build(:user, email: user1.email)
-    expect(user2).not_to be_valid
+    invalid_user = build(:user, email: user.email)
+    expect(invalid_user).not_to be_valid
   end
 
   it 'is not valid without a password' do
-    user2 = build(:user, password: nil)
-    expect(user2).not_to be_valid
+    invalid_user = build(:user, password: nil)
+    expect(invalid_user).not_to be_valid
   end
 
   it 'is not valid without an email' do
-    user2 = build(:user, email: nil)
-    expect(user2).not_to be_valid
+    invalid_user = build(:user, email: nil)
+    expect(invalid_user).not_to be_valid
   end
 end
