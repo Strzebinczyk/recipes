@@ -37,8 +37,8 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
-      fill_in 'Instructions', with: 'Boil water'
       click_link 'Add a step'
+      find_all(:field)[-2].set('Boil water')
       find_all(:field).last.set('Chop sausage')
       click_button 'Submit'
       expect(page).to have_content('Recipe was successfully created.')
