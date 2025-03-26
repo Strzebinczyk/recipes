@@ -1,0 +1,27 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+
+.header {
+  padding: 14px;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: var(--background-color);
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.navbar#upper {
+  background-color: var(--dark-accent-color);
+}
+
+.navbar#lower {
+  background-color: var(--accent-color);
+  top: 52px;
+}

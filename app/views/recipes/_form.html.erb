@@ -11,29 +11,31 @@
 <% end %>
 
 <%= form_with model: @recipe do |f| %>
-  <div class="field">
-    <%= f.label :name, 'Recipe name:'%><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: 'Name' %>
-  </div>
+  <div class="form">
+    <div>
+      <%= f.label :name, 'Recipe name:'%><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: 'Name' , class: "form-field"%>
+    </div>
 
-  <div class="field">
-    <%= f.label :serving,  'Serving:' %><br />
-    <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people' %>
-  </div>
+    <div>
+      <%= f.label :serving,  'Serving:' %><br />
+      <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-field" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :ingredients, 'Ingredient list:'%><br />
-    <%= f.text_field :ingredients, autocomplete: 'Ingredients' %>
-  </div>
+    <div>
+      <%= f.label :ingredients, 'Ingredient list:'%><br />
+      <%= f.text_field :ingredients, autocomplete: 'Ingredients' , class: "form-field"%>
+    </div>
 
-  <div id="steps">
-    <%= render @recipe.steps %>
-  </div>
-  <div>
-    <%= link_to "Add a step", new_step_path, data: { turbo_stream: true } %>
-  </div>
+    <div id="steps">
+      <%= render @recipe.steps %>
+    </div>
+    <div>
+      <%= link_to "Add a step", new_step_path, data: { turbo_stream: true } %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
+    <div class="actions">
+      <%= f.submit "SUBMIT" %>
+    </div>
   </div>
 <% end %>

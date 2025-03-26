@@ -1,0 +1,27 @@
+input:focus {
+  outline-color: var(--dark-accent-color);
+}
+
+.actions > input {
+  background: linear-gradient(to top, var(--accent-color) 0%, var(--button-gradient-color) 100%);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: var(--background-color);
+  cursor: pointer;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  text-align: center;
+  border: 0;
+}
+  
+  .actions > input:hover {
+    background: var(--accent-color);
+  }
+
+  .actions > input:focus {
+    background: var(--accent-color);
+    border: 2px solid var(--dark-accent-color);
+  }

@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--background-color);
+}
+
+:root {
+  --dark-accent-color: rgb(44, 120, 101);
+  --contrast-color: rgb(255, 152, 0);
+  --button-gradient-color: rgb(101, 204, 70);
+  --accent-color: rgb(119, 173, 90);
+  --background-color: rgb(238, 238, 237);
+}

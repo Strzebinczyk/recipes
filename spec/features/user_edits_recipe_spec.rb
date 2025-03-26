@@ -20,7 +20,7 @@ RSpec.describe 'User edits recipe' do
       find_all(:field)[4].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content('Updated name')
       expect(page).to have_content('Updated ingredients')
@@ -31,12 +31,12 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content('Recipe was successfully updated.')
     end
 
-    scenario 'with deleting a step', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-      find_all(:link)[2].click
-      find_all(:link)[2].click
-      find_all(:link)[2].click
+    scenario 'with deleting a step', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+      find_all(:link)[3].click
+      find_all(:link)[3].click
+      find_all(:link)[3].click
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).not_to have_content('First updated instruction')
       expect(page).to have_content('Recipe was successfully updated.')
@@ -46,7 +46,7 @@ RSpec.describe 'User edits recipe' do
       click_link 'Add a step'
       find_all(:field).last.set('Additional step')
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content('Additional step')
       expect(page).to have_content('Recipe was successfully updated.')
@@ -57,7 +57,7 @@ RSpec.describe 'User edits recipe' do
     scenario 'Without a recipe name' do
       find_field('Recipe name').set ''
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Name can't be blank")
     end
@@ -65,7 +65,7 @@ RSpec.describe 'User edits recipe' do
     scenario 'Without a serving quantity' do
       find_field('Serving').set ''
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Serving can't be blank")
     end
@@ -73,7 +73,7 @@ RSpec.describe 'User edits recipe' do
     scenario 'Without ingredients' do
       find_field('Ingredient list').set ''
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Ingredients can't be blank")
     end
@@ -81,7 +81,7 @@ RSpec.describe 'User edits recipe' do
     scenario 'Without an instruction' do
       find_all(:field).last.set('')
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Steps instructions can't be blank")
     end
