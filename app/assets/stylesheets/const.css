@@ -7,8 +7,10 @@ body {
 
 :root {
   --dark-accent-color: rgb(44, 120, 101);
+  --primary-button-gradient-color: rgb(248, 176, 67);
   --contrast-color: rgb(255, 152, 0);
-  --button-gradient-color: rgb(101, 204, 70);
+  --dark-contrast-color: rgb(177, 108, 4);
+  --secondary-button-gradient-color: rgb(101, 204, 70);
   --accent-color: rgb(119, 173, 90);
   --background-color: rgb(238, 238, 237);
 }

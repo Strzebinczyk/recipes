@@ -4,7 +4,7 @@
       <div>
         <%= ff.label :instructions %>
       </div>
-      <%= ff.text_field :instructions, class: "form-field" %>
+      <%= ff.text_field :instructions, class: "field" %>
       <%= ff.hidden_field :id %>
       <%= ff.hidden_field :_destroy, class: "destroy-step" %>
       <%= link_to "Delete step", "", data: {action: "click->delete-step#delete"} %>

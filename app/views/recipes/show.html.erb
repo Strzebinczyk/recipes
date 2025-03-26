@@ -7,10 +7,12 @@
   <% end %>
 </ul>
 
-<ul>
-  <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>
-  <li><%= link_to "Delete", recipe_path(@recipe), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>
+    <li><%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+  </ul>
+<% end %>
+
+
+

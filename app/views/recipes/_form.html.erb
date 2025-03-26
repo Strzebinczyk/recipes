@@ -14,17 +14,17 @@
   <div class="form">
     <div>
       <%= f.label :name, 'Recipe name:'%><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: 'Name' , class: "form-field"%>
+      <%= f.text_field :name, autofocus: true, autocomplete: 'Name' , class: "field"%>
     </div>
 
     <div>
       <%= f.label :serving,  'Serving:' %><br />
-      <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-field" %>
+      <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "field" %>
     </div>
 
     <div>
       <%= f.label :ingredients, 'Ingredient list:'%><br />
-      <%= f.text_field :ingredients, autocomplete: 'Ingredients' , class: "form-field"%>
+      <%= f.text_field :ingredients, autocomplete: 'Ingredients' , class: "field"%>
     </div>
 
     <div id="steps">

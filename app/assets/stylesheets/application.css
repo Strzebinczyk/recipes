@@ -23,6 +23,24 @@ fieldset {
   padding: 0px;
 }
 
+a {
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
 .hidden {
   display: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
