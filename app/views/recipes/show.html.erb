@@ -1,6 +1,7 @@
 <h1><%= @recipe.name %></h1>
-<h4><%= @recipe.serving %></h4>
-<h4><%= @recipe.ingredients %></h4>
+<h4>Serves: <%= @recipe.serving %></h4>
+<h4>Ingredients: <%= @recipe.ingredients %></h4>
+<h4>Steps:</h4>
 <ul>
   <% @recipe.steps.each do |step| %>
     <li><%= step.instructions %></li>
