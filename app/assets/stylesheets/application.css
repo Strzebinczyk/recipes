@@ -16,21 +16,6 @@
      *= require form
     */
 
-@import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
-
-fieldset {
-  border: 0px;
-  padding: 0px;
-}
-
-a {
-  color: black;
-}
-
-ul {
-  list-style: none;
-}
-
 .field {
   margin-bottom: 10px;
 }

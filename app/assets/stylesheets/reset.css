@@ -53,4 +53,18 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+/*
+  11. Custom
+*/
+fieldset {
+  border: 0px;
+  padding: 0px;
+}
 
+a {
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
