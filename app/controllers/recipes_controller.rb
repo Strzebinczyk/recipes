@@ -3,6 +3,10 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
 
+  def index
+    @recipes = params[:tag] ? Recipe.tagged_with(params[:tag]) : Recipe.all
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
@@ -58,6 +62,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params
       .require(:recipe)
-      .permit([:name, :serving, :ingredients, { steps_attributes: %i[id position instructions _destroy] }])
+      .permit([:name, :serving, :ingredients, { steps_attributes: %i[id position instructions _destroy] }, :tag_list,
+               :tag, { tag_ids: [] }, :tag_id])
   end
 end

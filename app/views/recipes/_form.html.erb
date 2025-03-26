@@ -18,6 +18,11 @@
     </div>
 
     <div>
+      <%= f.label :tag_ids, 'Tags:'%><br />
+      <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] }, {multiple: true} %>
+    </div>
+
+    <div>
       <%= f.label :serving,  'Serving:' %><br />
       <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "field" %>
     </div>

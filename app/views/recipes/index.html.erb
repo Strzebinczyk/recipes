@@ -1,7 +1,7 @@
 <h1>Latest recipes</h1>
 
 <ul>
-  <% @recent_recipes.each do |recipe| %>
+  <% @recipes.each do |recipe| %>
     <li>
       <%= link_to recipe.name, recipe %>
       <% if recipe.tags.any? %>

@@ -1,4 +1,7 @@
 <h1><%= @recipe.name %></h1>
+<% if @recipe.tags.any? %>
+  <p>Tags: <%= raw @recipe.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
+<% end %>
 <h4>Serves: <%= @recipe.serving %></h4>
 <h4>Ingredients: <%= @recipe.ingredients %></h4>
 <h4>Steps:</h4>
