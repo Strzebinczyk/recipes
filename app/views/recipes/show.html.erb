@@ -1,16 +1,16 @@
 <h1><%= @recipe.name %></h1>
-<h4><%= @recipe.serving %></h4>
-<h4><%= @recipe.ingredients %></h4>
+<h4>Serves: <%= @recipe.serving %></h4>
+<h4>Ingredients: <%= @recipe.ingredients %></h4>
+<h4>Steps:</h4>
 <ul>
   <% @recipe.steps.each do |step| %>
     <li><%= step.instructions %></li>
   <% end %>
 </ul>
 
-<ul>
-  <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>
-  <li><%= link_to "Delete", recipe_path(@recipe), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>
+    <li><%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+  </ul>
+<% end %>

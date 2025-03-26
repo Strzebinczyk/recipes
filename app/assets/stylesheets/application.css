@@ -11,16 +11,21 @@
 
 /*
      *= require reset
-
+     *= require const
+     *= require header
+     *= require form
     */
 
+.field {
+  margin-bottom: 10px;
+}
 
 .hidden {
   display: none;
 }
 
-
-fieldset {
-  border: 0px;
-  padding: 0px;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

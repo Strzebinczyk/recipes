@@ -16,7 +16,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content('Recipe was successfully created.')
     end
@@ -27,7 +27,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
       fill_in 'Instructions', with: 'Boil water'
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Recipe was successfully created.')
@@ -44,7 +44,7 @@ RSpec.describe 'User adds recipe' do
       find_all(:field)[-2].set('Boil water')
       find_all(:field).last.set('Chop sausage')
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Boil water')
@@ -57,7 +57,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Name can't be blank")
     end
@@ -66,7 +66,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Serving can't be blank")
     end
@@ -75,7 +75,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
 
-      click_button 'Submit'
+      click_button 'SUBMIT'
 
       expect(page).to have_content("Ingredients can't be blank")
     end

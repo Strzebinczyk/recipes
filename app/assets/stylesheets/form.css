@@ -1,0 +1,52 @@
+.form input:focus {
+  outline-color: var(--dark-accent-color);
+}
+
+.form .actions > input {
+  background: linear-gradient(to top, var(--contrast-color) 0%, var(--primary-button-gradient-color) 100%);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: var(--background-color);
+  cursor: pointer;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  text-align: center;
+  border: 0;
+  margin: 5px;
+}
+  
+.form .actions > input:hover {
+  background: var(--contrast-color);
+}
+
+.form .actions > input:focus {
+  background: var(--contrast-color);
+  border: 2px solid var(--dark-contrast-color);
+}
+
+.form a {
+  background: linear-gradient(to top, var(--accent-color) 0%, var(--secondary-button-gradient-color) 100%);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: var(--background-color);
+  cursor: pointer;
+  outline: 0;
+  overflow: hidden;
+  padding: 2px 20px;
+  margin: 5px;
+  text-align: center;
+  border: 0;
+  text-decoration: none;
+}
+
+.form a:hover {
+  background: var(--accent-color);
+}
+
+.form a:focus {
+  background: var(--accent-color);
+  border: 2px solid var(--dark-accent-color);
+}
