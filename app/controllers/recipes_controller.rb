@@ -5,6 +5,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = params[:tag] ? Recipe.tagged_with(params[:tag]) : Recipe.all
+    @tag = params[:tag]
   end
 
   def show
