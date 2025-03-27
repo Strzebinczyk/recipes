@@ -19,7 +19,7 @@
 
     <div>
       <%= f.label :tag_ids, 'Tags:'%><br />
-      <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] }, {multiple: true}%>
+      <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] },{include_blank: true}, {data: { controller: 'slim' }, multiple: true} %>
     </div>
 
     <div>
