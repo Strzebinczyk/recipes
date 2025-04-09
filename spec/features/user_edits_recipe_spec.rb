@@ -46,7 +46,7 @@ RSpec.describe 'User edits recipe' do
 
     scenario 'with adding a step', :js do # rubocop:disable RSpec/MultipleExpectations
       click_link 'Add a step'
-      find_all(:field)[-2].set('Additional step')
+      find_all(:field)[-1].set('Additional step')
 
       click_button 'SUBMIT'
 
