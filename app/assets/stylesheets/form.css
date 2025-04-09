@@ -50,3 +50,13 @@
   background: var(--accent-color);
   border: 2px solid var(--dark-accent-color);
 }
+
+.form, .ss-option, .ss-search, .ss-addable {
+  --ss-primary-color: var(--accent-color);
+  --ss-focus-color: var(--dark-accent-color);
+}
+
+div.ss-main:focus, .ss-content div.ss-search input:focus {
+  box-shadow: none;
+  border: 2px solid var(--dark-accent-color);
+}

@@ -18,5 +18,17 @@ FactoryBot.define do
         recipe.reload
       end
     end
+
+    factory :recipe_with_tags do
+      transient do
+        tags_count { 1 }
+      end
+
+      after(:create) do |recipe, evaluator|
+        create_list(:tag, evaluator.tags_count, recipes: [recipe])
+
+        recipe.reload
+      end
+    end
   end
 end
