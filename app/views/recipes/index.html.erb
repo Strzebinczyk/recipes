@@ -5,7 +5,7 @@
     <li>
       <%= link_to recipe.name, recipe %>
       <% if recipe.tags.any? %>
-        <p><small>Tags: <%= raw recipe.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %> </small></p>
+        <small> <%= render "/tags/tag_list", {recipe: recipe} %> </small>
       <% end %>
     </li>
   <% end %>

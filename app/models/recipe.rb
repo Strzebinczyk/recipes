@@ -19,4 +19,8 @@ class Recipe < ApplicationRecord
   def tag_list
     tags.map(&:name).join(', ')
   end
+
+  def tag_array
+    tags.map(&:name)
+  end
 end
