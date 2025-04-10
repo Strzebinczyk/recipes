@@ -18,8 +18,8 @@ RSpec.describe 'User edits recipe' do
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
       find_field('Ingredient list').set 'Updated ingredients'
-      find_all(:field)[4].set('First updated instruction')
-      find_all(:field)[5].set('Second updated instruction')
+      find_all(:field)[5].set('First updated instruction')
+      find_all(:field)[6].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
 
       click_button 'SUBMIT'
@@ -34,9 +34,9 @@ RSpec.describe 'User edits recipe' do
     end
 
     scenario 'with deleting a step', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
-      find_all(:link)[3].click
-      find_all(:link)[3].click
-      find_all(:link)[3].click
+      find_all(:link)[4].click
+      find_all(:link)[4].click
+      find_all(:link)[4].click
 
       click_button 'SUBMIT'
 
