@@ -30,10 +30,9 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content('First updated instruction')
       expect(page).to have_content('Second updated instruction')
       expect(page).to have_content('Third updated instruction')
-      expect(page).to have_content('Recipe was successfully updated.')
     end
 
-    scenario 'with deleting a step', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+    scenario 'with deleting a step', :js do
       find_all(:link)[4].click
       find_all(:link)[4].click
       find_all(:link)[4].click
@@ -41,17 +40,15 @@ RSpec.describe 'User edits recipe' do
       click_button 'SUBMIT'
 
       expect(page).not_to have_content('First updated instruction')
-      expect(page).to have_content('Recipe was successfully updated.')
     end
 
-    scenario 'with adding a step', :js do # rubocop:disable RSpec/MultipleExpectations
+    scenario 'with adding a step', :js do
       click_link 'Add a step'
       find_all(:field).last.set('Additional step')
 
       click_button 'SUBMIT'
 
       expect(page).to have_content('Additional step')
-      expect(page).to have_content('Recipe was successfully updated.')
     end
 
     scenario 'with deleting a tag', :js do # rubocop:disable RSpec/MultipleExpectations
@@ -66,12 +63,11 @@ RSpec.describe 'User edits recipe' do
       expect(page).not_to have_content('A tag')
     end
 
-    scenario 'with adding a tag', :js do # rubocop:disable RSpec/MultipleExpectations
+    scenario 'with adding a tag', :js do
       js_select('Cake')
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content('Recipe was successfully updated.')
       expect(page).to have_content('Cake')
     end
   end

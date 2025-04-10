@@ -16,16 +16,16 @@
      *= require form
     */
 
-.field {
+/* .field {
   margin-bottom: 10px;
-}
+} */
 
 .hidden {
   display: none;
 }
 
-.content {
+/* .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
