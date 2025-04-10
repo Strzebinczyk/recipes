@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'User adds recipe' do
   let(:user) { create(:user) }
+  let(:tag) { create(:tag) }
 
   before do
+    Rails.application.load_seed
     login_as(user, scope: :user, run_callbacks: false)
     visit new_recipe_path
   end
@@ -49,6 +51,31 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Chop sausage')
+    end
+
+    scenario 'with a tag', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      fill_in 'Recipe name', with: 'Lazanki'
+      fill_in 'Serving', with: 1
+      fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+      js_select('Cake')
+      click_button 'SUBMIT'
+
+      expect(page).to have_content('Recipe was successfully created.')
+      expect(page).to have_content('Cake')
+    end
+
+    scenario 'with multiple tags', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      fill_in 'Recipe name', with: 'Lazanki'
+      fill_in 'Serving', with: 1
+      fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+      js_select('Cake')
+      js_select('Vegan')
+
+      click_button 'SUBMIT'
+
+      expect(page).to have_content('Recipe was successfully created.')
+      expect(page).to have_content('Cake')
+      expect(page).to have_content('Vegan')
     end
   end
 

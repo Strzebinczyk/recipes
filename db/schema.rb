@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_133141) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_185150) do
   create_table "recipes", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
@@ -30,6 +30,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_133141) do
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_taggings_on_recipe_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,4 +59,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_133141) do
 
   add_foreign_key "recipes", "users"
   add_foreign_key "steps", "recipes"
+  add_foreign_key "taggings", "recipes"
+  add_foreign_key "taggings", "tags"
 end

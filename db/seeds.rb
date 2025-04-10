@@ -9,3 +9,18 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Tag.create(name: 'Quick and easy')
+Tag.create(name: 'Cake')
+Tag.create(name: 'One pot')
+Tag.create(name: 'Dinner')
+Tag.create(name: 'Breakfast')
+Tag.create(name: 'Lunch')
+Tag.create(name: 'Vegetarian')
+Tag.create(name: 'Vegan')
+Tag.create(name: 'Fit')
+Tag.create(name: 'Tray bake')
+Tag.create(name: 'Gluten-free')
+Tag.create(name: 'Dessert')
+Tag.create(name: 'Cookies')
+Tag.create(name: 'Muffins')
+Tag.create(name: 'Party food')

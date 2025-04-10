@@ -18,6 +18,7 @@ require 'database_cleaner/active_record'
 require 'capybara/rspec'
 require 'capybara/rails'
 require_relative './support/session_helpers'
+require_relative './support/slimselect_helpers'
 Capybara.server = :puma
 
 Capybara.register_driver :chrome do |app|
@@ -51,6 +52,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include ::Support::SessionHelpers, type: :feature
+  config.include ::Support::SlimselectHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers, type: :feature

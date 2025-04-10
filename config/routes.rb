@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   resources :recipes
   resources :steps
   resources :users, only: [:show]
+
+  get 'tags/:tag', to: 'recipes#index', as: :tag
 end

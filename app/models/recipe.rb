@@ -7,5 +7,20 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
   has_many :steps, dependent: :destroy
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
+
+  def self.tagged_with(name)
+    Tag.find_by!(name: name).recipes
+  end
+
+  def tag_list
+    tags.map(&:name).join(', ')
+  end
+
+  def tag_array
+    tags.map(&:name)
+  end
 end

@@ -1,4 +1,8 @@
 <h1><%= @recipe.name %></h1>
+<% if @recipe.tags.any? %>
+  <%= render "/tags/tag_list", {recipe: @recipe} %>
+<% end %>
+
 <h4>Serves: <%= @recipe.serving %></h4>
 <h4>Ingredients: <%= @recipe.ingredients %></h4>
 <h4>Steps:</h4>

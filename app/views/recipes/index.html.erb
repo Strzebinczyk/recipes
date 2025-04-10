@@ -1,0 +1,12 @@
+<h1><%= @tag %> recipes</h1>
+
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= link_to recipe.name, recipe %>
+      <% if recipe.tags.any? %>
+        <small> <%= render "/tags/tag_list", {recipe: recipe} %> </small>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

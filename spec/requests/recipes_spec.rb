@@ -6,6 +6,8 @@ RSpec.describe 'Recipes', type: :request do
   let(:recipe) { create(:recipe) }
   let(:user) { create(:user) }
   let(:recipe_with_steps) { create(:recipe_with_steps) }
+  let(:recipe_with_tags) { create(:recipe_with_tags) }
+  let(:tag) { create(:tag) }
 
   describe 'GET /recipes/:id' do
     it 'gets recipe show page' do
@@ -61,6 +63,21 @@ RSpec.describe 'Recipes', type: :request do
         expect(response).to redirect_to(recipe_path(recipe))
       end
 
+      it 'creates a recipe with tags' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          tag_ids: ['', tag.id],
+          serving: 2,
+          ingredients: 'Fish and garlic'
+        } }
+        recipe = Recipe.last
+        tag = recipe.tags[0]
+
+        expect(tag).to be_present
+        expect(tag.id).to eq(1)
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
       it 'bad request when book data is empty' do
         post recipes_path, params: { recipe: {} }
 
@@ -94,6 +111,7 @@ RSpec.describe 'Recipes', type: :request do
   describe 'PUT /recipes/:id' do
     context 'when user is authenticated' do
       before do
+        Rails.application.load_seed
         sign_in user
       end
 
@@ -151,6 +169,26 @@ RSpec.describe 'Recipes', type: :request do
         expect(Step.any?(step.id)).to be false
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe_with_steps))
+      end
+
+      it 'adds a tag in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        put recipe_path(recipe.id), params: { recipe: {
+          tag_ids: ['', '2']
+        } }
+
+        expect(recipe.tags[0].name).to eql 'Cake'
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'deletes a tag in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        put recipe_path(recipe_with_tags.id), params: { recipe: {
+          tag_ids: ['']
+        } }
+
+        expect(recipe_with_tags.tags).to eq []
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(recipe_path(recipe_with_tags))
       end
 
       it 'does not update recipe when recipe id is not found' do # rubocop:disable RSpec/ExampleLength
