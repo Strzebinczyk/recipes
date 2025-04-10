@@ -43,8 +43,8 @@ RSpec.describe 'User adds recipe' do
 
       click_link 'Add a step'
 
-      find_all(:field)[-2].set('Chop sausage')
-      find_all(:field)[-1].set('Boil water')
+      find_all(:field)[-2].set('Boil water')
+      find_all(:field).last.set('Chop sausage')
 
       click_button 'SUBMIT'
 
