@@ -16,11 +16,11 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
+    
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://unpkg.com/slim-select@latest/dist/slimselect.css", "data-turbo-track": "reload" %>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <%= javascript_importmap_tags %>
   </head>
 
@@ -28,27 +28,42 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <div id="upper", class="navbar">
-      <%= link_to "Home", home_index_path %>
-      <% if user_signed_in? %>
-        <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to "Sign in", new_user_session_path %>
-        <%= link_to "Sign up", new_user_registration_path %>
-      <% end %>
+    <div class="px-3 py-2 text-bg-dark border-bottom">
+      <div class='container'>
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <%= link_to "Home", home_index_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" %>
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li class="nav-link text-white">
+              <% if user_signed_in? %>
+                <a href="/recipes/new">
+                  <%= link_to image_tag("plus-circle.svg", alt: 'Plus sign', class: 'b d-block mx-auto mb-1', width: 30, height: 30), new_recipe_path%> 
+                  Add recipe
+                </a>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div> 
 
-    <div class="header">
-      <h2>Recipes</h2>
-    </div>
-
-    <div id="lower", class="navbar">
-      <% if user_signed_in? %>
-        <%= link_to "Add recipe", new_recipe_path%>
-      <% end %>
+    <div class="px-3 py-2 border-bottom mb-3">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+          <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+        </form>
+        <div class="text-end">
+          <% if user_signed_in? %>
+            <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path, class: "btn btn-light text-dark me-2"  %>
+            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary"  %>
+          <% end %>
+        </div>
+      </div>
     </div> 
     <div class="content">
       <%= yield %>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
