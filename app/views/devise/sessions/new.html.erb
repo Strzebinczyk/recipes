@@ -1,14 +1,12 @@
 <div id="log-in" class="section">
-  <div class="section-center">
+  <div class="section-middle">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm">
+					<div class="col-sm-4">
 						<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="form">
-                <%= render "devise/shared/error_messages", resource: resource %>
-
                 <div class="form-group">
-                  <%= f.label :email, class: "form-label" %><br />
+                  <%= f.label :email, autofocus: true, class: "form-label" %><br />
                   <%= f.email_field :email, class: "form-control" %>
                 </div>
 
@@ -25,7 +23,7 @@
                 <% end %>
 
                 <div class="form-btn">
-                  <%= f.submit "LOG IN", class: "submit-btn" %>
+                  <%= f.submit "LOG IN", class: "btn btn-primary" %>
                 </div>
                 <%= render "devise/shared/links" %>
               </div>
@@ -33,9 +31,7 @@
 
             
           </div>
-          <div class="col-sm">
-          </div>
-          <div class="col-sm ">
+          <div class="col-sm-8 ">
 						<div class="side-text">
 							<h1>Welcome back</h1>
 							<p>We have delicious recipes at your fingertips</p>
