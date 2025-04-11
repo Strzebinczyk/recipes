@@ -1,28 +1,45 @@
-<h2>Log in</h2>
+<div id="log-in" class="section">
+  <div class="section-middle">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form">
+                <div class="form-group">
+                  <%= f.label :email, autofocus: true, class: "form-label" %><br />
+                  <%= f.email_field :email, class: "form-control" %>
+                </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form">
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+                <div class="form-group">
+                  <%= f.label :password, class: "form-label" %><br />
+                  <%= f.password_field :password, class: "form-control" %>
+                </div>
 
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
+                <% if devise_mapping.rememberable? %>
+                  <div class="remember-check">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me, class: "form-label" %>
+                  </div>
+                <% end %>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+                <div class="form-btn">
+                  <%= f.submit "LOG IN", class: "btn btn-primary" %>
+                </div>
+                <%= render "devise/shared/links" %>
+              </div>
+            <% end %>
+
+            
+          </div>
+          <div class="col-sm-8 ">
+						<div class="side-text">
+							<h1>Welcome back</h1>
+							<p>We have delicious recipes at your fingertips</p>
+						</div>
+					</div>
+        </div>
       </div>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit "LOG IN" %>
     </div>
+    <a id="credit" href="https://www.vecteezy.com/free-photos/food">Food Stock photos by Vecteezy</a>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
