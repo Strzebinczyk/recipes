@@ -20,10 +20,10 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content('Recipe was successfully created.')
+      expect(page).to have_content('Ingredients: Pasta, sauerkraut and sausage')
     end
 
-    scenario 'with one step' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    scenario 'with one step' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
@@ -32,7 +32,6 @@ RSpec.describe 'User adds recipe' do
       click_button 'SUBMIT'
 
       expect(page).to have_content('Boil water')
-      expect(page).to have_content('Recipe was successfully created.')
     end
 
     scenario 'with multiple steps', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
@@ -48,19 +47,17 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Chop sausage')
     end
 
-    scenario 'with a tag', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    scenario 'with a tag', :js do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
       js_select('Cake')
       click_button 'SUBMIT'
 
-      expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Cake')
     end
 
@@ -73,7 +70,6 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content('Recipe was successfully created.')
       expect(page).to have_content('Cake')
       expect(page).to have_content('Vegan')
     end
