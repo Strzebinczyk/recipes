@@ -95,3 +95,12 @@
   justify-content: center;
   padding-top: 20px;
 }
+
+#credit {
+	color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  text-align: center;
+}
