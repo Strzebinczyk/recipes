@@ -18,8 +18,8 @@ RSpec.describe 'User edits recipe' do
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
       find_field('Ingredient list').set 'Updated ingredients'
-      find_all(:field)[5].set('First updated instruction')
-      find_all(:field)[6].set('Second updated instruction')
+      find_all(:field)[6].set('First updated instruction')
+      find_all(:field)[7].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
 
       click_button 'SUBMIT'
