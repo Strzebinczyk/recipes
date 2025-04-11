@@ -65,7 +65,7 @@ RSpec.describe 'User edits recipe' do
 
     scenario 'with adding a tag', :js do
       js_select('Cake')
-      # I am suddenly logged out and I don't get it
+
       click_button 'SUBMIT'
 
       expect(page).to have_content('Cake')
