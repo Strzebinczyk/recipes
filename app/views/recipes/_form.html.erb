@@ -24,8 +24,8 @@
               <%= f.file_field :image, class: "custom-file-input", "data-image-preview-target"=>"source", "data-action"=>"image-preview#show"%>
               <img data-image-preview-target="canvas" hidden class="img-thumbnail mx-auto mt-2">
               <button type="button" id="preview-close" class="btn-close" aria-label="Close"></button>
-              <%=image_tag(@recipe.image, class: "preview img-thumbnail mx-auto mt-2") if @recipe.image.attached? %>
-              <%= link_to "", delete_image_recipe_path(@recipe), data: {turbo_method: :delete}, id:"preview-close", class:"btn-close"%>
+              <%=image_tag(@recipe.image, class: "preview img-thumbnail mx-auto mt-2") if @recipe.image.attached? && @recipe.image.persisted? %>
+              <%# <%= link_to "", delete_image_recipe_path(@recipe), data: {turbo_method: :delete}, id:"preview-close", class:"btn-close"%> %>
             </div>
 
             <div class="form-group">
