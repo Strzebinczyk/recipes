@@ -73,6 +73,17 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content('Cake')
       expect(page).to have_content('Vegan')
     end
+
+    scenario 'with an image' do
+      fill_in 'Recipe name', with: 'Lazanki'
+      fill_in 'Serving', with: 1
+      fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
+      page.attach_file("recipe_image", Rails.root + 'app/assets/images/session-background.jpg')
+
+      click_button 'SUBMIT'
+
+      expect(page.find('.recipe-image')['src']).to have_content('session-background.jpg')
+    end
   end
 
   describe 'With invalid data' do

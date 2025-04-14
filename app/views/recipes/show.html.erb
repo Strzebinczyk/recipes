@@ -1,6 +1,6 @@
 <h1><%= @recipe.name %></h1>
 
-<%=image_tag (@recipe.image) if @recipe.image.attached? %>
+<%=image_tag(@recipe.image, class: "recipe-image") if @recipe.image.attached? %>
 
 <% if @recipe.tags.any? %>
   <%= render "/tags/tag_list", {recipe: @recipe} %>
