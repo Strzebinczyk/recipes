@@ -14,6 +14,10 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
 
+  attr_accessor :destroy_image
+
+  after_save(:purge_image)
+
   def self.tagged_with(name)
     Tag.find_by!(name: name).recipes
   end
@@ -24,6 +28,14 @@ class Recipe < ApplicationRecord
 
   def tag_array
     tags.map(&:name)
+  end
+
+  private
+
+  def purge_image
+    return unless :destroy_image == true
+
+    image.purge_later
   end
 
   def acceptable_image
