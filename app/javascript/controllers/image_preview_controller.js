@@ -9,7 +9,9 @@ export default class extends Controller {
 
     reader.onload = function () {
       this.canvasTarget.removeAttribute("hidden");
-      preview.classList.add("hidden");
+      if(preview != null) {
+        preview.classList.add("hidden");
+      }
       this.canvasTarget.src = reader.result;
     }.bind(this)
 

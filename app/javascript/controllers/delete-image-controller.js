@@ -5,6 +5,6 @@ export default class extends Controller {
     e.preventDefault();
 
     this.element.querySelector("check_box").value = "1"
-    this.element.classList.toggle("hidden")
+    this.element.classList.add("hidden")
   }
 }
