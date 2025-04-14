@@ -54,9 +54,9 @@ class RecipesController < ApplicationController
     end
   end
 
-  def delete_image 
+  def delete_image
     @recipe = Recipe.find(params[:id])
-    @recipe.image.purge
+    @recipe.image.purge_later
     redirect_back fallback_location: root_path
   end
 
