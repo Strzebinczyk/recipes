@@ -70,6 +70,47 @@ RSpec.describe 'User edits recipe' do
 
       expect(page).to have_content('Cake')
     end
+
+    scenario 'with adding an image' do
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
+
+      click_button 'SUBMIT'
+
+      expect(page.find('.recipe-image')['src']).to have_content('sample.jpg')
+    end
+
+    scenario 'with changing the image', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample2.jpg').to_s)
+
+      click_button 'SUBMIT'
+
+      expect(page.find('.recipe-image')['src']).to have_content('sample2.jpg')
+
+      visit edit_recipe_path(recipe_with_steps.id)
+
+      find('a#preview-close').click
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
+
+      click_button 'SUBMIT'
+
+      expect(page.find('.recipe-image')['src']).to have_content('sample.jpg')
+    end
+
+    scenario 'with deleting the image', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample2.jpg').to_s)
+
+      click_button 'SUBMIT'
+
+      expect(page).to have_selector 'img.recipe-image'
+
+      visit edit_recipe_path(recipe_with_steps.id)
+
+      find('a#preview-close').click
+
+      click_button 'SUBMIT'
+
+      expect(page).not_to have_selector 'img.recipe-image'
+    end
   end
 
   describe 'With invalid data' do

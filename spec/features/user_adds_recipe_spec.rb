@@ -74,15 +74,15 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content('Vegan')
     end
 
-    scenario 'with an image' do
+    scenario 'with an image' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       fill_in 'Ingredient list', with: 'Pasta, sauerkraut and sausage'
-      page.attach_file("recipe_image", Rails.root + 'app/assets/images/session-background.jpg')
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
 
       click_button 'SUBMIT'
 
-      expect(page.find('.recipe-image')['src']).to have_content('session-background.jpg')
+      expect(page.find('.recipe-image')['src']).to have_content('sample.jpg')
     end
   end
 
