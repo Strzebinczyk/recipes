@@ -97,6 +97,15 @@
   padding-top: 20px;
 }
 
+.ingredient {
+	display: flex;
+}
+
+.ingredient-part {
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
 #credit {
 	color: #fff;
   position: absolute;
@@ -111,4 +120,10 @@
 	float: right;
 	top: 3px;
 	right: 0px;
+}
+
+#delete-ingredient {
+	position: relative;
+	top:6px;
+	right:1px;
 }

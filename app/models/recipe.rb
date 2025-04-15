@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   has_one_attached :image, dependent: :destroy
 
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
 
   def self.tagged_with(name)
     Tag.find_by!(name: name).recipes

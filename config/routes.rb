@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :recipes
   resources :steps
+  resources :ingredients
   resources :users, only: [:show]
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
