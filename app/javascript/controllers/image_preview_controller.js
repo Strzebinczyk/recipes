@@ -10,6 +10,7 @@ export default class extends Controller {
     reader.onload = function () {
       this.canvasTarget.removeAttribute("hidden");
       this.canvasTarget.classList.remove("hidden");
+      document.querySelector(".destroy-image").disabled = true;
       if(preview != null) {
         preview.classList.add("hidden");
       }
