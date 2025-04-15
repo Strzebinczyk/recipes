@@ -39,9 +39,14 @@
               <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-control" %>
             </div>
 
-            <div class="form-group">
-              <%= f.label :ingredients, 'Ingredient list:', class: "form-label" %><br />
-              <%= f.text_field :ingredients, autocomplete: 'Ingredients', class: "form-control" %>
+            <div id="ingredients">
+              <div>
+                <%= f.label '', "Ingredients:", class: "form-label"  %>
+              </div>
+              <%= render @recipe.ingredients %>
+            </div>
+            <div>
+              <%= link_to "Add an ingredient", new_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
 
             <div id="steps">
