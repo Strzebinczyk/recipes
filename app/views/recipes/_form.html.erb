@@ -18,6 +18,16 @@
               <%= f.label :name, 'Recipe name:', autofocus: true, class: "form-label" %><br />
               <%= f.text_field :name, class: "form-control" %>
             </div>
+            <div data-controller="delete-image">
+              <div class="form-group" data-controller="image-preview">
+                <%= f.label :image,  class: "form-label" %>
+                <%= f.file_field :image, class: "custom-file-input", "data-image-preview-target"=>"source", "data-action"=>"image-preview#show"%>
+                <img data-image-preview-target="canvas" hidden class="img-thumbnail mx-auto mt-2" id="upload-preview">
+                <%= link_to "", "", data: {action: "click->delete-image#delete"}, id: "preview-close", class: "btn-close"%>
+                <%= f.hidden_field :image, class: "destroy-image", value: nil, disabled: true %>
+                <%=image_tag(@recipe.image, class: "preview img-thumbnail mx-auto mt-2", id:"persisted-image") if @recipe.image.attached? && @recipe.image.persisted? %>
+              </div>
+            </div>
 
             <div class="form-group">
               <%= f.label :tag_ids, 'Tags:', class: "form-label" %><br />

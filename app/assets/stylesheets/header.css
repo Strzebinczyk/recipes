@@ -2,3 +2,7 @@
   color: var(--background-color);
   background-color: var(--dark-accent-color);
 }
+
+#header {
+  max-height: 145px;
+}

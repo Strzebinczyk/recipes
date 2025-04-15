@@ -64,6 +64,6 @@ class RecipesController < ApplicationController
     params
       .require(:recipe)
       .permit([:name, :serving, :ingredients, { steps_attributes: %i[id position instructions _destroy] },
-               { tag_ids: [] }])
+               { tag_ids: [] }, :image])
   end
 end
