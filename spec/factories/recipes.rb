@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :recipe do
     user
-    name { 'A very nice recipe' }
-    serving { 4 }
+    name { Faker::Food.dish }
+    serving { rand(1..20) }
 
     transient do
       ingredients_count { 2 }

@@ -97,15 +97,6 @@
   padding-top: 20px;
 }
 
-.ingredient {
-	display: flex;
-}
-
-.ingredient-part {
-	margin-right: 20px;
-	margin-bottom: 10px;
-}
-
 #credit {
 	color: #fff;
   position: absolute;

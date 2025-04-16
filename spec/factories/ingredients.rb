@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :ingredient do
-    name { 'Carrot' }
-    quantity { '1' }
+    name { Faker::Food.ingredient }
+    quantity { Faker::Food.measurement }
   end
 end

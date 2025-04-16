@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: 'home#index'
   resources :recipes
-  resources :steps
-  resources :ingredients
+  resources :steps, only: %i[new create]
+  resources :ingredients, only: %i[new create]
   resources :users, only: [:show]
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
