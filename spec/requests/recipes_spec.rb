@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe 'Recipes', type: :request do
   let(:recipe) { create(:recipe) }
   let(:user) { create(:user) }
-
   let(:recipe_with_tags) { create(:recipe_with_tags) }
   let(:tag) { create(:tag) }
 
