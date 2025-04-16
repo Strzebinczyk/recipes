@@ -2,7 +2,7 @@
 
 module Support
   module SlimselectHelpers
-    def js_select(item_text) # rubocop:disable Metrics/MethodLength
+    def js_select(item_text) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
       container = find('div.ss-main')
       within container do
         find('.ss-arrow', match: :first).click
