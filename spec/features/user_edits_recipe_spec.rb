@@ -53,16 +53,17 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content('Additional step')
     end
 
-    scenario 'with deleting a tag', :js do # rubocop:disable RSpec/MultipleExpectations
+    scenario 'with deleting a tag', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
       visit edit_recipe_path(recipe_with_tags.id)
+      tag = recipe_with_tags.tags[0]
 
-      expect(page).to have_content('A tag')
+      expect(page).to have_content(tag.name)
 
       find('div.ss-value-delete').click
 
       click_button 'SUBMIT'
 
-      expect(page).not_to have_content('A tag')
+      expect(page).not_to have_content(tag.name)
     end
 
     scenario 'with adding a tag', :js do

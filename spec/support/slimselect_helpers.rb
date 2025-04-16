@@ -7,7 +7,7 @@ module Support
       within container do
         find('.ss-arrow').click
       end
-      content = find('div.ss-content')
+      content = find('div.ss-content.ss-open-below')
       within content do
         input = find('div.ss-search input').native
         input.send_keys(item_text)
