@@ -17,8 +17,8 @@ RSpec.describe 'User edits recipe' do
     scenario 'with editing multiple steps' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
-      find('.name').fill_in with: 'Updated ingredient'
-      find('.quantity').fill_in with: 'Updated amount'
+      find_all('.name')[0].fill_in with: 'Updated ingredient'
+      find_all('.quantity')[0].fill_in with: 'Updated amount'
       find_all(:field)[-3].set('First updated instruction')
       find_all(:field)[-2].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
@@ -35,13 +35,13 @@ RSpec.describe 'User edits recipe' do
     end
 
     scenario 'with deleting a step', :js do
-      find_all(:link)[4].click
-      find_all(:link)[4].click
-      find_all(:link)[4].click
+      find_all(:link)[-2].click
+      find_all(:link)[-2].click
+      find_all(:link)[-2].click
 
       click_button 'SUBMIT'
 
-      expect(page).not_to have_content('First updated instruction')
+      expect(page).not_to have_content('Lorem ipsum')
     end
 
     scenario 'with adding a step', :js do
@@ -88,7 +88,7 @@ RSpec.describe 'User edits recipe' do
 
       expect(page.find('.recipe-image')['src']).to have_content('sample2.jpg')
 
-      visit edit_recipe_path(recipe_with_steps.id)
+      visit edit_recipe_path(recipe.id)
 
       find('a#preview-close').click
       page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
@@ -105,7 +105,7 @@ RSpec.describe 'User edits recipe' do
 
       expect(page).to have_selector 'img.recipe-image'
 
-      visit edit_recipe_path(recipe_with_steps.id)
+      visit edit_recipe_path(recipe.id)
 
       find('a#preview-close').click
 
@@ -132,8 +132,8 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content("Serving can't be blank")
     end
 
-    scenario 'Without ingredients' do
-      find_field('Ingredient list').set ''
+    scenario 'Without ingredients', :js do
+      find_all('a#delete-ingredient').each(&:click)
 
       click_button 'SUBMIT'
 

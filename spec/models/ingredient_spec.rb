@@ -1,5 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:ingredient) { create(:ingredient) }
+
+  it 'is valid with valid attributes' do
+    expect(ingredient).to be_valid
+  end
+
+  it 'is not valid without name' do
+    ingredient = build(:ingredient, name: nil)
+    expect(ingredient).not_to be_valid
+  end
+
+  it 'is not valid without quantity' do
+    ingredient = build(:ingredient, quantity: nil)
+    expect(ingredient).not_to be_valid
+  end
 end

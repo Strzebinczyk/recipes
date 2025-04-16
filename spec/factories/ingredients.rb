@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :ingredient do
-    recipe
     name { 'Carrot' }
     quantity { '1' }
   end
