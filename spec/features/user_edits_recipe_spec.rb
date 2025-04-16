@@ -4,28 +4,30 @@ require 'rails_helper'
 
 RSpec.describe 'User edits recipe' do
   let(:user) { create(:user) }
-  let(:recipe_with_steps) { create(:recipe_with_steps) }
+  let(:recipe) { create(:recipe) }
   let(:recipe_with_tags) { create(:recipe_with_tags) }
 
   before do
     Rails.application.load_seed
     login_as(user, scope: :user, run_callbacks: false)
-    visit edit_recipe_path(recipe_with_steps.id)
+    visit edit_recipe_path(recipe.id)
   end
 
   describe 'With valid data' do
     scenario 'with editing multiple steps' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
-      find_field('Ingredient list').set 'Updated ingredients'
-      find_all(:field)[6].set('First updated instruction')
-      find_all(:field)[7].set('Second updated instruction')
+      find('.name').fill_in with: 'Updated ingredient'
+      find('.quantity').fill_in with: 'Updated amount'
+      find_all(:field)[-3].set('First updated instruction')
+      find_all(:field)[-2].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
 
       click_button 'SUBMIT'
 
       expect(page).to have_content('Updated name')
-      expect(page).to have_content('Updated ingredients')
+      expect(page).to have_content('Updated ingredient')
+      expect(page).to have_content('Updated amount')
       expect(page).to have_content('10')
       expect(page).to have_content('First updated instruction')
       expect(page).to have_content('Second updated instruction')

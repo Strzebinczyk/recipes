@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
   validates :name, presence: true
   validates :serving, presence: true
   validates :ingredients, presence: true
+  validates :steps, presence: true
   validate :acceptable_image
 
   belongs_to :user

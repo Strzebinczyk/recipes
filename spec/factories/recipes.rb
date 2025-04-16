@@ -5,18 +5,15 @@ FactoryBot.define do
     user
     name { 'A very nice recipe' }
     serving { 4 }
-    ingredients { 'Water, clove of garlic, Maggi' }
 
-    factory :recipe_with_steps do
-      transient do
-        steps_count { 3 }
-      end
+    transient do
+      ingredients_count { 2 }
+      steps_count { 3 }
+    end
 
-      after(:create) do |recipe, evaluator|
-        create_list(:step, evaluator.steps_count, recipe: recipe)
-
-        recipe.reload
-      end
+    after :build do |recipe, evaluator|
+      recipe.steps << FactoryBot.build_list(:step, evaluator.steps_count, recipe: nil)
+      recipe.ingredients << FactoryBot.build_list(:ingredient, evaluator.ingredients_count, recipe: nil)
     end
 
     factory :recipe_with_tags do
