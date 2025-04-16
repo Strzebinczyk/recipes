@@ -13,7 +13,7 @@ FactoryBot.define do
 
     after :build do |recipe, evaluator|
       recipe.steps << FactoryBot.build_list(:step, evaluator.steps_count, recipe: nil)
-      recipe.ingredients << FactoryBot.build_list(:ingredient, evaluator.ingredients_count, recipe: nil)
+      recipe.ingredients << FactoryBot.build_list(:ingredient, evaluator.ingredients_count)
     end
 
     factory :recipe_with_tags do

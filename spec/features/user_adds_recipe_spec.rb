@@ -13,7 +13,7 @@ RSpec.describe 'User adds recipe' do
   end
 
   describe 'With valid data' do
-    scenario 'with one step and one ingredient' do
+    scenario 'with one step and one ingredient' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
@@ -106,7 +106,7 @@ RSpec.describe 'User adds recipe' do
   end
 
   describe 'With invalid data' do
-    scenario 'Without a recipe name' do
+    scenario 'Without a recipe name' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
@@ -117,7 +117,7 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content("Name can't be blank")
     end
 
-    scenario 'Without a serving quantity' do
+    scenario 'Without a serving quantity' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
@@ -138,7 +138,7 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content("Ingredients can't be blank")
     end
 
-    scenario 'Without steps' do
+    scenario 'Without steps' do # rubocop:disable RSpec/ExampleLength
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'

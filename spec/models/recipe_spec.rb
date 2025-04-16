@@ -5,15 +5,10 @@ require 'rails_helper'
 RSpec.describe Recipe, type: :model do
   let(:recipe) { create(:recipe) }
   let(:recipe_with_tags) { create(:recipe_with_tags) }
-  let(:recipe_with_steps) { create(:recipe_with_steps) }
   let(:tag) { create(:tag) }
 
   it 'is valid with valid attributes' do
     expect(recipe).to be_valid
-  end
-
-  it 'is valid with steps' do
-    expect(recipe_with_steps).to be_valid
   end
 
   it 'is valid with tags' do
@@ -27,11 +22,6 @@ RSpec.describe Recipe, type: :model do
 
   it 'is not valid without a serve quantity' do
     recipe = build(:recipe, serving: nil)
-    expect(recipe).not_to be_valid
-  end
-
-  it 'is not valid without ingredients' do
-    recipe = build(:recipe, ingredients: nil)
     expect(recipe).not_to be_valid
   end
 
