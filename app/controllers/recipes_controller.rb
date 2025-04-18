@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../interactions/recipes/create_recipe'
+
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
 
@@ -19,7 +21,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = current_user.recipes.build(recipe_params)
+    @recipe = CreateRecipe.run!(user: current_user, params: recipe_params)
 
     respond_to do |format|
       if @recipe.save

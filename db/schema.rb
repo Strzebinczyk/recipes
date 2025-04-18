@@ -40,12 +40,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_085105) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.integer "recipe_id"
     t.string "name"
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -104,7 +102,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_085105) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "ingredients", "recipes"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipes", "users"
