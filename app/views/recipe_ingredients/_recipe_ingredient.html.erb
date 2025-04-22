@@ -1,9 +1,9 @@
-<%= fields_for "recipe[ingredients_attributes][#{turbo_id_for(ingredient)}]", ingredient do |ff| %>
-  <fieldset id="<%= turbo_id_for(ingredient) %>" data-controller="delete-ingredient">
+<%= fields_for "recipe[recipe_ingredients_attributes][#{turbo_id_for(recipe_ingredient)}]", recipe_ingredient do |ff| %>
+  <fieldset id="<%= turbo_id_for(recipe_ingredient) %>" data-controller="delete-ingredient">
     <div class="d-flex">
       <%= ff.text_field :name, class: "form-control mb-2 name", placeholder: "Name" %>
       <%= ff.text_field :quantity, class: "form-control mx-2 mb-2 quantity", placeholder: "Quantity" %>
-      <%= ff.hidden_field :id %>
+      <%= ff.hidden_field :ingredient_id %>
       <%= ff.hidden_field :_destroy, class: "destroy-ingredient" %>
       <%= link_to "", "", data: {action: "click->delete-ingredient#delete"}, id: "delete-ingredient", class: "btn-close" %>
     </div>

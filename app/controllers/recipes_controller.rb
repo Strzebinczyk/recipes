@@ -18,6 +18,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.steps.build
     @recipe.ingredients.build
+    @recipe.recipe_ingredients.build
   end
 
   def create
@@ -67,7 +68,7 @@ class RecipesController < ApplicationController
     params
       .require(:recipe)
       .permit([:name, :serving, :image, { tag_ids: [] },
-               { ingredients_attributes: %i[id name quantity _destroy] },
+               { recipe_ingredients_attributes: %i[ingredient_id name quantity _destroy] },
                { steps_attributes: %i[id position instructions _destroy] }])
   end
 end

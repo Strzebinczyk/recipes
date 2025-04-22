@@ -1,31 +1,35 @@
 # frozen_string_literal: true
 
+require_relative '../../models/ingredient'
+
 class CreateRecipe < ActiveInteraction::Base
   object :user
   hash :params, strip: false
 
   def execute
-    quantity = []
     i = 0
     new_params = params
-    if params['ingredients_attributes'].instance_of?(Array)
-      params['ingredients_attributes'].length.times do
-        ingredient_recipe = { 'ingredient_id' => nil,
-                              'quantity' => params['ingredients_attributes'][i]['quantity'] }
-        quantity.append ingredient_recipe
-        new_params['ingredients_attributes'][i].delete('quantity')
-        i += 1
+
+    params['recipe_ingredients_attributes'].length.times do
+      if params['recipe_ingredients_attributes'].values[i]['name'] == '' || params['recipe_ingredients_attributes'].values[i]['quantity'] == ''
+        return
       end
-    elsif params['ingredients_attributes'].instance_of?(ActiveSupport::HashWithIndifferentAccess)
-      params['ingredients_attributes'].length.times do
-        ingredient_recipe = { 'ingredient_id' => params['ingredients_attributes'].keys[i],
-                              'quantity' => params['ingredients_attributes'].values[i]['quantity'] }
-        quantity.append ingredient_recipe
-        new_params['ingredients_attributes'].values[i].delete('quantity')
-        i += 1
+
+      name = params['recipe_ingredients_attributes'].values[i]['name']
+      new_params['recipe_ingredients_attributes'].values[i].delete('name')
+      ingredient = Ingredient.all.select { |ingredient| ingredient.name == name }[0]
+
+      unless ingredient
+        ingredient = Ingredient.build(name: name)
+        ingredient.save
+        ingredient = Ingredient.all.select { |ingredient| ingredient.name == name }[0]
       end
+
+      params['recipe_ingredients_attributes'].values[i]['ingredient_id'] = ingredient.id
+
+      i += 1
     end
-    recipe = user.recipes.build(new_params)
-    binding.irb
+
+    user.recipes.build(new_params)
   end
 end

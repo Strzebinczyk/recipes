@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IngredientsController < ApplicationController
+class RecipeIngredientsController < ApplicationController
   def new
     respond_to do |format|
       format.turbo_stream

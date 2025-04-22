@@ -39,14 +39,14 @@
               <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-control" %>
             </div>
 
-            <div id="ingredients">
+            <div id="recipe_ingredients">
               <div>
                 <p class="form-label">Ingredients:</p>
               </div>
-              <%= render @recipe.ingredients %>
+              <%= render @recipe.recipe_ingredients %>
             </div>
             <div>
-              <%= link_to "Add an ingredient", new_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
+              <%= link_to "Add an ingredient", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
 
             <div id="steps">
