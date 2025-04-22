@@ -7,6 +7,7 @@ class CreateRecipe < ActiveInteraction::Base
   hash :params, strip: false
 
   def execute
+    # binding.irb
     i = 0
     new_params = params
 
@@ -29,7 +30,7 @@ class CreateRecipe < ActiveInteraction::Base
 
       i += 1
     end
-
+    # binding.irb
     user.recipes.build(new_params)
   end
 end
