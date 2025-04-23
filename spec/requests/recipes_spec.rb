@@ -153,7 +153,8 @@ RSpec.describe 'Recipes', type: :request do
       it 'edits an existing ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         ingredient = recipe.ingredients.first
         put recipe_path(recipe.id), params: { recipe: {
-          recipe_ingredients_attributes: [id: ingredient.id, name: 'Updated ingredient', quantity: 'Updated quantity']
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Updated ingredient',
+                                                                          quantity: 'Updated quantity' } }
         } }
 
         expect(ingredient.reload).to be_present

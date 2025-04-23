@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../interactions/recipes/create_recipe'
+require_relative '../interactions/recipes/update_recipe'
 
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
@@ -39,9 +40,9 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-
+    new_params = UpdateRecipe.run!(id: params[:id], params: recipe_params)
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if @recipe.update(new_params)
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -68,7 +69,7 @@ class RecipesController < ApplicationController
     params
       .require(:recipe)
       .permit([:name, :serving, :image, { tag_ids: [] },
-               { recipe_ingredients_attributes: %i[ingredient_id name quantity _destroy] },
+               { recipe_ingredients_attributes: %i[id ingredient_id name quantity _destroy] },
                { steps_attributes: %i[id position instructions _destroy] }])
   end
 end
