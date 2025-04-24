@@ -13,10 +13,10 @@ module Support
         input.send_keys(item_text)
       end
       list = find('div.ss-list', match: :first)
-      expect(list).to have_content(item_text)
       within list do
-        find('.ss-option', match: :first).click
+        expect(list).to have_content(item_text)
       end
+      find('div.ss-option').click
       find('body').click
     end
   end
