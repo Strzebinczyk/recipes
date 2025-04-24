@@ -154,15 +154,19 @@ RSpec.describe 'Recipes', type: :request do
       it 'edits an existing ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         ingredient = recipe.ingredients.first
         recipe_ingredient = ingredient.recipe_ingredients.first
+
         put recipe_path(recipe.id), params: { recipe: {
           recipe_ingredients_attributes:
           { recipe_ingredient.id => { id: recipe_ingredient.id, ingredient_id: ingredient.id,
                                       name: 'Updated ingredient', quantity: 'Updated quantity' } }
         } }
 
+        ingredient = recipe.ingredients.last
+
         expect(ingredient.reload).to be_present
+        expect(recipe_ingredient.reload).to be_present
         expect(ingredient.name).to eq('Updated ingredient')
-        expect(ingredient.quantity).to eq('Updated quantity')
+        expect(recipe_ingredient.quantity).to eq('Updated quantity')
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end
@@ -172,7 +176,9 @@ RSpec.describe 'Recipes', type: :request do
         recipe_ingredient = ingredient.recipe_ingredients.first
 
         put recipe_path(recipe.id), params: { recipe: {
-          recipe_ingredients_attributes: { recipe_ingredient.id => { id: ingredient.id, name: ingredient.name, _destroy: true } }
+          recipe_ingredients_attributes: {
+            recipe_ingredient.id => { id: ingredient.id, name: ingredient.name, _destroy: true }
+          }
         } }
 
         expect(Ingredient.any?(ingredient.id)).to be false

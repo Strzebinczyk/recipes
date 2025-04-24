@@ -135,7 +135,7 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content("Ingredients can't be blank")
+      expect(page).to have_content("Recipe ingredients can't be blank")
     end
 
     scenario 'Without steps' do # rubocop:disable RSpec/ExampleLength

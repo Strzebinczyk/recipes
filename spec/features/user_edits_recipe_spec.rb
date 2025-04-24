@@ -138,7 +138,7 @@ RSpec.describe 'User edits recipe' do
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content("Ingredients can't be blank")
+      expect(page).to have_content("Recipe ingredients can't be blank")
     end
 
     scenario 'Without an instruction' do

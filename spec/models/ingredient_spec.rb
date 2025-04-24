@@ -13,9 +13,4 @@ RSpec.describe Ingredient, type: :model do
     ingredient = build(:ingredient, name: nil)
     expect(ingredient).not_to be_valid
   end
-
-  it 'is not valid without quantity' do
-    ingredient = build(:ingredient, quantity: nil)
-    expect(ingredient).not_to be_valid
-  end
 end
