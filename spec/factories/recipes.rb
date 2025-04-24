@@ -7,13 +7,13 @@ FactoryBot.define do
     serving { rand(1..20) }
 
     transient do
-      ingredients_count { 2 }
+      recipe_ingredients_count { 2 }
       steps_count { 3 }
     end
 
     after :build do |recipe, evaluator|
       recipe.steps << FactoryBot.build_list(:step, evaluator.steps_count, recipe: nil)
-      recipe.ingredients << FactoryBot.build_list(:ingredient, evaluator.ingredients_count)
+      recipe.recipe_ingredients << FactoryBot.build_list(:recipe_ingredient, evaluator.recipe_ingredients_count)
     end
 
     factory :recipe_with_tags do

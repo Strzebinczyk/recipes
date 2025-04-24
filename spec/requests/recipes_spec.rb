@@ -137,24 +137,27 @@ RSpec.describe 'Recipes', type: :request do
       it 'adds an ingredient in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
-          recipe_ingredients_attributes: [name: 'Carrot', quantity: '3']
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Carrot', quantity: '3' } }
         } }
         recipe = Recipe.last
         ingredient = Ingredient.last
+        recipe_ingredient = RecipeIngredient.last
 
         expect(ingredient).to be_present
         expect(recipe.name).to eq('Updated recipe')
         expect(ingredient.name).to eq('Carrot')
-        expect(ingredient.quantity).to eq('3')
+        expect(recipe_ingredient.quantity).to eq('3')
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end
 
       it 'edits an existing ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         ingredient = recipe.ingredients.first
+        recipe_ingredient = ingredient.recipe_ingredients.first
         put recipe_path(recipe.id), params: { recipe: {
-          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Updated ingredient',
-                                                                          quantity: 'Updated quantity' } }
+          recipe_ingredients_attributes:
+          { recipe_ingredient.id => { id: recipe_ingredient.id, ingredient_id: ingredient.id,
+                                      name: 'Updated ingredient', quantity: 'Updated quantity' } }
         } }
 
         expect(ingredient.reload).to be_present
@@ -166,8 +169,10 @@ RSpec.describe 'Recipes', type: :request do
 
       it 'deletes an ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         ingredient = recipe.ingredients.first
+        recipe_ingredient = ingredient.recipe_ingredients.first
+
         put recipe_path(recipe.id), params: { recipe: {
-          recipe_ingredients_attributes: [id: ingredient.id, _destroy: true]
+          recipe_ingredients_attributes: { recipe_ingredient.id => { id: ingredient.id, name: ingredient.name, _destroy: true } }
         } }
 
         expect(Ingredient.any?(ingredient.id)).to be false
