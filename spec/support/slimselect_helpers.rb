@@ -15,7 +15,7 @@ module Support
       list = find('div.ss-list', match: :first)
       expect(list).to have_content(item_text)
       within list do
-        find('div.ss-option').click
+        find('.ss-option', match: :first).click
       end
       find('body').click
     end

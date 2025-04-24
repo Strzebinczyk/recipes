@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../interactions/recipes/create_recipe'
-require_relative '../interactions/recipes/update_recipe'
+require_relative '../interactions/create_recipe'
+require_relative '../interactions/update_recipe'
 
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
