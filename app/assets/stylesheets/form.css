@@ -97,6 +97,13 @@
   padding-top: 20px;
 }
 
+.step {
+	margin-right: .5rem!important;
+}
+
+.ss-content.ss-open-below {
+	display: flex;
+}
 #credit {
 	color: #fff;
   position: absolute;
@@ -113,7 +120,7 @@
 	right: 0px;
 }
 
-#delete-ingredient {
+#delete-ingredient, #delete-step {
 	position: relative;
 	top:6px;
 	right:1px;
