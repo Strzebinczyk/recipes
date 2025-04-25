@@ -31,7 +31,7 @@
 
             <div class="form-group">
               <%= f.label :tag_ids, 'Tags:', class: "form-label" %><br />
-              <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] },{include_blank: true}, {data: { controller: 'slim' }, multiple: true, id: "tag-select", class: "form-control"} %>
+              <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] },{include_blank: true}, {data: { controller: 'slim' }, multiple: true, id: "tag-select"} %>
             </div>
 
             <div class="form-group">
@@ -39,9 +39,14 @@
               <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-control" %>
             </div>
 
-            <div class="form-group">
-              <%= f.label :ingredients, 'Ingredient list:', class: "form-label" %><br />
-              <%= f.text_field :ingredients, autocomplete: 'Ingredients', class: "form-control" %>
+            <div id="recipe_ingredients">
+              <div>
+                <p class="form-label">Ingredients:</p>
+              </div>
+              <%= render @recipe.recipe_ingredients %>
+            </div>
+            <div>
+              <%= link_to "Add an ingredient", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
 
             <div id="steps">

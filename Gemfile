@@ -79,4 +79,6 @@ group :test do
   gem 'simplecov'
 end
 
+gem 'active_interaction'
 gem 'devise', '~> 4.9'
+gem 'faker'

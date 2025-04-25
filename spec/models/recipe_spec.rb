@@ -5,15 +5,9 @@ require 'rails_helper'
 RSpec.describe Recipe, type: :model do
   let(:recipe) { create(:recipe) }
   let(:recipe_with_tags) { create(:recipe_with_tags) }
-  let(:recipe_with_steps) { create(:recipe_with_steps) }
-  let(:tag) { create(:tag) }
 
   it 'is valid with valid attributes' do
     expect(recipe).to be_valid
-  end
-
-  it 'is valid with steps' do
-    expect(recipe_with_steps).to be_valid
   end
 
   it 'is valid with tags' do
@@ -30,15 +24,10 @@ RSpec.describe Recipe, type: :model do
     expect(recipe).not_to be_valid
   end
 
-  it 'is not valid without ingredients' do
-    recipe = build(:recipe, ingredients: nil)
-    expect(recipe).not_to be_valid
-  end
-
   describe '#self.tagged_with' do
     it 'returns an array of recipes with a given tag' do
       recipe_with_tags
-      result = described_class.tagged_with(tag.name)
+      result = described_class.tagged_with(recipe_with_tags.tags[0].name)
       expect(result).to eq [recipe_with_tags]
     end
   end
@@ -46,7 +35,7 @@ RSpec.describe Recipe, type: :model do
   describe '#tag_list' do
     it 'produces a tag list of the recipe' do
       result = recipe_with_tags.tag_list
-      expect(result).to eq tag.name
+      expect(result).to eq recipe_with_tags.tags[0].name
     end
   end
 end

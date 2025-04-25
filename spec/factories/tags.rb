@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :tag do
-    name { 'A tag' }
+    name { Faker::TvShows::StarTrek.character }
   end
 end

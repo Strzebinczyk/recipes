@@ -4,28 +4,30 @@ require 'rails_helper'
 
 RSpec.describe 'User edits recipe' do
   let(:user) { create(:user) }
-  let(:recipe_with_steps) { create(:recipe_with_steps) }
+  let(:recipe) { create(:recipe) }
   let(:recipe_with_tags) { create(:recipe_with_tags) }
 
   before do
     Rails.application.load_seed
     login_as(user, scope: :user, run_callbacks: false)
-    visit edit_recipe_path(recipe_with_steps.id)
+    visit edit_recipe_path(recipe.id)
   end
 
   describe 'With valid data' do
     scenario 'with editing multiple steps' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
       find_field('Recipe name').set 'Updated name'
       find_field('Serving').set 10
-      find_field('Ingredient list').set 'Updated ingredients'
-      find_all(:field)[6].set('First updated instruction')
-      find_all(:field)[7].set('Second updated instruction')
+      find_all('.name')[0].fill_in with: 'Updated ingredient'
+      find_all('.quantity')[0].fill_in with: 'Updated amount'
+      find_all(:field)[-3].set('First updated instruction')
+      find_all(:field)[-2].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
 
       click_button 'SUBMIT'
 
       expect(page).to have_content('Updated name')
-      expect(page).to have_content('Updated ingredients')
+      expect(page).to have_content('Updated ingredient')
+      expect(page).to have_content('Updated amount')
       expect(page).to have_content('10')
       expect(page).to have_content('First updated instruction')
       expect(page).to have_content('Second updated instruction')
@@ -33,13 +35,13 @@ RSpec.describe 'User edits recipe' do
     end
 
     scenario 'with deleting a step', :js do
-      find_all(:link)[4].click
-      find_all(:link)[4].click
-      find_all(:link)[4].click
+      find_all(:link)[-2].click
+      find_all(:link)[-2].click
+      find_all(:link)[-2].click
 
       click_button 'SUBMIT'
 
-      expect(page).not_to have_content('First updated instruction')
+      expect(page).not_to have_content('Lorem ipsum')
     end
 
     scenario 'with adding a step', :js do
@@ -51,16 +53,17 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content('Additional step')
     end
 
-    scenario 'with deleting a tag', :js do # rubocop:disable RSpec/MultipleExpectations
+    scenario 'with deleting a tag', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
       visit edit_recipe_path(recipe_with_tags.id)
+      tag = recipe_with_tags.tags[0]
 
-      expect(page).to have_content('A tag')
+      expect(page).to have_content(tag.name)
 
       find('div.ss-value-delete').click
 
       click_button 'SUBMIT'
 
-      expect(page).not_to have_content('A tag')
+      expect(page).not_to have_content(tag.name)
     end
 
     scenario 'with adding a tag', :js do
@@ -86,7 +89,7 @@ RSpec.describe 'User edits recipe' do
 
       expect(page.find('.recipe-image')['src']).to have_content('sample2.jpg')
 
-      visit edit_recipe_path(recipe_with_steps.id)
+      visit edit_recipe_path(recipe.id)
 
       find('a#preview-close').click
       page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
@@ -103,7 +106,7 @@ RSpec.describe 'User edits recipe' do
 
       expect(page).to have_selector 'img.recipe-image'
 
-      visit edit_recipe_path(recipe_with_steps.id)
+      visit edit_recipe_path(recipe.id)
 
       find('a#preview-close').click
 
@@ -130,12 +133,12 @@ RSpec.describe 'User edits recipe' do
       expect(page).to have_content("Serving can't be blank")
     end
 
-    scenario 'Without ingredients' do
-      find_field('Ingredient list').set ''
+    scenario 'Without ingredients', :js do
+      find_all('a#delete-ingredient').each(&:click)
 
       click_button 'SUBMIT'
 
-      expect(page).to have_content("Ingredients can't be blank")
+      expect(page).to have_content("Recipe ingredients can't be blank")
     end
 
     scenario 'Without an instruction' do

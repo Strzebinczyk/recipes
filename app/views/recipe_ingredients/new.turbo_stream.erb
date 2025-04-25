@@ -1,0 +1,3 @@
+<%= turbo_stream.append :recipe_ingredients do %>
+  <%= render partial: "recipe_ingredients/recipe_ingredient", locals: { recipe_ingredient: RecipeIngredient.new } %>
+<% end %>

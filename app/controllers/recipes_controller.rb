@@ -13,15 +13,15 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
-    @recipe.steps.build
+    @recipe = Recipes::New.run!
   end
 
   def create
-    @recipe = current_user.recipes.build(recipe_params)
+    outcome = Recipes::Create.run(user: current_user, params: recipe_params)
+    @recipe = outcome.result
 
     respond_to do |format|
-      if @recipe.save
+      if outcome.valid?
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,9 +35,9 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-
+    outcome = Recipes::Update.run(recipe: @recipe, params: recipe_params)
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if outcome.valid?
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +63,13 @@ class RecipesController < ApplicationController
   def recipe_params
     params
       .require(:recipe)
-      .permit([:name, :serving, :ingredients, { steps_attributes: %i[id position instructions _destroy] },
-               { tag_ids: [] }, :image])
+      .permit([
+                :name,
+                :serving,
+                :image,
+                { tag_ids: [] },
+                { recipe_ingredients_attributes: %i[id name quantity _destroy] },
+                { steps_attributes: %i[id position instructions _destroy] }
+              ])
   end
 end
