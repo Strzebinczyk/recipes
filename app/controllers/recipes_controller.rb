@@ -13,10 +13,7 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
-    @recipe.steps.build
-    @recipe.ingredients.build
-    @recipe.recipe_ingredients.build
+    @recipe = Recipes::New.run!
   end
 
   def create
@@ -37,9 +34,9 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    new_params = Recipes::Update.run!(id: params[:id], params: recipe_params)
+    outcome = Recipes::Update.run(recipe: @recipe, params: recipe_params)
     respond_to do |format|
-      if @recipe.update(new_params)
+      if outcome.valid?
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
