@@ -67,7 +67,7 @@ class RecipesController < ApplicationController
                 :serving,
                 :image,
                 { tag_ids: [] },
-                { recipe_ingredients_attributes: %i[id ingredient_id name quantity _destroy] },
+                { recipe_ingredients_attributes: %i[id name quantity _destroy] },
                 { steps_attributes: %i[id position instructions _destroy] }
               ])
   end

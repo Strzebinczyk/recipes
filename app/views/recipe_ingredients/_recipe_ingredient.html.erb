@@ -3,7 +3,6 @@
     <div class="d-flex">
       <%= ff.text_field :name, class: "form-control mb-2 name", placeholder: "Name" %>
       <%= ff.text_field :quantity, class: "form-control mx-2 mb-2 quantity", placeholder: "Quantity" %>
-      <%= ff.hidden_field :ingredient_id %>
       <%= ff.hidden_field :id %>
       <%= ff.hidden_field :_destroy, class: "destroy-ingredient" %>
       <%= link_to "", "", data: {action: "click->delete-ingredient#delete"}, id: "delete-ingredient", class: "btn-close" %>
