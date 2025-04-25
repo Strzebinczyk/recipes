@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../interactions/create_recipe'
-require_relative '../interactions/update_recipe'
-
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
 
@@ -23,7 +20,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = CreateRecipe.run!(user: current_user, params: recipe_params)
+    @recipe = Recipes::Create.run!(user: current_user, params: recipe_params)
 
     respond_to do |format|
       if @recipe.save
@@ -40,7 +37,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    new_params = UpdateRecipe.run!(id: params[:id], params: recipe_params)
+    new_params = Recipes::Update.run!(id: params[:id], params: recipe_params)
     respond_to do |format|
       if @recipe.update(new_params)
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
@@ -68,8 +65,13 @@ class RecipesController < ApplicationController
   def recipe_params
     params
       .require(:recipe)
-      .permit([:name, :serving, :image, { tag_ids: [] },
-               { recipe_ingredients_attributes: %i[id ingredient_id name quantity _destroy] },
-               { steps_attributes: %i[id position instructions _destroy] }])
+      .permit([
+                :name,
+                :serving,
+                :image,
+                { tag_ids: [] },
+                { recipe_ingredients_attributes: %i[id ingredient_id name quantity _destroy] },
+                { steps_attributes: %i[id position instructions _destroy] }
+              ])
   end
 end
