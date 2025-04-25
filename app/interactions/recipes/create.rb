@@ -5,22 +5,21 @@ module Recipes
     object :user
     hash :params, strip: false
 
-    def execute # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def execute # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
       new_recipe_ingredients_attributes =
-        params['recipe_ingredients_attributes'].transform_values do |recipe_ingredient|
-          name = recipe_ingredient['name']
-          recipe_ingredient.delete('name')
+        params['recipe_ingredients_attributes']
+        .reject { _1['name'] == '' || _1['quantity'] == '' }
+        .transform_values do |recipe_ingredient|
+          name = recipe_ingredient.delete('name')
+          ingredient = Ingredient.find_by(name: name) || Ingredient.create(name: name)
 
-          ingredient = Ingredient.find_by(name: name)
-          ingredient ||= Ingredient.create(name: name)
-
-          recipe_ingredient['ingredient_id'] = ingredient.id
-          recipe_ingredient
-        end.reject do |recipe_ingredient| # rubocop:disable Style/MultilineBlockChain
-          recipe_ingredient['name'] == '' || recipe_ingredient['quantity'] == ''
+          { **recipe_ingredient, 'ingredient_id' => ingredient.id }
         end
-      new_params = { recipe_ingredients_attributes: new_recipe_ingredients_attributes, **params }
-      user.recipes.build(new_params)
+      new_params = { **params, 'recipe_ingredients_attributes' => new_recipe_ingredients_attributes }
+      recipe = user.recipes.build(new_params)
+
+      errors.merge!(recipe.errors) unless recipe.save
+      recipe
     end
   end
 end

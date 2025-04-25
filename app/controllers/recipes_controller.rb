@@ -17,10 +17,11 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipes::Create.run!(user: current_user, params: recipe_params)
+    outcome = Recipes::Create.run(user: current_user, params: recipe_params)
+    @recipe = outcome.result
 
     respond_to do |format|
-      if @recipe.save
+      if outcome.valid?
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
