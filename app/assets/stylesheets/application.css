@@ -19,3 +19,10 @@
 .hidden {
   display: none;
 }
+
+body:has(#recipe-form) {
+  background: linear-gradient(45deg, var(--dark-accent-color), var(--accent-color));
+  background-size: cover;
+	background-position: center bottom;
+	background-attachment: fixed;
+}
