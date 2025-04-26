@@ -18,7 +18,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
 
       click_button 'SUBMIT'
 
@@ -47,7 +47,7 @@ RSpec.describe 'User adds recipe' do
       expect(page).to have_content('Sign out')
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
 
       click_link 'Add an ingredient'
 
@@ -69,7 +69,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
       js_select('Cake')
       click_button 'SUBMIT'
 
@@ -81,7 +81,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
       js_select('Cake')
       js_select('Vegan')
 
@@ -96,7 +96,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
       page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
 
       click_button 'SUBMIT'
@@ -110,7 +110,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Serving', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
 
       click_button 'SUBMIT'
 
@@ -121,7 +121,7 @@ RSpec.describe 'User adds recipe' do
       fill_in 'Recipe name', with: 'Lazanki'
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
 
       click_button 'SUBMIT'
 
@@ -131,7 +131,7 @@ RSpec.describe 'User adds recipe' do
     scenario 'Without ingredients' do
       fill_in 'Recipe name', with: 'Lazanki'
       fill_in 'Serving', with: 1
-      fill_in 'Instructions', with: 'Boil it'
+      find('.step').fill_in with: 'Boil it'
 
       click_button 'SUBMIT'
 
