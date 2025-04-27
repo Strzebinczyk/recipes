@@ -1,31 +1,43 @@
-<h1><%= @recipe.name %></h1>
-
-<%=image_tag(@recipe.image, class: "recipe-image") if @recipe.image.attached? %>
-
-<% if @recipe.tags.any? %>
-  <%= render "/tags/tag_list", {recipe: @recipe} %>
-<% end %>
-
-<h4>Serves: <%= @recipe.serving %></h4>
-<h4>Ingredients: </h4>
-<ul>
-  <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-    <li>
-      <%= recipe_ingredient.name %>
-      <%= recipe_ingredient.quantity %>
-    </li>
-  <% end %>
-</ul>
-<h4>Steps:</h4>
-<ul>
-  <% @recipe.steps.each do |step| %>
-    <li><%= step.instructions %></li>
-  <% end %>
-</ul>
-
-<% if user_signed_in? %>
-  <ul>
-    <li><%= link_to "Edit", edit_recipe_path(@recipe) %></li>
-    <li><%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
-  </ul>
-<% end %>
+<div class='container mx-auto'>
+  <div class='row'>
+    <div class='col-8'>
+      <h1><%= @recipe.name %></h1>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-8'>
+      <%=image_tag(@recipe.image, class: "recipe-image w-100") if @recipe.image.attached? %>
+    </div>
+    <div class='col-4'>
+      <h4>Serves: <%= @recipe.serving %></h4>
+      <% if @recipe.tags.any? %>
+        <%= render "/tags/tag_list", {recipe: @recipe} %>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= link_to "Edit", edit_recipe_path(@recipe) %>
+        <%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+      <% end %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-4 border-end'>
+      <h4>Ingredients: </h4>
+      <ul>
+        <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
+          <li>
+            <%= recipe_ingredient.quantity %>
+            <%= recipe_ingredient.name %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='col-8'>
+      <h4>Steps:</h4>
+      <ul>
+        <% @recipe.steps.each do |step| %>
+          <li><%= step.instructions %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
