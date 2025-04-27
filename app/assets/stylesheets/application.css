@@ -12,8 +12,9 @@
     /*
      *= require reset
      *= require const
-     *= require header
      *= require form
+     *= require header
+     *= require home
     */
 
 .hidden {
