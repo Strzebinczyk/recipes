@@ -1,9 +1,9 @@
 <p>
   Tags:
-  <% recipe.tag_array[0..-2].each do |tag| %>
+  <% tag_array[0..-2].each do |tag| %>
     <%= link_to tag, tag_path(tag) %>,
   <% end %>
-  <% recipe.tag_array[-1..].each do |tag| %>
+  <% tag_array[-1..].each do |tag| %>
     <%= link_to tag, tag_path(tag) %>
   <% end %>
 </p>

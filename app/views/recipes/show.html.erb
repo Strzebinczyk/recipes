@@ -11,13 +11,16 @@
     <div class='col-4'>
       <h4>Serves: <%= @recipe.serving %></h4>
       <% if @recipe.tags.any? %>
-        <%= render "/tags/tag_list", {recipe: @recipe} %>
+        <%= render "/tags/tag_list", {tag_array: @recipe.tag_array} %>
       <% end %>
       <% if user_signed_in? %>
         <%= link_to "Edit", edit_recipe_path(@recipe) %>
         <%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
       <% end %>
     </div>
+  </div>
+  <div class='row'>
+    <p>By <%= @recipe.user.email %></p>
   </div>
   <div class='row'>
     <div class='col-4 border-end'>
