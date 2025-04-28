@@ -1,12 +1,25 @@
-<h1><%= @tag %> recipes</h1>
+<div class='container'>
+  <div class='d-flex justify-content-center mb-4'>
+    <h1 class='display-4 fw-normal'><%= @tag %> recipes</h1>
+  </div>
 
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li>
-      <%= link_to recipe.name, recipe %>
-      <% if recipe.tags.any? %>
-        <small> <%= render "/tags/tag_list", {recipe: recipe} %> </small>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <div class='container'>
+    <% @recipes.each_slice(4) do |row| %>
+      <div class="row row-cols-4 align-self-center justify-content-start">
+        <% row.each do |recipe| %>
+      
+          <div class='col mb-3'>
+            <% if recipe.image.present? %>
+              <%= link_to recipe, class: 'recipe-thumbnail' do %>
+                <%= image_tag recipe.image %>
+              <% end %>
+            <% end %>
+            <div class='title d-flex justify-content-center'>
+              <%= link_to recipe.name, recipe, class: "text-decoration-none link-dark" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %> 
+  </div>
+</div>
