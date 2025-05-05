@@ -1,7 +1,7 @@
 <div class='container mx-auto'>
   <div class='row'>
     <div class='col-8'>
-      <h1><%= @recipe.name %></h1>
+      <h1 class='py-2'><%= @recipe.name %></h1>
     </div>
   </div>
   <div class='row'>
@@ -27,7 +27,7 @@
       <h4>Składniki: </h4>
       <ul>
         <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-          <li>
+          <li class='mb-1'>
             <%= recipe_ingredient.name %>
              - 
             <%= recipe_ingredient.quantity %>
@@ -39,7 +39,7 @@
       <h4>Instrukcje:</h4>
       <ul>
         <% @recipe.steps.each do |step| %>
-          <li><%= step.instructions %></li>
+          <li class='border-bottom mb-1'><%= step.instructions %></li>
         <% end %>
       </ul>
     </div>

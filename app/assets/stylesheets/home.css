@@ -3,3 +3,8 @@
   height: 170px;
 }
 
+.col img {
+  height: inherit;
+  width: 100%;
+  object-fit: cover;
+}
