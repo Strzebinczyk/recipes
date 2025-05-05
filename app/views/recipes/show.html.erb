@@ -9,33 +9,34 @@
       <%=image_tag(@recipe.image, class: "recipe-image w-100") if @recipe.image.attached? %>
     </div>
     <div class='col-4'>
-      <h4>Serves: <%= @recipe.serving %></h4>
+      <h4>Liczba porcji: <%= @recipe.serving %></h4>
       <% if @recipe.tags.any? %>
         <%= render "/tags/tag_list", {tag_array: @recipe.tag_array} %>
       <% end %>
       <% if user_signed_in? %>
-        <%= link_to "Edit", edit_recipe_path(@recipe) %>
-        <%= link_to "Delete", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+        <%= link_to "Edytuj", edit_recipe_path(@recipe) %>
+        <%= link_to "Usuń", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"} %>
       <% end %>
     </div>
   </div>
   <div class='row'>
-    <p>By <%= @recipe.user.email %></p>
+    <p>Dodano przez: <%= @recipe.user.email %></p>
   </div>
   <div class='row'>
     <div class='col-4 border-end'>
-      <h4>Ingredients: </h4>
+      <h4>Składniki: </h4>
       <ul>
         <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
           <li>
-            <%= recipe_ingredient.quantity %>
             <%= recipe_ingredient.name %>
+             - 
+            <%= recipe_ingredient.quantity %>
           </li>
         <% end %>
       </ul>
     </div>
     <div class='col-8'>
-      <h4>Steps:</h4>
+      <h4>Instrukcje:</h4>
       <ul>
         <% @recipe.steps.each do |step| %>
           <li><%= step.instructions %></li>

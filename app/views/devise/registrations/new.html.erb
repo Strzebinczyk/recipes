@@ -13,20 +13,20 @@
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :password, class: "form-label" %>
+                  <%= f.label :password, 'Hasło', class: "form-label" %>
                   <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <em>(minimum <%= @minimum_password_length %> znaków)</em>
                   <% end %><br />
                   <%= f.password_field :password, autocomplete: "new-password", class: "form-control"  %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :password_confirmation, class: "form-label" %><br />
+                  <%= f.label :password_confirmation, 'Powtórz hasło', class: "form-label" %><br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
                 </div>
 
                 <div class="form-btn">
-                  <%= f.submit "SIGN UP", class: "btn btn-primary" %>
+                  <%= f.submit "Zarejestruj", class: "btn btn-primary" %>
                 </div>
                 <%= render "devise/shared/links" %>
               </div>
@@ -36,8 +36,8 @@
           </div>
           <div class="col-sm-8 ">
 						<div class="side-text">
-							<h1>Sign up now</h1>
-							<p>Discover tasty everyday recipes</p>
+							<h1>Zarejestruj się</h1>
+							<p>Odkryj wyjątkowe przepisy na codzień</p>
 						</div>
 					</div>
         </div>

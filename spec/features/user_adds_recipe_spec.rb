@@ -14,49 +14,49 @@ RSpec.describe 'User adds recipe' do
 
   describe 'With valid data' do
     scenario 'with one step and one ingredient' do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content('Boil it')
     end
 
     scenario 'with multiple steps', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-      expect(page).to have_content('Sign out')
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      expect(page).to have_content('Wyloguj')
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
 
-      click_link 'Add a step'
+      click_link 'Dodaj instrukcję'
 
       find_all(:field)[-2].set('Boil water')
       find_all(:field).last.set('Chop sausage')
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content('Boil water')
       expect(page).to have_content('Chop sausage')
     end
 
     scenario 'with multiple ingredients', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-      expect(page).to have_content('Sign out')
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      expect(page).to have_content('Wyloguj')
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.step').fill_in with: 'Boil it'
 
-      click_link 'Add an ingredient'
+      click_link 'Dodaj składnik'
 
       find_all('.name')[0].fill_in with: 'Pasta'
       find_all('.quantity')[0].fill_in with: '200g'
       find_all('.name')[1].fill_in with: 'Sauerkraut'
       find_all('.quantity')[1].fill_in with: '100g'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content('Pasta')
       expect(page).to have_content('200g')
@@ -65,41 +65,41 @@ RSpec.describe 'User adds recipe' do
     end
 
     scenario 'with a tag', :js do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
-      js_select('Cake')
-      click_button 'SUBMIT'
+      js_select('Ciasto')
+      click_button 'Prześlij'
 
-      expect(page).to have_content('Cake')
+      expect(page).to have_content('Ciasto')
     end
 
     scenario 'with multiple tags', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
-      js_select('Cake')
-      js_select('Vegan')
+      js_select('Ciasto')
+      js_select('Wegańskie')
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
-      expect(page).to have_content('Cake')
-      expect(page).to have_content('Vegan')
+      expect(page).to have_content('Ciasto')
+      expect(page).to have_content('Wegańskie')
     end
 
     scenario 'with an image' do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
       page.attach_file('recipe_image', Rails.root.join('app/assets/images/sample.jpg').to_s)
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page.find('.recipe-image')['src']).to have_content('sample.jpg')
     end
@@ -107,44 +107,44 @@ RSpec.describe 'User adds recipe' do
 
   describe 'With invalid data' do
     scenario 'Without a recipe name' do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Serving', with: 1
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content("Name can't be blank")
     end
 
     scenario 'Without a serving quantity' do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Recipe name', with: 'Lazanki'
+      fill_in 'Nazwa', with: 'Lazanki'
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
       find('.step').fill_in with: 'Boil it'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content("Serving can't be blank")
     end
 
     scenario 'Without ingredients' do
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.step').fill_in with: 'Boil it'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content("Recipe ingredients can't be blank")
     end
 
     scenario 'Without steps' do # rubocop:disable RSpec/ExampleLength
-      fill_in 'Recipe name', with: 'Lazanki'
-      fill_in 'Serving', with: 1
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
       find('.name').fill_in with: 'Pasta'
       find('.quantity').fill_in with: '200g'
 
-      click_button 'SUBMIT'
+      click_button 'Prześlij'
 
       expect(page).to have_content("Steps can't be blank")
     end

@@ -7,7 +7,7 @@ RSpec.describe 'User signs out' do
 
   it 'logs the user out' do
     log_in_with user.email, user.password
-    click_link 'Sign out'
+    click_link 'Wyloguj'
 
     expect(page).to have_content('Signed out successfully.')
   end

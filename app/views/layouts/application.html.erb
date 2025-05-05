@@ -31,13 +31,13 @@
       <div class="px-3 py-2 dark border-bottom">
         <div class='container'>
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <%= link_to "Home", home_index_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" %>
+            <%= link_to "Strona główna", home_index_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" %>
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
                 <% if user_signed_in? %>
                   <a class="nav-link text-white" href="/recipes/new">
                     <img class="b d-block mx-auto mb-1" src="<%= asset_path('plus-circle.svg') %>" width="30" height= "30">
-                    Add recipe
+                    Dodaj przepis
                   </a>
                 <% end %>
               </li>
@@ -45,84 +45,84 @@
                 <% if user_signed_in? %>
                   <a class="nav-link text-white" href="#">
                     <img class="b d-block mx-auto mb-1" src="<%= asset_path('heart.svg') %>" width="30" height= "30">
-                    Favourite
+                    Ulubione
                   </a>
                 <% end %>
               </li>
               <li>
                   <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="b d-block mx-auto mb-1" src="<%= asset_path('star.svg') %>" width="30" height= "30">
-                    Popular
+                    Popularne
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="/tags/Quick%20and%20easy">Quick and easy</a>
+                      <a class="dropdown-item" href="/tags/Prosty%20przepis">Prosty przepis</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/tags/One%20pot">One pot</a>
+                      <a class="dropdown-item" href="/tags/Jednogarnkowe">Jednogarnkowe</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/tags/Tray%20bake">Tray bake</a>
+                      <a class="dropdown-item" href="/tags/Z%20piekarnika">Z piekarnika</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/tags/Party%20food">Party food</a>
+                      <a class="dropdown-item" href="/tags/Na%20imprezę">Na imprezę</a>
                     </li>
                   </ul>
               </li>
               <li>
                   <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="b d-block mx-auto mb-1" src="<%= asset_path('dish.svg') %>" width="30" height= "30">
-                    Meal type
+                    Rodzaj posiłku
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="/tags/Breakfast">Breakfast</a>
+                      <a class="dropdown-item" href="/tags/Śniadanie">Śniadanie</a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="/tags/Lunch">Lunch</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/tags/Dinner">Dinner</a>
+                      <a class="dropdown-item" href="/tags/Obiad">Obiad</a>
                     </li>
                   </ul>
               </li>
               <li>
                 <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   <img class="b d-block mx-auto mb-1" src="<%= asset_path('cupcake.svg') %>" width="30" height= "30">
-                  Sweet
+                  Słodkości
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="/tags/Cake">Cake</a>
+                    <a class="dropdown-item" href="/tags/Ciasto">Ciasto</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Dessert">Dessert</a>
+                    <a class="dropdown-item" href="/tags/Deser">Deser</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Cookies">Cookies</a>
+                    <a class="dropdown-item" href="/tags/Ciasteczka">Ciasteczka</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Muffins">Muffins</a>
+                    <a class="dropdown-item" href="/tags/Drożdżowe">Drożdżowe</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   <img class="b d-block mx-auto mb-1" src="<%= asset_path('apple.svg') %>" width="30" height= "30">
-                  Diet type
+                  Dieta
                 </a>
                 <ul class="dropdown-menu">
                   <li>
                     <a class="dropdown-item" href="/tags/Fit">Fit</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Vegetarian">Vegetarian</a>
+                    <a class="dropdown-item" href="/tags/Wegetariańskie">Wegetariańskie</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Vegan">Vegan</a>
+                    <a class="dropdown-item" href="/tags/Wegańskie">Wegańskie</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/tags/Gluten-free">Gluten-free</a>
+                    <a class="dropdown-item" href="/tags/Bezglutenowe">Bezglutenowe</a>
                   </li>
                 </ul>
               </li>
@@ -134,14 +134,14 @@
       <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
           <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-            <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+            <input class="form-control" type="search" placeholder="Szukaj..." aria-label="Search">
           </form>
           <div class="text-end">
             <% if user_signed_in? %>
-              <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>
+              <%= link_to "Wyloguj", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>
             <% else %>
-              <%= link_to "Sign in", new_user_session_path, class: "btn btn-light text-dark me-2"  %>
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary"  %>
+              <%= link_to "Zaloguj", new_user_session_path, class: "btn btn-light text-dark me-2"  %>
+              <%= link_to "Zarejestruj", new_user_registration_path, class: "btn btn-primary"  %>
             <% end %>
           </div>
         </div>

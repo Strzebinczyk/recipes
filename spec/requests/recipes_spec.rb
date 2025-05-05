@@ -177,7 +177,7 @@ RSpec.describe 'Recipes', type: :request do
 
         put recipe_path(recipe.id), params: { recipe: {
           recipe_ingredients_attributes: {
-            recipe_ingredient.id => { id: ingredient.id, name: ingredient.name, _destroy: true }
+            recipe_ingredient.id => { ingredient_id: ingredient.id, name: ingredient.name, _destroy: true }
           }
         } }
 
@@ -231,7 +231,7 @@ RSpec.describe 'Recipes', type: :request do
           tag_ids: ['', '2']
         } }
 
-        expect(recipe.tags[0].name).to eql 'Cake'
+        expect(recipe.tags[0].name).to eql 'Ciasto'
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end
@@ -247,7 +247,7 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'does not update recipe when recipe id is not found' do # rubocop:disable RSpec/ExampleLength
-        put recipe_path(2), params: { recipe: {
+        put recipe_path(200), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
           recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
