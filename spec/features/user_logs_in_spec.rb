@@ -8,7 +8,7 @@ RSpec.describe 'User logs in' do
   scenario 'with valid email and password' do
     log_in_with user.email, user.password
 
-    expect(page).to have_content('Sign out')
+    expect(page).to have_content('Wyloguj')
   end
 
   scenario 'with invalid email' do

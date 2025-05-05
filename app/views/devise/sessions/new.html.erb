@@ -11,19 +11,19 @@
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :password, class: "form-label" %><br />
+                  <%= f.label :password, 'Hasło', class: "form-label" %><br />
                   <%= f.password_field :password, class: "form-control" %>
                 </div>
 
                 <% if devise_mapping.rememberable? %>
                   <div class="remember-check">
                     <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me, class: "form-label" %>
+                    <%= f.label :remember_me, 'Zapamiętaj mnie', class: "form-label" %>
                   </div>
                 <% end %>
 
                 <div class="form-btn">
-                  <%= f.submit "LOG IN", class: "btn btn-primary" %>
+                  <%= f.submit "Zaloguj", class: "btn btn-primary" %>
                 </div>
                 <%= render "devise/shared/links" %>
               </div>
@@ -33,8 +33,8 @@
           </div>
           <div class="col-sm-8 ">
 						<div class="side-text">
-							<h1>Welcome back</h1>
-							<p>We have delicious recipes at your fingertips</p>
+							<h1>Witaj znowu</h1>
+							<p>Mamy pyszne przepisy na wyciągnięcie ręki</p>
 						</div>
 					</div>
         </div>

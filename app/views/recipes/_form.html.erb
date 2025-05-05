@@ -15,12 +15,12 @@
 				<%= form_with model: @recipe do |f| %>
           <div class="form mb-5">
             <div class="form-group">
-              <%= f.label :name, 'Recipe name:', autofocus: true, class: "form-label" %><br />
+              <%= f.label :name, 'Nazwa:', autofocus: true, class: "form-label" %><br />
               <%= f.text_field :name, class: "form-control" %>
             </div>
             <div data-controller="delete-image">
               <div class="form-group" data-controller="image-preview">
-                <%= f.label :image,  class: "form-label" %>
+                <%= f.label :image, 'Obraz: ',  class: "form-label" %>
                 <%= f.file_field :image, class: "custom-file-input", "data-image-preview-target"=>"source", "data-action"=>"image-preview#show"%>
                 <img data-image-preview-target="canvas" hidden class="img-thumbnail mx-auto mt-2" id="upload-preview">
                 <%= link_to "", "", data: {action: "click->delete-image#delete"}, id: "preview-close", class: "btn-close"%>
@@ -30,37 +30,37 @@
             </div>
 
             <div class="form-group">
-              <%= f.label :tag_ids, 'Tags:', class: "form-label" %><br />
+              <%= f.label :tag_ids, 'Tagi:', class: "form-label" %><br />
               <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] },{include_blank: true}, {data: { controller: 'slim' }, multiple: true, id: "tag-select", class: 'form-control'} %>
             </div>
 
             <div class="form-group">
-              <%= f.label :serving,  'Serving:', class: "form-label"  %><br />
-              <%= f.number_field :serving, in: 1..20, step: 1, autocomplete: 'Will serve this many people', class: "form-control" %>
+              <%= f.label :serving,  'Liczba porcji:', class: "form-label"  %><br />
+              <%= f.number_field :serving, in: 1..20, step: 1, class: "form-control" %>
             </div>
 
             <div id="recipe_ingredients">
               <div>
-                <p class="form-label">Ingredients:</p>
+                <p class="form-label">Składniki:</p>
               </div>
               <%= render @recipe.recipe_ingredients %>
             </div>
             <div>
-              <%= link_to "Add an ingredient", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
+              <%= link_to "Dodaj składnik", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
 
             <div id="steps">
               <div>
-                <p class="form-label">Instructions:</p>
+                <p class="form-label">Instrukcje:</p>
               </div>
               <%= render @recipe.steps %>
             </div>
             <div>
-              <%= link_to "Add a step", new_step_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
+              <%= link_to "Dodaj instrukcję", new_step_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
 
             <div class="form-btn">
-              <%= f.submit "SUBMIT", class: "btn btn-primary" %>
+              <%= f.submit "Prześlij", class: "btn btn-primary" %>
             </div>
           </div>
         <% end %>
