@@ -30,8 +30,12 @@ class Recipe < ApplicationRecord
     tags.map(&:name)
   end
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ['name']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[ingredients steps tags]
   end
 
   private
