@@ -132,9 +132,12 @@
 
       <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-          <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-            <input class="form-control" type="search" placeholder="Szukaj..." aria-label="Search" data-controller="autocomplete" data-list= '<%= search_autocomplete %>'>
-          </form>
+          <%= search_form_for(@query, url: search_path, method: :get, class: "col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto") do |f| %>
+            
+            <%= f.search_field :name_i_cont, 
+            placeholder: 'Szukaj...', 'data-controller' => "autocomplete", 'data-list'=> search_autocomplete,
+            class: 'form-control' %>
+          <% end %>
           <div class="text-end">
             <% if user_signed_in? %>
               <%= link_to "Wyloguj", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>

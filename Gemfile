@@ -82,3 +82,5 @@ end
 gem 'active_interaction'
 gem 'devise', '~> 4.9'
 gem 'faker'
+
+gem "ransack", "~> 4.3"

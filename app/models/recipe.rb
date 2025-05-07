@@ -30,6 +30,10 @@ class Recipe < ApplicationRecord
     tags.map(&:name)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['name']
+  end
+
   private
 
   def acceptable_image
