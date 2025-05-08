@@ -5,7 +5,7 @@ import { Autocomplete } from "src/autocomplete"
 export default class extends Controller {
   connect() {
     const data = JSON.parse(this.element.dataset.list)
-    const ac = new Autocomplete(document.getElementById('autocomplete'), {
+    const ac = new Autocomplete(this.element, {
       data: data
     });
   }

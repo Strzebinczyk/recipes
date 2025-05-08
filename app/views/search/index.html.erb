@@ -1,0 +1,22 @@
+<div class='container'>
+  <div class='d-flex justify-content-center mb-4'>
+    <h1 class='display-4 fw-normal py-2'>Znaleziono <%= @searched_recipes.count %></h1>
+  </div>
+
+  <div class='container'>
+    <% @searched_recipes.each_slice(4) do |row| %>
+      <div class="row row-cols-4 align-self-center justify-content-start">
+        <% row.each do |recipe| %>
+          <div class='col mb-3'>
+            <% if recipe.image.present? %>
+              <%= link_to (image_tag recipe.image, class: ""), recipe, class: 'recipe-thumbnail' %>
+            <% end %>
+            <div class='title d-flex justify-content-center'>
+              <%= link_to recipe.name, recipe, class: "text-decoration-none link-dark" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %> 
+  </div>
+</div>
