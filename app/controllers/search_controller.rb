@@ -2,7 +2,14 @@
 
 class SearchController < ApplicationController
   def index
-    @query = Recipe.ransack(params[:q])
-    @searched_recipes = @query.result(distinct: true)
+    search = "%#{Recipe.sanitize_sql_like(params[:query] || '')}%"
+    @searched_recipes = Recipe.joins(:ingredients, :steps, :tags)
+                              .where(
+                                'lower(recipes.name) LIKE lower(?) or
+                                 lower(ingredients.name) LIKE lower(?) or
+                                 lower(steps.instructions) LIKE lower(?) or
+                                 lower(tags.name) LIKE lower(?)',
+                                search, search, search, search
+                              ).distinct
   end
 end

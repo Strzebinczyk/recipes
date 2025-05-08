@@ -10,8 +10,8 @@ module ApplicationHelper
   end
 
   def search_autocomplete
-    (Tag.pluck(:name).map { { label: _1, value: _1 } } + Ingredient.pluck(:name).map {
-      { label: _1, value: _1 }
-    }).to_json
+    names = Tag.pluck(:name) + Ingredient.pluck(:name)
+    hash = names.map { |name| { label: name, value: name } }
+    hash.to_json
   end
 end

@@ -132,9 +132,8 @@
 
       <div class="px-3 py-2 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
-            <%= search_form_for(@query, url: search_path, method: :get, class: "col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto d-flex") do |f| %>
-              <%= f.search_field :name_or_ingredients_name_or_steps_instructions_or_tags_name_i_cont, 
-              placeholder: 'Szukaj...', 'data-controller' => "autocomplete", 'data-list'=> search_autocomplete, class: 'form-control search', autocomplete: 'off' %>
+            <%= form_with(url: search_path, method: :get, class: "col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto d-flex") do |f| %>
+              <%= f.search_field :query, placeholder: 'Szukaj...', 'data-controller' => "autocomplete", 'data-list'=> search_autocomplete, class: 'form-control search', autocomplete: 'off' %>
               <%= f.submit "Szukaj", class: "btn btn-outline-success mx-2" %>
             <% end %>
           
