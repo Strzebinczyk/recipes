@@ -14,12 +14,12 @@ RSpec.describe 'User logs in' do
   scenario 'with invalid email' do
     log_in_with 'invalid_email', 'password'
 
-    expect(page).to have_content('Invalid Email or password.')
+    expect(page).to have_content('Nieprawidłowy E-mail lub hasło.')
   end
 
   scenario 'with blank password' do
     log_in_with 'valid@example.com', ''
 
-    expect(page).to have_content('Invalid Email or password.')
+    expect(page).to have_content('Nieprawidłowy E-mail lub hasło.')
   end
 end
