@@ -114,7 +114,7 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content('Pole nazwa nie może być puste')
     end
 
     scenario 'Without a serving quantity' do # rubocop:disable RSpec/ExampleLength
@@ -125,7 +125,7 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Serving can't be blank")
+      expect(page).to have_content('Pole liczba porcji nie może być puste')
     end
 
     scenario 'Without ingredients' do
@@ -135,7 +135,7 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Recipe ingredients can't be blank")
+      expect(page).to have_content('Pole składniki nie może być puste')
     end
 
     scenario 'Without steps' do # rubocop:disable RSpec/ExampleLength
@@ -146,7 +146,7 @@ RSpec.describe 'User adds recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Steps can't be blank")
+      expect(page).to have_content('Pole instrukcje nie może być puste')
     end
   end
 end

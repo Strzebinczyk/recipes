@@ -122,7 +122,7 @@ RSpec.describe 'User edits recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content('Pole nazwa nie może być puste')
     end
 
     scenario 'Without a serving quantity' do
@@ -130,7 +130,7 @@ RSpec.describe 'User edits recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Serving can't be blank")
+      expect(page).to have_content('Pole liczba porcji nie może być puste')
     end
 
     scenario 'Without ingredients', :js do
@@ -138,15 +138,15 @@ RSpec.describe 'User edits recipe' do
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Recipe ingredients can't be blank")
+      expect(page).to have_content('Pole składniki nie może być puste')
     end
 
-    scenario 'Without an instruction' do
-      find_all(:field).last.set('')
+    scenario 'Without an instruction', :js do
+      find_all('a#delete-step').each(&:click)
 
       click_button 'Prześlij'
 
-      expect(page).to have_content("Steps instructions can't be blank")
+      expect(page).to have_content('Pole instrukcje nie może być puste')
     end
   end
 end

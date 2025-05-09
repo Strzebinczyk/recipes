@@ -6,25 +6,19 @@
 						<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="form needs-validation">
                 <div class="form-group">
-                  <%= f.label :email, autofocus: true, class: "form-label" %><br />
+                  <%= f.label :email, autofocus: true, class: "form-label" %>
                   <%= f.email_field :email, class: "form-control", required: true %>
-                  <% resource.errors.full_messages_for(:email).each do |message| %>
-                    <div class='invalid-feedback d-block' data-controller="errors">
-                      <%=message%>
-                    </div>
-                  <% end %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :password, 'Hasło', class: "form-label" %><br />
+                  <%= f.label :password, 'Hasło', class: "form-label" %>
                   <%= f.password_field :password, class: "form-control", required: true %>
-                  <% resource.errors.full_messages_for(:password).each do |message| %>
-                    <div class='invalid-feedback d-block' data-controller="errors">
-                      <%=message%>
-                    </div>
-                  <% end %>
                 </div>
-
+                <% if alert %>
+                  <div class='alert alert-danger' data-controller="errors">
+                    <%=alert%>
+                  </div>
+                <% end %>
                 <% if devise_mapping.rememberable? %>
                   <div class="remember-check">
                     <%= f.check_box :remember_me %>
