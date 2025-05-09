@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    let password = document.querySelector('.password');
-    let confirmation = document.querySelector('.confirmation');
-    let message = document.querySelector('#feedback')
-    let submit = document.querySelector('#sign-up-btn')
+    const password = document.querySelector('.password');
+    const confirmation = document.querySelector('.confirmation');
+    const message = document.querySelector('#feedback')
+    const submit = document.querySelector('#sign-up-btn')
 
     function checkPassword () {
       if (password.value == confirmation.value) {

@@ -8,11 +8,7 @@
                 <div class="form-group">
                   <%= f.label :email, class: "form-label" %>
                   <%= f.email_field :email, autofocus: true, class: "form-control", required: true %>
-                  <% resource.errors.full_messages_for(:email).each do |message| %>
-                    <div class='invalid-feedback d-block' data-controller="errors">
-                      <%=message%>
-                    </div>
-                  <% end %>
+                  <%= render "/shared/errors", object: resource, field: :email %>
                 </div>
 
                 <div class="form-group">
@@ -21,11 +17,7 @@
                   <em>(minimum <%= @minimum_password_length %> znaków)</em>
                   <% end %>
                   <%= f.password_field :password, autocomplete: "new-password", class: "form-control password", required: true %>
-                  <% resource.errors.full_messages_for(:password).each do |message| %>
-                    <div class='invalid-feedback d-block' data-controller="errors">
-                      <%=message%>
-                    </div>
-                  <% end %>
+                 <%= render "/shared/errors", object: resource, field: :password %>
                 </div>
 
                 <div class="form-group">

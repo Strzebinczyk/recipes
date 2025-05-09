@@ -8,11 +8,7 @@
                 <div class="form-group">
                   <%= f.label :email, class: "form-label" %>
                   <%= f.email_field :email, autofocus: true, class: "form-control"%>
-                  <% resource.errors.full_messages_for(:email).each do |message| %>
-                    <div class='invalid-feedback d-block' data-controller="errors">
-                      <%=message%>
-                    </div>
-                  <% end %>
+                  <%= render "/shared/errors", object: resource, field: :email %>
                 </div>
 
                 <div class="form-btn">

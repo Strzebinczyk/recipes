@@ -6,11 +6,7 @@
             <div class="form-group">
               <%= f.label :name, 'Nazwa:', autofocus: true, class: "form-label" %>
               <%= f.text_field :name, class: "form-control" %>
-              <% @recipe.errors.full_messages_for(:name).each do |message| %>
-                <div class='invalid-feedback d-block' data-controller="errors">
-                  <%=message%>
-                </div>
-              <% end %>
+              <%= render "/shared/errors", object: @recipe, field: :name %>
             </div>
             <div data-controller="delete-image">
               <div class="form-group" data-controller="image-preview">
@@ -20,11 +16,7 @@
                 <%= link_to "", "", data: {action: "click->delete-image#delete"}, id: "preview-close", class: "btn-close"%>
                 <%= f.hidden_field :image, class: "destroy-image", value: nil, disabled: true %>
                 <%=image_tag(@recipe.image, class: "preview img-thumbnail mx-auto mt-2", id:"persisted-image") if @recipe.image.attached? && @recipe.image.persisted? %>
-                <% @recipe.errors.full_messages_for(:image).each do |message| %>
-                  <div class='invalid-feedback d-block' data-controller="errors">
-                    <%=message%>
-                  </div>
-                <% end %>
+                <%= render "/shared/errors", object: @recipe, field: :image %>
               </div>
             </div>
 
@@ -36,11 +28,7 @@
             <div class="form-group">
               <%= f.label :serving,  'Liczba porcji:', class: "form-label"  %>
               <%= f.number_field :serving, in: 1..20, step: 1, class: "form-control" %>
-              <% @recipe.errors.full_messages_for(:serving).each do |message| %>
-                <div class='invalid-feedback d-block' data-controller="errors">
-                  <%=message%>
-                </div>
-              <% end %>
+              <%= render "/shared/errors", object: @recipe, field: :serving %>
             </div>
 
             <div id="recipe_ingredients">
@@ -52,11 +40,7 @@
             <div>
               <%= link_to "Dodaj składnik", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
-            <% @recipe.errors.full_messages_for(:recipe_ingredients).each do |message| %>
-              <div class='invalid-feedback d-block mb-2' data-controller="errors">
-                <%=message%>
-              </div>
-            <% end %>
+            <%= render "/shared/errors", object: @recipe, field: :recipe_ingredients %>
             <div id="steps">
               <div>
                 <p class="form-label">Instrukcje:</p>
@@ -66,11 +50,7 @@
             <div>
               <%= link_to "Dodaj instrukcję", new_step_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2"  %>
             </div>
-            <% @recipe.errors.full_messages_for(:steps).each do |message| %>
-              <div class='invalid-feedback d-block mb-2' data-controller="errors">
-                <%=message%>
-              </div>
-            <% end %>
+            <%= render "/shared/errors", object: @recipe, field: :steps %>
             <div class="form-btn my-2">
               <%= f.submit "Prześlij", class: "btn btn-primary" %>
             </div>
