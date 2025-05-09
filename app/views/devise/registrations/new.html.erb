@@ -4,29 +4,40 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-              <div class="form">
-                <%= render "devise/shared/error_messages", resource: resource %>
-
+              <div class="form needs-validation">
                 <div class="form-group">
-                  <%= f.label :email, class: "form-label" %><br />
-                  <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                  <%= f.label :email, class: "form-label" %>
+                  <%= f.email_field :email, autofocus: true, class: "form-control", required: true %>
+                  <% resource.errors.full_messages_for(:email).each do |message| %>
+                    <div class='invalid-feedback d-block' data-controller="errors">
+                      <%=message%>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
                   <%= f.label :password, 'Hasło', class: "form-label" %>
                   <% if @minimum_password_length %>
                   <em>(minimum <%= @minimum_password_length %> znaków)</em>
-                  <% end %><br />
-                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control"  %>
+                  <% end %>
+                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control password", required: true %>
+                  <% resource.errors.full_messages_for(:password).each do |message| %>
+                    <div class='invalid-feedback d-block' data-controller="errors">
+                      <%=message%>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :password_confirmation, 'Powtórz hasło', class: "form-label" %><br />
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
+                  <%= f.label :password_confirmation, 'Powtórz hasło', class: "form-label" %>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control confirmation", 'data-controller' => 'match-password', required: true %>
+                  <div class="invalid-feedback" id='feedback'>
+                    Hasła się nie zgadzają
+                  </div>
                 </div>
 
                 <div class="form-btn">
-                  <%= f.submit "Zarejestruj", class: "btn btn-primary" %>
+                  <%= f.submit "Zarejestruj", class: "btn btn-primary", id: 'sign-up-btn' %>
                 </div>
                 <%= render "devise/shared/links" %>
               </div>
