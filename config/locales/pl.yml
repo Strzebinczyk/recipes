@@ -2,14 +2,23 @@
 pl:
   activerecord:
     attributes:
-        user:
-          current_password: Aktualne hasło
-          email: E-mail
-          password: Hasło
-          password_confirmation: Potwierdź hasło
-          remember_me: Pozostać zalogowanym?
-        models:
-          user: Użytkownik
+      recipe:
+        name: Pole nazwa
+        serving: Pole liczba porcji
+        tag_ids: Tagi
+        recipe_ingredients: Pole składniki
+        steps: Pole instrukcje
+      user:
+        current_password: Aktualne hasło
+        email: E-mail
+        password: Hasło
+        password_confirmation: Potwierdź hasło
+        remember_me: Pozostać zalogowanym?
+      models:
+        user: Użytkownik
+        recipe: Przepis
+        Step: Krok
+        Ingredient: Składnik
     errors:
       messages:
         record_invalid: 'Znaleziono błędy: %{errors}'
