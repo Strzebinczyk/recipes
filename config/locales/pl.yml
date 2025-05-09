@@ -8,6 +8,7 @@ pl:
         tag_ids: Tagi
         recipe_ingredients: Pole składniki
         steps: Pole instrukcje
+        image: Obraz
       user:
         current_password: Aktualne hasło
         email: E-mail
