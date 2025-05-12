@@ -8,12 +8,16 @@
     <div class="row row-cols-4 align-self-center justify-content-start">
       <% row.each do |recipe| %>
       
-        <div class='col mb-3'>
+        <div class='col mb-3 relative'>
           <% if recipe.image.present? %>
-            <%= link_to (image_tag recipe.image, class: ""), recipe, class: 'recipe-thumbnail' %>
+            <%= link_to (image_tag recipe.image), recipe, class: 'recipe-thumbnail' %>
+            <%= link_to (image_tag asset_path('plus-circle.svg'), class: "add-to-plan bg-dark bg-opacity-50"), recipe %>
+          <% else %>
+            <%= link_to (image_tag asset_path('placeholder.jpg')), recipe, class: 'recipe-thumbnail' %>
+            <%= link_to (image_tag asset_path('plus-circle.svg'), class: "add-to-plan bg-dark bg-opacity-50"), recipe %>
           <% end %>
           <div class='title d-flex justify-content-center'>
-            <%= link_to recipe.name, recipe, class: "text-decoration-none link-dark" %>
+            <%= link_to recipe.name, recipe, class: "text-decoration-none link-dark text-center" %>
           </div>
         </div>
         <% end %>

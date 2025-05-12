@@ -2,12 +2,13 @@
 
 <h1>Moje plany posiłków</h1>
 
-<%= link_to "Nowy plan", new_plan_path, data: { turbo_frame: "modal" } %>
+<%= link_to "Nowy plan", new_plan_path, data: { turbo_frame: "modal" }, class: "btn btn-primary" %>
 
-<ul>
-  <% @plans.each do |plan| %>
-    <li>
-      <%= link_to plan.name, plan %>
-    </li>
-  <% end %>
-</ul>
+<% @plans.each do |plan| %>
+  <div class="card text-center" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= plan.name %></h5>
+      <%= link_to "Zobacz", plan, class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

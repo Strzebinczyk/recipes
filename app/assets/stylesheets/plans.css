@@ -1,0 +1,11 @@
+.add-to-plan {
+  max-height: 25px;
+  max-width: 25px;
+  position: absolute;
+  right: 12px;
+  bottom: 25px;
+}
+
+.relative {
+  position: relative;
+}

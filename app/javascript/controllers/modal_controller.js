@@ -3,8 +3,10 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   connect() {
   }
+
   close(e) {
+    const modal = document.querySelector('.modal')
     e.preventDefault();
-    this.classList.remove("d-block");
+    modal.classList.remove("d-block");
   }
 }
