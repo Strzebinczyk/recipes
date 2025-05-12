@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :ingredients, only: %i[new create]
   resources :recipe_ingredients, only: %i[new create]
   resources :users, only: [:show]
+  resources :plans, only: %i[index show]
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
 end

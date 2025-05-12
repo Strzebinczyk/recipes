@@ -10,4 +10,5 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :recipes, dependent: :destroy
+  has_many :plans, dependent: :destroy
 end

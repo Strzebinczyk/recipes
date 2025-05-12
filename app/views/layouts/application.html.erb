@@ -49,6 +49,14 @@
                 <% end %>
               </li>
               <li>
+                <% if user_signed_in? %>
+                  <a class="nav-link text-white" href="/plans">
+                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('plan.svg') %>" width="30" height= "30">
+                    Plany posiłków
+                  </a>
+                <% end %>
+              </li>
+              <li>
                   <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="b d-block mx-auto mb-1" src="<%= asset_path('star.svg') %>" width="30" height= "30">
                     Popularne

@@ -1,0 +1,9 @@
+<h1>Moje plany posiłków</h1>
+
+<ul>
+  <% @plans.each do |plan| %>
+    <li>
+      <%= link_to plan.name, plan %>
+    </li>
+  <% end %>
+</ul>
