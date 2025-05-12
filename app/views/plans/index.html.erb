@@ -1,4 +1,8 @@
+<%= turbo_frame_tag "modal" %>
+
 <h1>Moje plany posiłków</h1>
+
+<%= link_to "Nowy plan", new_plan_path, data: { turbo_frame: "modal" } %>
 
 <ul>
   <% @plans.each do |plan| %>

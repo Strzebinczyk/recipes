@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal bg-dark bg-opacity-50 d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title">Dodaj plan posiłków</h5>
+        </div>
+        <%= form_with model: @plan do |f| %>
+          <div class="modal-body">
+            <div class="form-group needs-validation">
+              <%= f.label :name, 'Nazwa:', autofocus: true, class: "form-label" %>
+              <%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+              <%= render "/shared/errors", object: @plan, field: :name %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to "Zamknij", "#", data: {
+              controller: "modals",
+              action: "modal#close"
+            }, class: "btn btn-secondary" %>
+            <%= f.submit "Zapisz", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
