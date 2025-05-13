@@ -2,8 +2,6 @@
 
 class RecipePlansController < ApplicationController
   def create
-    @recipe = Recipe.find_by(id: params[:recipe])
-    @plan = Plan.find_by(id: params[:plan])
     @recipe_plan = RecipePlan.build(plan_id: params[:plan], recipe_id: params[:recipe])
 
     respond_to do |format|

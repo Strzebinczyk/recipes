@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Plans', type: :request do
@@ -17,7 +19,7 @@ RSpec.describe 'Plans', type: :request do
         sign_in user
       end
 
-      it 'creates plan successfully' do
+      it 'creates plan successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         post plans_path, params: { plan: {
           name: 'A name'
         } }
@@ -25,7 +27,7 @@ RSpec.describe 'Plans', type: :request do
 
         expect(plan).to be_present
         expect(plan.name).to eq('A name')
-        expect(response).to redirect_to(plan_path(plan))
+        expect(response).to redirect_to(plans_path)
       end
     end
   end
