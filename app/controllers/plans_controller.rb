@@ -9,6 +9,7 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
+    @plan.recipe_plans.build
   end
 
   def edit
@@ -51,6 +52,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name)
+    params.require(:plan).permit(:name, { recipe_plans_attributes: %i[id recipe_id plan_id] })
   end
 end

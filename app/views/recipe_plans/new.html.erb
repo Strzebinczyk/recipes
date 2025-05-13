@@ -1,0 +1,26 @@
+<%= turbo_frame_tag "add_recipe_plan" do %>
+  <div class="modal bg-dark bg-opacity-50 d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content shadow" data-controller='modal'>
+        <div class="modal-header">
+          <h5 class="modal-title">Dodaj przepis do planu posiłków</h5>
+        </div>
+        <%= form_with model: current_user do |f| %>
+          <div class="modal-body">
+            <div class="form-group needs-validation">
+              <%= f.label :plan, 'Nazwa:', autofocus: true, class: "form-label" %>
+              <%= f.select(:plan, current_user.plans.order(:name).map { |plan| [plan.name, plan.id] }, {include_blank: false}, {data: { controller: 'slim' }, id: "plan-select", class: 'form-control'}) %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to "Zamknij", "#", data: {
+              controller: "modals",
+              action: "modal#close"
+            }, class: "btn btn-secondary" %>
+            <%= f.submit "Zapisz", class: "btn btn-primary", data: {turbo_frame: "_top"} %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

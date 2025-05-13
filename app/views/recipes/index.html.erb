@@ -3,23 +3,5 @@
     <h1 class='display-4 fw-normal py-2'><%= @tag %></h1>
   </div>
 
-  <div class='container'>
-    <% @recipes.each_slice(4) do |row| %>
-      <div class="row row-cols-4 align-self-center justify-content-start">
-        <% row.each do |recipe| %>
-      
-          <div class='col mb-3'>
-            <% if recipe.image.present? %>
-              <%= link_to recipe, class: 'recipe-thumbnail' do %>
-                <%= image_tag recipe.image %>
-              <% end %>
-            <% end %>
-            <div class='title d-flex justify-content-center'>
-              <%= link_to recipe.name, recipe, class: "text-decoration-none link-dark" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %> 
-  </div>
+  <%= render partial: "shared/recipe_grid", locals: { recipes: @recipes } %>
 </div>

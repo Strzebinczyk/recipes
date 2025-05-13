@@ -22,7 +22,7 @@
 
             <div class="form-group">
               <%= f.label :tag_ids, 'Tagi:', class: "form-label" %><br />
-              <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] },{include_blank: true}, {data: { controller: 'slim' }, multiple: true, id: "tag-select", class: 'form-control'} %>
+              <%= f.select :tag_ids, Tag.order(:name).map { |tag| [tag.name, tag.id] }, {include_blank: false}, {data: { controller: 'slim' }, multiple: true, id: "tag-select", class: 'form-control'} %>
             </div>
 
             <div class="form-group">
