@@ -20,7 +20,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully created.' }
+        format.html { redirect_to plans_url, notice: 'Plan was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -32,7 +32,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.update(post_params)
-        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully updated.' }
+        format.html { redirect_to plans_url, notice: 'Plan was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -40,6 +40,7 @@ class PlansController < ApplicationController
   end
 
   def destroy
+    @plan = Plan.find(params[:id])
     @plan.destroy
 
     respond_to do |format|

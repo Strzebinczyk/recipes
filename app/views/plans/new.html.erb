@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "modal" do %>
+<%= turbo_frame_tag "new_plan" do %>
   <div class="modal bg-dark bg-opacity-50 d-block" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content shadow" data-controller='modal'>
@@ -18,7 +18,7 @@
               controller: "modals",
               action: "modal#close"
             }, class: "btn btn-secondary" %>
-            <%= f.submit "Zapisz", class: "btn btn-primary" %>
+            <%= f.submit "Zapisz", class: "btn btn-primary", data: {turbo_frame: "_top"} %>
           </div>
         <% end %>
     </div>
