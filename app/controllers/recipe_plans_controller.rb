@@ -12,4 +12,13 @@ class RecipePlansController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @recipe_plan = RecipePlan.find(params[:id])
+    @recipe_plan.destroy
+
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.' }
+    end
+  end
 end
