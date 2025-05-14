@@ -11,7 +11,7 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @plan.recipe_plans.build
+    # @plan.recipe_plans.build
   end
 
   def edit
@@ -51,9 +51,34 @@ class PlansController < ApplicationController
     end
   end
 
+  def new_recipe
+    @recipe_plan = RecipePlan.new
+  end
+
+  def add_recipe
+    @recipe_plan = RecipePlan.build(plan_id: params[:plan_id], recipe_id: params[:recipe_id])
+
+    respond_to do |format|
+      if @recipe_plan.save
+        format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_recipe
+    @recipe_plan = RecipePlan.find(params[:id])
+    @recipe_plan.destroy
+
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.' }
+    end
+  end
+
   private
 
   def plan_params
-    params.require(:plan).permit(:name, { recipe_plans_attributes: %i[id recipe_id plan_id] })
+    params.require(:plan).permit(:name, :plan_id, :recipe_id)
   end
 end

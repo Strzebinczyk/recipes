@@ -1,11 +1,29 @@
 .add-to-plan {
-  max-height: 25px;
-  max-width: 25px;
   position: absolute;
-  right: 12px;
-  bottom: 25px;
+  right: 0;
+  bottom: 0;
+  max-width: 25px;
+  max-height: 25px;
+  transition: transform 0.5s;
+  visibility: hidden;
+}
+
+.add-to-plan:hover {
+  transform: scale3d(1.5, 1.5, 1.5);
 }
 
 .relative {
   position: relative;
+}
+
+.recipe-card, .recipe-card-image {
+  max-height: 120px;
+}
+
+.recipe-card-image {
+  object-fit: cover;
+}
+
+.relative:hover .add-to-plan{
+  visibility: visible;
 }

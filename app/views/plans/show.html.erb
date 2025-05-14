@@ -2,25 +2,31 @@
   <div class="text-center mb-4">
     <h1 class='display-4 fw-normal py-2'><%= @plan.name %></h1>
   </div>
-  <% @plan.recipes.each do |recipe| %>
-    <% recipe_plan = @plan.recipe_plans.find_by(recipe_id: recipe.id)%>
-    <div class='row mx-auto row-cols-3'>
-      <div class="card mb-3">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <%= (image_tag recipe.image) || (image_tag asset_path('placeholder.jpg')) %>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title"><%= recipe.name %></h5>
-              <div>
-                <%= link_to "Zobacz", recipe_path(recipe) %>
-                <%= link_to "Usuń", recipe_plan_path(recipe_plan), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"} %>
+  <div class='container'>
+    <% @plan.recipes.each do |recipe| %>
+      <% recipe_plan = @plan.recipe_plans.find_by(recipe_id: recipe.id)%>
+      <div class='row d-flex justify-content-center'>
+        <div class="card mb-3 w-50 recipe-card">
+          <div class="row no-gutters">
+            <div class="col-md-4 px-0">
+              <% if recipe.image.present? %>
+                <%= image_tag recipe.image, class: 'h-100 w-100 rounded-start recipe-card-image' %>
+              <% else %>
+                <%= image_tag asset_path('placeholder.jpg'), class: 'h-100 w-100 rounded-start recipe-card-image' %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= recipe.name %></h5>
+                <div>
+                  <%= link_to "Zobacz", recipe_path(recipe), class: 'btn btn-primary' %>
+                  <%= link_to "Usuń", remove_recipe_plan_path(recipe_plan), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"}, class: 'btn btn-secondary' %>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
