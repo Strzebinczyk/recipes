@@ -2,16 +2,16 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    const frame = document.querySelector("turbo-frame");
-    if (frame.complete) {
+    if (document.readyState == "complete") {
       document.addEventListener('click', event => {
-        if (!'.modal-content'.includes(event.target)) {
+        const modal_content = document.querySelector('.modal-content')
+        if (!modal_content.contains(event.target)) {
           const modal = document.querySelector('.modal')
           modal.classList.remove("d-block");
-        }
-      });
-      
+        }})
     }
+    
+      
   }
 
   close(e) {

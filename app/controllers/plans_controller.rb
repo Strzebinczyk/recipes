@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PlansController < ApplicationController
+  before_action :authenticate_user!
   def index
     @plans = current_user.plans
   end
@@ -34,8 +35,8 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
 
     respond_to do |format|
-      if @plan.update(post_params)
-        format.html { redirect_to plans_url, notice: 'Plan was successfully updated.' }
+      if @plan.update(plan_params)
+        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
