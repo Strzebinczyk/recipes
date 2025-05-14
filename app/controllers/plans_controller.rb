@@ -2,6 +2,7 @@
 
 class PlansController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @plans = current_user.plans
   end
@@ -62,7 +63,7 @@ class PlansController < ApplicationController
       if @recipe_plan.save
         format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.' }
       else
-        format.html { redirect_back fallback_location: root_path, notice: 'User did not create any plans.' }
+        format.html { redirect_back fallback_location: root_path, alert: 'User did not create any plans.' }
       end
     end
   end
