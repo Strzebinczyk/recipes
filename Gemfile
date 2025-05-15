@@ -82,3 +82,4 @@ end
 gem 'active_interaction'
 gem 'devise', '~> 4.9'
 gem 'faker'
+gem 'view_component'

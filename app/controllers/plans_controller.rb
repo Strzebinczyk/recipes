@@ -8,7 +8,7 @@ class PlansController < ApplicationController
   end
 
   def show
-    @plan = Plan.find(params[:id])
+    @plan = current_user.plans.find(params[:id])
   end
 
   def new
@@ -16,64 +16,60 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @plan = Plan.find(params[:id])
+    @plan = current_user.plans.find(params[:id])
   end
 
   def create
     @plan = current_user.plans.build(plan_params)
 
-    respond_to do |format|
-      if @plan.save
-        format.html { redirect_to plans_url, notice: 'Plan was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @plan.save
+      redirect_to plans_url, notice: 'Plan was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    @plan = Plan.find(params[:id])
+    @plan = current_user.plans.find(params[:id])
 
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @plan.update(plan_params)
+      redirect_to plan_url(@plan), notice: 'Plan was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @plan = Plan.find(params[:id])
+    @plan = current_user.plans.find(params[:id])
     @plan.destroy
 
-    respond_to do |format|
-      format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
-    end
+    redirect_to plans_url, notice: 'Plan was successfully destroyed.'
   end
 
   def new_recipe
     @recipe_plan = RecipePlan.new
+    @recipe_id = request.url.partition('=').last
+    @recipe = Recipe.find(@recipe_id)
   end
 
   def add_recipe
-    @recipe_plan = RecipePlan.build(plan_id: params[:plan_id], recipe_id: params[:recipe_id])
+    @plan = current_user.plans.find(params[:plan_id])
+    @recipe_plan = @plan.recipe_plans.build(plan_id: @plan.id, recipe_id: params[:recipe_id])
 
-    respond_to do |format|
-      if @recipe_plan.save
-        format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.' }
-      else
-        format.html { redirect_back fallback_location: root_path, alert: 'User did not create any plans.' }
-      end
+    if @recipe_plan.save
+      redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.'
+    else
+      redirect_back fallback_location: root_path, alert: 'User did not create any plans.'
     end
   end
 
   def remove_recipe
     @recipe_plan = RecipePlan.find(params[:id])
-    @recipe_plan.destroy
-
-    respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.' }
+    if current_user.plans.find(@recipe_plan.plan_id)
+      @recipe_plan.destroy
+      redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.'
+    else
+      redirect_back fallback_location: root_path, alert: 'This plan does not belong to user.'
     end
   end
 

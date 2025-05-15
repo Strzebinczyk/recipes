@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Plans', type: :request do
   let(:user) { create(:user) }
-  let(:plan) { create(:plan) }
+  let(:plan) { create(:plan, user: user) }
   let(:recipe) { create(:recipe) }
 
   context 'when user is authenticated' do

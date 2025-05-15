@@ -7,12 +7,18 @@
         <div class='col mb-3'>
           <div class='relative'>
             <% if recipe.image.present? %>
-              <%= link_to (image_tag recipe.image), recipe, class: 'recipe-thumbnail' %>
+              <%= link_to recipe, class: 'recipe-thumbnail' do %>
+                <%= image_tag recipe.image %>
+              <% end %>
             <% else %>
-              <%= link_to (image_tag asset_path('placeholder.jpg')), recipe, class: 'recipe-thumbnail' %>
+              <%= link_to recipe, class: 'recipe-thumbnail' do %>
+                <%= image_tag asset_path('placeholder.jpg') %>
+              <% end %>
             <% end %>
             <% if user_signed_in? %>
-              <%= link_to (image_tag asset_path('add.svg'), class: "add-to-plan bg-body"),  new_recipe_plans_path(recipe: recipe.id), data: { turbo_frame: "add_recipe_plan" }, title: 'Dodaj do planu posiłków' %>
+              <%= link_to new_recipe_plans_path(recipe: recipe.id), data: { turbo_frame: "add_recipe_plan" }, title: 'Dodaj do planu posiłków' do %>
+                <% image_tag asset_path('add.svg'), class: "add-to-plan bg-body" %>
+              <% end %>
             <% end %>
           </div>
           <div class='title d-flex justify-content-center'>

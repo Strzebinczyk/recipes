@@ -34,104 +34,30 @@
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
                 <% if user_signed_in? %>
-                  <a class="nav-link text-white" href="/recipes/new">
-                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('plus-circle.svg') %>" width="30" height= "30">
-                    Dodaj przepis
-                  </a>
+                  <%= render(NavElementComponent.new(path: new_recipe_path, img_path: asset_path('plus-circle.svg'), text: 'Dodaj przepis')) %>
                 <% end %>
               </li>
               <li>
                 <% if user_signed_in? %>
-                  <a class="nav-link text-white" href="#">
-                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('heart.svg') %>" width="30" height= "30">
-                    Ulubione
-                  </a>
+                  <%= render(NavElementComponent.new(path: '#', img_path: asset_path('heart.svg'), text: 'Ulubione')) %>
                 <% end %>
               </li>
               <li>
                 <% if user_signed_in? %>
-                  <a class="nav-link text-white" href="/plans">
-                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('plan.svg') %>" width="30" height= "30">
-                    Plany posiłków
-                  </a>
+                  <%= render(NavElementComponent.new(path: plans_path, img_path: asset_path('plan.svg'), text: 'Plany posiłków')) %>
                 <% end %>
               </li>
               <li>
-                  <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('star.svg') %>" width="30" height= "30">
-                    Popularne
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="/tags/Prosty%20przepis">Prosty przepis</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/tags/Jednogarnkowe">Jednogarnkowe</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/tags/Z%20piekarnika">Z piekarnika</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/tags/Na%20imprezę">Na imprezę</a>
-                    </li>
-                  </ul>
+                <%= render(NavElementComponent.new(img_path: asset_path('star.svg'), text: 'Popularne', tag_list: ['Prosty przepis', 'Jednogarnkowe', 'Z piekarnika', 'Na imprezę'])) %>
               </li>
               <li>
-                  <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="b d-block mx-auto mb-1" src="<%= asset_path('dish.svg') %>" width="30" height= "30">
-                    Rodzaj posiłku
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="/tags/Śniadanie">Śniadanie</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/tags/Lunch">Lunch</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/tags/Obiad">Obiad</a>
-                    </li>
-                  </ul>
+                <%= render(NavElementComponent.new(img_path: asset_path('dish.svg'), text: 'Rodzaj posiłku', tag_list: ['Śniadanie', 'Lunch', 'Obiad'])) %>
               </li>
               <li>
-                <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img class="b d-block mx-auto mb-1" src="<%= asset_path('cupcake.svg') %>" width="30" height= "30">
-                  Słodkości
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="/tags/Ciasto">Ciasto</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Deser">Deser</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Ciasteczka">Ciasteczka</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Drożdżowe">Drożdżowe</a>
-                  </li>
-                </ul>
+                <%= render(NavElementComponent.new(img_path: asset_path('cupcake.svg'), text: 'Słodkości', tag_list: ['Ciasto', 'Deser', 'Ciasteczka', 'Drożdżowe'])) %>
               </li>
               <li>
-                <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img class="b d-block mx-auto mb-1" src="<%= asset_path('apple.svg') %>" width="30" height= "30">
-                  Dieta
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="/tags/Fit">Fit</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Wegetariańskie">Wegetariańskie</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Wegańskie">Wegańskie</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/tags/Bezglutenowe">Bezglutenowe</a>
-                  </li>
-                </ul>
+                <%= render(NavElementComponent.new(img_path: asset_path('apple.svg'), text: 'Dieta', tag_list: ['Fit', 'Wegetariańskie', 'Wegańskie', 'Bezglutenowe'])) %>
               </li>
             </ul>
           </div>
