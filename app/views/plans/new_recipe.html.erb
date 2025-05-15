@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "add_recipe_plan" do %>
+  <div class="modal bg-dark bg-opacity-50 d-block" tabindex="-1" role="dialog" data-controller='modal'>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title">Dodaj przepis do planu posiłków</h5>
+        </div>
+        <%= form_with url: add_recipe_plans_path do |f| %>
+          <div class="modal-body">
+            <div class='form-group'>
+              <h5> <%= @recipe.name %> </h5>
+            </div>
+            <div class="form-group">
+              <%= f.label :plan_id, 'Wybierz plan:', autofocus: true, class: "form-label" %>
+              <%= f.select(:plan_id, current_user.plans.order(:name).map { |plan| [plan.name, plan.id] }, {include_blank: false}, {data: { controller: 'slim' }, id: "plan-select", class: 'form-control'}) %>
+              <%= f.hidden_field :recipe_id, value: @recipe_id %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to "Zamknij", "#", data: {
+              controller: "modals",
+              action: "modal#close"
+            }, class: "btn btn-secondary" %>
+            <%= f.submit "Zapisz", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

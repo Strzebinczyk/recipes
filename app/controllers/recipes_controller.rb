@@ -20,12 +20,10 @@ class RecipesController < ApplicationController
     outcome = Recipes::Create.run(user: current_user, params: recipe_params)
     @recipe = outcome.result
 
-    respond_to do |format|
-      if outcome.valid?
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if outcome.valid?
+      redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -36,12 +34,11 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     outcome = Recipes::Update.run(recipe: @recipe, params: recipe_params)
-    respond_to do |format|
-      if outcome.valid?
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+
+    if outcome.valid?
+      redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -49,9 +46,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
-    respond_to do |format|
-      format.html { redirect_to home_index_path, notice: 'Recipe was successfully destroyed.' }
-    end
+    redirect_to home_index_path, notice: 'Recipe was successfully destroyed.'
   end
 
   private

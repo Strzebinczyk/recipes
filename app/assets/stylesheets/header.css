@@ -3,6 +3,11 @@
   background-color: var(--dark-accent-color);
 }
 
+.nav-image {
+  height: 30px;
+  width: 30px;
+}
+
 #header {
   max-height: 145px;
   background-color: var(--background-color);

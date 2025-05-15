@@ -1,0 +1,18 @@
+<% if @tag_list.any? %>
+  <%= link_to @path, class: "nav-link text-white dropdown-toggle", 'data-bs-toggle' => "dropdown", 'aria-expanded' => "false" do %>
+    <%= image_tag @img_path, class: "b d-block mx-auto mb-1 nav-image" %>
+    <%= @text %>
+  <% end %>
+  <ul class="dropdown-menu">
+    <% @tag_list.each do |tag| %>
+      <li>
+        <%= link_to tag, tag_path(tag), class: "dropdown-item" %>
+      </li>                  
+    <% end %>
+  </ul>
+<% else %>
+  <%= link_to @path, class: "nav-link text-white" do %>
+    <%= image_tag @img_path, class: "b d-block mx-auto mb-1 nav-image" %>
+    <%= @text %>
+  <% end %>
+<% end %>

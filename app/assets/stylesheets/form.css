@@ -129,6 +129,6 @@ body:has(.background-gradient) {
   right:1px;
 }
 
-#tag-select + .form-control {
+#tag-select + .form-control, #plan-select + .form-control  {
   display: flex;
 }

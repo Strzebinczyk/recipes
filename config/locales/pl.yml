@@ -20,6 +20,8 @@ pl:
         recipe: Przepis
         Step: Krok
         Ingredient: Składnik
+      plan:
+        name: Pole nazwa
     errors:
       messages:
         record_invalid: 'Znaleziono błędy: %{errors}'

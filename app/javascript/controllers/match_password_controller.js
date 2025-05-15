@@ -4,18 +4,18 @@ export default class extends Controller {
   connect() {
     const password = document.querySelector('.password');
     const confirmation = document.querySelector('.confirmation');
-    const message = document.querySelector('#feedback')
-    const submit = document.querySelector('#sign-up-btn')
+    const message = document.querySelector('#feedback');
+    const submit = document.querySelector('#sign-up-btn');
 
     function checkPassword () {
       if (password.value == confirmation.value) {
         confirmation.classList.remove('is-invalid');
         message.classList.remove('d-block');
-        submit.classList.remove('disabled')
+        submit.classList.remove('disabled');
       } else {
         confirmation.classList.add('is-invalid');
         message.classList.add('d-block');
-        submit.classList.add('disabled')
+        submit.classList.add('disabled');
       }
     }
 

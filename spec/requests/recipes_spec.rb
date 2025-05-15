@@ -172,16 +172,21 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'deletes an ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-        ingredient = recipe.ingredients.first
-        recipe_ingredient = ingredient.recipe_ingredients.first
+        recipe_ingredient = recipe.recipe_ingredients.first
+        recipe_ingredient_id = recipe_ingredient.id
+        ingredient_id = recipe_ingredient.ingredient_id
+        ingredient = Ingredient.find_by(id: ingredient_id)
 
         put recipe_path(recipe.id), params: { recipe: {
           recipe_ingredients_attributes: {
-            recipe_ingredient.id => { ingredient_id: ingredient.id, name: ingredient.name, _destroy: true }
+            recipe_ingredient_id => {
+              id: recipe_ingredient_id, name: ingredient.name, quantity: recipe_ingredient.quantity, _destroy: true
+            }
           }
         } }
 
-        expect(Ingredient.any?(ingredient.id)).to be false
+        expect(Ingredient.exists?(ingredient_id)).to be true
+        expect(RecipeIngredient.exists?(recipe_ingredient_id)).to be false
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end
@@ -221,7 +226,7 @@ RSpec.describe 'Recipes', type: :request do
           steps_attributes: [id: step.id, _destroy: true]
         } }
 
-        expect(Step.any?(step.id)).to be false
+        expect(Step.exists?(step.id)).to be false
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end
@@ -289,7 +294,7 @@ RSpec.describe 'Recipes', type: :request do
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(home_index_path)
-        expect(Recipe.any?(recipe_id)).to be false
+        expect(Recipe.exists?(recipe_id)).to be false
       end
 
       it "deletes recipe with it's steps" do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
@@ -299,12 +304,12 @@ RSpec.describe 'Recipes', type: :request do
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(home_index_path)
-        expect(Recipe.any?(recipe_id)).to be false
-        expect(Step.any?(step_id)).to be false
+        expect(Recipe.exists?(recipe_id)).to be false
+        expect(Step.exists?(step_id)).to be false
       end
 
       it 'does not delete recipe when recipe id is not found' do
-        delete recipe_path(2)
+        delete recipe_path(2002)
 
         expect(response).to have_http_status(:not_found)
       end

@@ -1,0 +1,14 @@
+<div class='col mb-3'>
+  <div class="card text-center" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @plan.name %></h5>
+      <ul class="list-group list-group-flush">
+        <% @plan.recipes.each do |recipe| %>
+          <li class="list-group-item"><%= recipe.name %></li>
+        <% end %>
+      </ul>
+      <%= link_to "Zobacz", @plan, class: "btn btn-primary" %>
+      <%= link_to "Usuń", plan_path(@plan), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"}, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
