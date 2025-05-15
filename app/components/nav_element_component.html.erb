@@ -1,4 +1,4 @@
-<% if @tag_list.length != 0 %>
+<% if @tag_list.any? %>
   <%= link_to @path, class: "nav-link text-white dropdown-toggle", 'data-bs-toggle' => "dropdown", 'aria-expanded' => "false" do %>
     <%= image_tag @img_path, class: "b d-block mx-auto mb-1 nav-image" %>
     <%= @text %>

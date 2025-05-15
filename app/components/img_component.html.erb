@@ -1,0 +1,5 @@
+<% if @recipe.image.attached? %>
+  <%= image_tag @recipe.image, class: @class_list %>
+<% else %>
+  <%= image_tag asset_path('placeholder.jpg'), class: @class_list %>
+<% end %>

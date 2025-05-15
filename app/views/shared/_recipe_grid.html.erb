@@ -6,14 +6,8 @@
       <% row.each do |recipe| %>
         <div class='col mb-3'>
           <div class='relative'>
-            <% if recipe.image.present? %>
-              <%= link_to recipe, class: 'recipe-thumbnail' do %>
-                <%= image_tag recipe.image %>
-              <% end %>
-            <% else %>
-              <%= link_to recipe, class: 'recipe-thumbnail' do %>
-                <%= image_tag asset_path('placeholder.jpg') %>
-              <% end %>
+            <%= link_to recipe, class: 'recipe-thumbnail' do %>
+              <%= render(ImgComponent.new(recipe: recipe)) %>
             <% end %>
             <% if user_signed_in? %>
               <%= link_to new_recipe_plans_path(recipe: recipe.id), data: { turbo_frame: "add_recipe_plan" }, title: 'Dodaj do planu posiłków' do %>

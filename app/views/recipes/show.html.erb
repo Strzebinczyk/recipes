@@ -6,7 +6,7 @@
   </div>
   <div class='row'>
     <div class='col-8'>
-      <%=image_tag(@recipe.image, class: "recipe-image w-100") if @recipe.image.attached? %>
+      <%= render(ImgComponent.new(recipe: @recipe, class_list: 'recipe-image w-100')) %>
     </div>
     <div class='col-4'>
       <h4>Liczba porcji: <%= @recipe.serving %></h4>

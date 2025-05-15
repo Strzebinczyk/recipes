@@ -10,11 +10,7 @@
         <div class="card mb-3 w-50 recipe-card">
           <div class="row no-gutters">
             <div class="col-md-4 px-0">
-              <% if recipe_plan.recipe.image.present? %>
-                <%= image_tag recipe_plan.recipe.image, class: 'h-100 w-100 rounded-start recipe-card-image' %>
-              <% else %>
-                <%= image_tag asset_path('placeholder.jpg'), class: 'h-100 w-100 rounded-start recipe-card-image' %>
-              <% end %>
+              <%= render(ImgComponent.new(recipe: recipe_plan.recipe, class_list: 'h-100 w-100 rounded-start recipe-card-image')) %>
             </div>
             <div class="col-md-8">
               <div class="card-body">

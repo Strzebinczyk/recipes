@@ -65,6 +65,7 @@ class PlansController < ApplicationController
 
   def remove_recipe
     @recipe_plan = RecipePlan.find(params[:id])
+
     if current_user.plans.find(@recipe_plan.plan_id)
       @recipe_plan.destroy
       redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.'
