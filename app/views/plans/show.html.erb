@@ -3,7 +3,8 @@
   <div class="text-center mb-4">
     <h1 class='display-4 fw-normal py-2'><%= @plan.name %></h1>
   </div>
-  <%= link_to "edytuj", edit_plan_path(@plan), data: { turbo_frame: "edit_plan" }, class: "btn btn-primary my-4" %>
+  <%= link_to "Lista zakupów", list_path(@list), class: "btn btn-primary my-4" %>
+  <%= link_to "Edytuj", edit_plan_path(@plan), data: { turbo_frame: "edit_plan" }, class: "btn btn-secondary my-4" %>
   <div class='container'>
     <% @plan.recipe_plans.each do |recipe_plan| %>
       <div class='row d-flex justify-content-center'>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,6 +43,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "list_ingredients", force: :cascade do |t|
+    t.integer "ingredient_id", null: false
+    t.integer "list_id", null: false
+    t.string "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_list_ingredients_on_ingredient_id"
+    t.index ["list_id"], name: "index_list_ingredients_on_list_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.integer "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_lists_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -119,6 +136,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "list_ingredients", "ingredients"
+  add_foreign_key "list_ingredients", "lists"
+  add_foreign_key "lists", "plans"
   add_foreign_key "plans", "users"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
