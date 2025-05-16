@@ -3,6 +3,15 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["canvas", "source"];
 
+  connect() {
+    const preview = document.querySelector(".preview")
+    const closeBtn = document.querySelector("#preview-close")
+
+    if (preview != null) {
+      closeBtn.classList.remove('hidden')
+    }
+  }
+
   show() {
     const reader = new FileReader();
     const preview = document.querySelector(".preview")
@@ -13,10 +22,9 @@ export default class extends Controller {
       this.canvasTarget.classList.remove("hidden");
       closeBtn.classList.remove('hidden');
       document.querySelector(".destroy-image").disabled = true;
-      if(preview != null) {
+      if (preview != null) {
         preview.classList.add("hidden");
-      } else {
-        closeBtn.classList.add('hidden');
+        closeBtn.classList.remove('hidden')
       }
       this.canvasTarget.src = reader.result;
     }.bind(this)
