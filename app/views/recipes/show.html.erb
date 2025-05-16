@@ -29,7 +29,7 @@
         <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
           <li class='mb-1'>
             <%= recipe_ingredient.name %>
-             - 
+            <span> - </span>
             <%= recipe_ingredient.quantity %>
           </li>
         <% end %>
