@@ -7,5 +7,6 @@ export default class extends Controller {
     document.querySelector(".destroy-image").disabled = false;
     document.querySelector("#persisted-image")?.classList.add("hidden");
     document.querySelector("#upload-preview")?.classList.add("hidden");
+    document.querySelector("#preview-close")?.classList.add("hidden");
   }
 }
