@@ -29,7 +29,7 @@
 }
 
 .plan-index {
-  background-image: url(meal-plan-background.jpg);
+  background-image: url("meal-plan-background.jpg");
   background-size: cover;
   background-position: center bottom;
   background-attachment: fixed;	

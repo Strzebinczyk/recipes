@@ -62,6 +62,9 @@ jobs:
       - name: Run ESLint
         run: yarn run eslint ./app/javascript --ext .js,.jsx,.ts,.tsx
 
+      - name: Run Stylelint
+        run: npx stylelint "./app/assets/stylesheets/*.css"
+
   test:
     runs-on: ubuntu-latest
 

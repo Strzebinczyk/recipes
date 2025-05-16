@@ -13,6 +13,7 @@
 body {
   /* 3. Add accessible line-height */
   line-height: 1.5;
+
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
 }
@@ -37,23 +38,17 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
+
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
 /*
-  9. Create a root stacking context
-*/
-#root, #__next {
-  isolation: isolate;
-}
-
-/*
-  10. Custom
+  9. Custom
 */
 fieldset {
-  border: 0px;
-  padding: 0px;
+  border: 0;
+  padding: 0;
 }
 
 ul {
