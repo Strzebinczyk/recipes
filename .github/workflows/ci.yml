@@ -60,7 +60,7 @@ jobs:
         run: yarn
 
       - name: Run ESLint
-        run: eslint . --ext .js,.jsx,.ts,.tsx
+        run: yarn run eslint ./app/javascript --ext .js,.jsx,.ts,.tsx
 
   test:
     runs-on: ubuntu-latest
