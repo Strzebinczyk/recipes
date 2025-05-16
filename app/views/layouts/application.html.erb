@@ -28,35 +28,38 @@
   <body>
     <div id="header">
       <div class="px-3 py-2 dark border-bottom">
-        <div class='container'>
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <%= link_to "Strona główna", home_index_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" %>
-            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-              <li>
-                <% if user_signed_in? %>
+        <div class='container d-flex flex-wrap'>
+          <div class="nav me-lg-auto">
+            <%= render(NavElementComponent.new(path: home_index_path, img_path: asset_path('home.svg'), text: 'Strona główna')) %>
+          </div>
+          <% if user_signed_in? %>
+            <div class="d-flex">
+              <ul class="nav">
+                <li class='d-flex align-items-center'>
                   <%= render(NavElementComponent.new(path: new_recipe_path, img_path: asset_path('plus-circle.svg'), text: 'Dodaj przepis')) %>
-                <% end %>
-              </li>
-              <li>
-                <% if user_signed_in? %>
+                </li>
+                <li class='d-flex align-items-center'>
                   <%= render(NavElementComponent.new(img_path: asset_path('heart.svg'), text: 'Ulubione')) %>
-                <% end %>
-              </li>
-              <li>
-                <% if user_signed_in? %>
+                </li>
+                <li class='d-flex align-items-center'>
                   <%= render(NavElementComponent.new(path: plans_path, img_path: asset_path('plan.svg'), text: 'Plany posiłków')) %>
-                <% end %>
-              </li>
-              <li>
+                </li>
+              </ul>
+            </div>
+            <div class="vr"></div>
+          <% end %>
+          <div class="d-flex flex-wrap">
+            <ul class="nav">
+              <li class='d-flex align-items-center'>
                 <%= render(NavElementComponent.new(img_path: asset_path('star.svg'), text: 'Popularne', tag_list: ['Prosty przepis', 'Jednogarnkowe', 'Z piekarnika', 'Na imprezę'])) %>
               </li>
-              <li>
+              <li class='d-flex align-items-center'>
                 <%= render(NavElementComponent.new(img_path: asset_path('dish.svg'), text: 'Rodzaj posiłku', tag_list: ['Śniadanie', 'Lunch', 'Obiad'])) %>
               </li>
-              <li>
+              <li class='d-flex align-items-center'>
                 <%= render(NavElementComponent.new(img_path: asset_path('cupcake.svg'), text: 'Słodkości', tag_list: ['Ciasto', 'Deser', 'Ciasteczka', 'Drożdżowe'])) %>
               </li>
-              <li>
+              <li class='d-flex align-items-center'>
                 <%= render(NavElementComponent.new(img_path: asset_path('apple.svg'), text: 'Dieta', tag_list: ['Fit', 'Wegetariańskie', 'Wegańskie', 'Bezglutenowe'])) %>
               </li>
             </ul>

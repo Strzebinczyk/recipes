@@ -20,9 +20,9 @@ RSpec.describe 'User manages recipe in a meal plan' do
 
     visit home_index_path
 
-    expect(page).to have_content('Kurczak w sosie marchewkowym')
+    expect(page).to have_content('Biszkopt bezowy z galaretką')
 
-    find_all('.recipe-thumbnail').first.hover
+    find_all('.recipe-thumbnail img').last.hover
     find('.add-to-plan').click
 
     expect(page).to have_content('Dodaj przepis do planu posiłków')
@@ -31,7 +31,8 @@ RSpec.describe 'User manages recipe in a meal plan' do
 
     visit plans_path
 
-    expect(page).to have_content('Kurczak w sosie marchewkowym')
+    expect(page).to have_content('Moje plany posiłków')
+    expect(page).to have_content('Biszkopt bezowy z galaretką')
   end
 
   scenario 'removes recipe', :js do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
@@ -39,9 +40,9 @@ RSpec.describe 'User manages recipe in a meal plan' do
 
     visit home_index_path
 
-    expect(page).to have_content('Kurczak w sosie marchewkowym')
+    expect(page).to have_content('Biszkopt bezowy z galaretką')
 
-    find_all('.recipe-thumbnail').first.hover
+    find_all('.recipe-thumbnail').last.hover
     find('.add-to-plan').click
 
     expect(page).to have_content('Dodaj przepis do planu posiłków')
@@ -50,11 +51,11 @@ RSpec.describe 'User manages recipe in a meal plan' do
 
     visit plans_path
 
-    expect(page).to have_content('Kurczak w sosie marchewkowym')
+    expect(page).to have_content('Biszkopt bezowy z galaretką')
 
     find_all('.btn-secondary').last.click
     accept_confirm
 
-    expect(page).not_to have_content('Kurczak w sosie marchewkowym')
+    expect(page).not_to have_content('Biszkopt bezowy z galaretką')
   end
 end

@@ -8,7 +8,11 @@
   width: 30px;
 }
 
+#header .vr {
+  width: 2px;
+  opacity: 0.75;
+}
+
 #header {
-  max-height: 145px;
   background-color: var(--background-color);
 }
