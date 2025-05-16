@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   scan_ruby:
@@ -55,6 +55,12 @@ jobs:
 
       - name: Lint erb
         run: bundle exec erb_lint ./app
+
+      - name: Install modules
+        run: yarn
+
+      - name: Run ESLint
+        run: yarn run eslint ./app/javascript --ext .js,.jsx,.ts,.tsx
 
   test:
     runs-on: ubuntu-latest

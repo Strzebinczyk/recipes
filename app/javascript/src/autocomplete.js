@@ -6,7 +6,7 @@ const DEFAULTS = {
   label: 'label',
   value: 'value',
   showValue: false,
-  showValueBeforeLabel: false,
+  showValueBeforeLabel: false
 };
 
 class Autocomplete {
@@ -25,7 +25,7 @@ class Autocomplete {
 
     insertAfter(dropdown, field);
 
-    this.dropdown = new bootstrap.Dropdown(field, this.options.dropdownOptions);
+    this.dropdown = new window.bootstrap.Dropdown(field, this.options.dropdownOptions);
 
     field.addEventListener('click', (e) => {
       if (this.createItems() === 0) {
