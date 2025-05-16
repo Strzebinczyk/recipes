@@ -1,9 +1,9 @@
 <div id="sign-up" class="section devise-form">
   <div class="section-middle">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <div class="form needs-validation">
                 <div class="form-group">
                   <%= f.label :email, class: "form-label" %>
@@ -34,15 +34,13 @@
                 <%= render "devise/shared/links" %>
               </div>
             <% end %>
-
-            
           </div>
           <div class="col-sm-8 ">
-						<div class="side-text">
-							<h1>Zarejestruj się</h1>
-							<p>Odkryj wyjątkowe przepisy na codzień</p>
-						</div>
-					</div>
+            <div class="side-text">
+              <h1>Zarejestruj się</h1>
+              <p>Odkryj wyjątkowe przepisy na codzień</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

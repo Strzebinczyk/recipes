@@ -80,6 +80,8 @@ group :test do
 end
 
 gem 'active_interaction'
+gem 'better_html'
 gem 'devise', '~> 4.9'
+gem 'erb_lint', require: false
 gem 'faker'
 gem 'view_component'

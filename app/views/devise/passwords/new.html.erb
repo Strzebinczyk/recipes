@@ -1,31 +1,27 @@
 <div id="reset-password" class="section devise-form">
   <div class="section-middle">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-              <div class="form needs-validation">
-                <div class="form-group">
-                  <%= f.label :email, class: "form-label" %>
-                  <%= f.email_field :email, autofocus: true, class: "form-control"%>
-                  <%= render "/shared/errors", object: resource, field: :email %>
-                </div>
-
-                <div class="form-btn">
-                  <%= f.submit "Wyślij", class: "btn btn-primary" %>
-                </div>
-                <%= render "devise/shared/links" %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <div class="form needs-validation">
+              <div class="form-group">
+                <%= f.label :email, class: "form-label" %>
+                <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                <%= render "/shared/errors", object: resource, field: :email %>
               </div>
-            <% end %>
-
-            
+              <div class="form-btn">
+                <%= f.submit "Wyślij", class: "btn btn-primary" %>
+              </div>
+              <%= render "devise/shared/links" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-sm ">
+          <div class="side-text">
+            <h1>Zapomniałeś hasła?</h1>
+            <p>Nie martw się, wyślemy Ci instrukcje odzyskania hasła!</p>
           </div>
-          <div class="col-sm ">
-						<div class="side-text">
-							<h1>Zapomniałeś hasła?</h1>
-							<p>Nie martw się, wyślemy Ci instrukcje odzyskania hasła!</p>
-						</div>
-					</div>
         </div>
       </div>
     </div>
