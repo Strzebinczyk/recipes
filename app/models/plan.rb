@@ -5,6 +5,6 @@ class Plan < ApplicationRecord
 
   has_many :recipe_plans, dependent: :destroy
   has_many :recipes, through: :recipe_plans
-  has_one :list, dependent: :destroy
+  has_one :shopping_list, dependent: :destroy
   belongs_to :user
 end

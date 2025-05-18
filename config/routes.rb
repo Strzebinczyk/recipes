@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       delete :remove_recipe
     end
   end
-  resources :lists, only: [:show]
+  resources :shopping_lists, only: [:show]
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
 end

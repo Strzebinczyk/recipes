@@ -1,5 +1,5 @@
-class ListIngredient < ApplicationRecord
-  belongs_to :list
+class ShoppingListIngredient < ApplicationRecord
+  belongs_to :shopping_list
   belongs_to :ingredient
   validates :quantity, presence: true
 

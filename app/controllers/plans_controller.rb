@@ -9,12 +9,12 @@ class PlansController < ApplicationController
 
   def show
     @plan = current_user.plans.find(params[:id])
-    @list = @plan.list
+    @shopping_list = @plan.shopping_list
   end
 
   def new
     @plan = Plan.new
-    @list = @plan.build_list
+    @shopping_list = @plan.build_shopping_list
   end
 
   def edit
@@ -23,9 +23,10 @@ class PlansController < ApplicationController
 
   def create
     @plan = current_user.plans.build(plan_params)
+    @shopping_list = @plan.build_shopping_list
 
     if @plan.save
-      @plan.list.save
+      @shopping_list.save
       redirect_to plans_url, notice: 'Plan was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -58,9 +59,8 @@ class PlansController < ApplicationController
   def add_recipe
     @plan = current_user.plans.find(params[:plan_id])
     @recipe_plan = @plan.recipe_plans.build(plan_id: @plan.id, recipe_id: params[:recipe_id])
-    @list = @plan.list
+    @shopping_list = @plan.shopping_list
     if @recipe_plan.save
-      @list.add_recipe(@recipe_plan.recipe)
       redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.'
     else
       redirect_back fallback_location: root_path, alert: 'User did not create any plans.'
@@ -71,7 +71,6 @@ class PlansController < ApplicationController
     @recipe_plan = RecipePlan.find(params[:id])
 
     if current_user.plans.find(@recipe_plan.plan_id)
-      @list.remove_recipe(@recipe_plan.recipe)
       @recipe_plan.destroy
       redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully destroyed.'
     else

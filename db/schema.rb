@@ -45,23 +45,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "list_ingredients", force: :cascade do |t|
-    t.integer "ingredient_id", null: false
-    t.integer "list_id", null: false
-    t.string "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_list_ingredients_on_ingredient_id"
-    t.index ["list_id"], name: "index_list_ingredients_on_list_id"
-  end
-
-  create_table "lists", force: :cascade do |t|
-    t.integer "plan_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["plan_id"], name: "index_lists_on_plan_id"
-  end
-
   create_table "plans", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
@@ -96,6 +79,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "shopping_list_ingredients", force: :cascade do |t|
+    t.integer "ingredient_id", null: false
+    t.integer "shopping_list_id", null: false
+    t.string "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_shopping_list_ingredients_on_ingredient_id"
+    t.index ["shopping_list_id"], name: "index_shopping_list_ingredients_on_shopping_list_id"
+  end
+
+  create_table "shopping_lists", force: :cascade do |t|
+    t.integer "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_shopping_lists_on_plan_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -136,15 +136,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "list_ingredients", "ingredients"
-  add_foreign_key "list_ingredients", "lists"
-  add_foreign_key "lists", "plans"
   add_foreign_key "plans", "users"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipe_plans", "plans"
   add_foreign_key "recipe_plans", "recipes"
   add_foreign_key "recipes", "users"
+  add_foreign_key "shopping_list_ingredients", "ingredients"
+  add_foreign_key "shopping_list_ingredients", "shopping_lists"
+  add_foreign_key "shopping_lists", "plans"
   add_foreign_key "steps", "recipes"
   add_foreign_key "taggings", "recipes"
   add_foreign_key "taggings", "tags"

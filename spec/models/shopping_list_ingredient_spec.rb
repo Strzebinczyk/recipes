@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe ListIngredient, type: :model do
+RSpec.describe ShoppingListIngredient, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
