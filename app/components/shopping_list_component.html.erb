@@ -1,0 +1,13 @@
+<ul>
+  <% @ingredients_hash.each do |name, quantities| %>
+    <li class='mb-1'>
+      <%= name %>
+      <span> - </span>
+      <% quantities[0..-2].each do |quantity| %>
+        <%= quantity %>
+          <span> + </span>
+      <% end %>
+      <%= quantities[-1] %>
+    </li>
+  <% end %>
+</ul>

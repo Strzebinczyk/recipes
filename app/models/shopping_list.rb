@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShoppingList < ApplicationRecord
   belongs_to :plan
   has_many :shopping_list_ingredients, dependent: :destroy
