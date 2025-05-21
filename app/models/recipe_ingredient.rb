@@ -16,7 +16,7 @@ class RecipeIngredient < ApplicationRecord
     return if whitelist_conditions?
 
     errors.add(:quantity_unit, 'Nieprawidłowa jednostka, dozwolone: g, ml, łyżka, łyżeczka, ząbek, kawałek, puszka,
-                                  pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki')
+                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki')
   end
 
   def whitelist_conditions? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
@@ -45,10 +45,11 @@ class RecipeIngredient < ApplicationRecord
 end
 
 def standardize_quantity_unit(unit)
-  acceptable_matches = [[/łyżecz.*/, 'łyżcz'], [/łyż.*/, 'łyż'], [/szt.*/, 'szt.'], [/ząb.*/, 'ząb.'],
+  acceptable_matches = [[/łyżecz.*/, 'łyżcz.'], [/łyż.*/, 'łyż.'], [/szt.*/, 'szt.'], [/ząb.*/, 'ząb.'],
                         [/pusz.*/, 'pusz.'], [/pęcz.*/, 'pęcz.'], [/szkl.*/, 'szkl.'], [/garś.*/, 'garść.'],
-                        [/szcz.*/, 'szczypt.'], [/kawał.*/, 'kawał.']]
-  return unit if unit.in? ['g', 'do smaku', 'ml', nil]
+                        [/szcz.*/, 'szczypt.'], [/kawał.*/, 'kawał.'], [/opak.*/, 'opak.']]
+  return unit if unit.in? ['g', 'do smaku', 'ml']
+  return nil if unit.nil?
 
   acceptable_matches.map do |match, abbr|
     return abbr if unit =~ (match)

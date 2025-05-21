@@ -317,3 +317,8 @@ pl:
       one: 'szczypta'
       '2_4': 'szczypty'
       '5_21': 'szczypt'
+    package:
+      fraction: 'opakowania'
+      one: 'opakowanie'
+      '2_4': 'opakowania'
+      '5_21': 'opakowań'

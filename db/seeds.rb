@@ -420,7 +420,7 @@ recipe12_params = { name: 'Zapiekanka z kalafiorem i marchewką', 'tag_ids' => [
 recipe12 = user2.recipes.build(recipe12_params)
 
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Makaron').id, quantity: '150g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Kalafior').id, quantity: '1 główka' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Kalafior').id, quantity: '1' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Marchew').id, quantity: '1' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Śmietana 30').id, quantity: '200g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '2 łyżeczki' },

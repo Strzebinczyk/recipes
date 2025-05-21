@@ -29,7 +29,7 @@ class ShoppingListComponent < ViewComponent::Base
   def unit_declention(unit, amount) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
     allowed_misc_units = [['łyżcz.', 'tsp'], ['łyż.', 'tbsp'], ['szt.', 'unit'], ['ząb.', 'clove'], ['pusz.', 'can'],
                           ['pęcz.', 'bunch'], ['szkl.', 'cup'], ['garść.', 'handful'], ['szczypt', 'pinch'],
-                          ['kawał.', 'piece']]
+                          ['kawał.', 'piece'], ['opak.', 'package']]
 
     return unit if unit.in? ['g', 'do smaku', 'ml']
     return nil if unit.nil?
