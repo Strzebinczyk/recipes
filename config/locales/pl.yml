@@ -34,6 +34,12 @@ pl:
         restrict_dependent_destroy:
           has_one: Nie można usunąć, gdyż istnieje zależny od niego %{record}
           has_many: Nie można usunąć, gdyż istnieją zależne od niego %{record}
+      models:
+        recipe_ingredient:
+          attributes:
+            quantity_unit:
+              not_on_whitelist: 'Nieprawidłowa jednostka, dozwolone: g, ml, łyżka, łyżeczka, ząbek, kawałek, puszka,
+                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki'
   date:
     abbr_day_names:
     - nie
@@ -267,57 +273,57 @@ pl:
       short: "%-d %b %H:%M"
     pm: po południu
   units:
-    tsp:
+    łyżcz:
       other: 'łyżeczki'
       one: 'łyżeczka'
       few: 'łyżeczki'
       many: 'łyżeczek'
-    tbsp:
+    łyż:
       other: 'łyżki'
       one: 'łyżka'
       few: 'łyżki'
       many: 'łyżek'
-    piece:
+    kawał:
       other: 'kawałka'
       one: 'kawałek'
       few: 'kawałki'
       many: 'kawałków'
-    unit:
+    szt:
       other: 'sztuki'
       one: 'sztuka'
       few: 'sztuki'
       many: 'sztuk'
-    clove:
+    ząb:
       other: 'ząbka'
       one: 'ząbek'
       few: 'ząbki'
       many: 'ząbków'
-    can:
+    pusz:
       other: 'puszki'
       one: 'puszka'
       many: 'puszki'
       many: 'puszek'
-    bunch:
+    pęcz:
       other: 'pęczka'
       one: 'pęczek'
       few: 'pęczki'
       many: 'pęczków'
-    cup:
+    szkl:
       other: 'szklanki'
       one: 'szklanka'
       few: 'szklanki'
       many: 'szklanek'
-    handful:
+    garść:
       other: 'garści'
       one: 'garść'
       few: 'garście'
       many: 'garści'
-    pinch:
+    szczypt:
       other: 'szczypty'
       one: 'szczypta'
       few: 'szczypty'
       many: 'szczypt'
-    package:
+    opak:
       other: 'opakowania'
       one: 'opakowanie'
       few: 'opakowania'

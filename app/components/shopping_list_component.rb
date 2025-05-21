@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class ShoppingListComponent < ViewComponent::Base
-  def initialize(shopping_list:, sl_ingredients_hash:) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def initialize(shopping_list:) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     super()
 
     @shopping_list = shopping_list
+    shopping_list_ingredients_hash = create_shopping_list_ingredient_hash(@shopping_list)
     @ingredients_hash = {}
 
-    sl_ingredients_hash.each do |ingredient, sl_ingr_array|
+    shopping_list_ingredients_hash.each do |ingredient, shopping_list_ingridient_array|
       quantities = {}
       quantities_readable = {}
 
-      sl_ingr_array.each do |shopping_list_ingredient|
+      shopping_list_ingridient_array.each do |shopping_list_ingredient|
         quantities[shopping_list_ingredient.quantity_unit] = (quantities[shopping_list_ingredient.quantity_unit] || 0) +
                                                              shopping_list_ingredient.quantity_amount
       end
@@ -27,17 +28,26 @@ class ShoppingListComponent < ViewComponent::Base
   end
 
   def unit_declention(unit, amount)
-    allowed_misc_units = [['łyżcz.', 'tsp'], ['łyż.', 'tbsp'], ['szt.', 'unit'], ['ząb.', 'clove'], ['pusz.', 'can'],
-                          ['pęcz.', 'bunch'], ['szkl.', 'cup'], ['garść.', 'handful'], ['szczypt', 'pinch'],
-                          ['kawał.', 'piece'], ['opak.', 'package']]
+    allowed_misc_units = %w[łyżcz łyż szt ząb pusz pęcz szkl garść szczypt kawał opak]
 
     return unit if unit.in? ['g', 'do smaku', 'ml']
     return nil if unit.nil?
 
-    allowed_misc_units.map do |unit_standardized, declention|
+    allowed_misc_units.each do |unit_standardized|
       next unless unit == unit_standardized
 
-      return I18n.t("units.#{declention}", count: amount)
+      return I18n.t("units.#{unit_standardized}", count: amount)
     end
+  end
+
+  def create_shopping_list_ingredient_hash(shopping_list)
+    shopping_list_ingredients_hash = {}
+
+    shopping_list.shopping_list_ingredients.each do |shopping_list_ingredient|
+      shopping_list_ingredients_hash[shopping_list_ingredient.ingredient] =
+        (shopping_list_ingredients_hash[shopping_list_ingredient.ingredient] || []).append shopping_list_ingredient
+    end
+
+    shopping_list_ingredients_hash
   end
 end

@@ -7,24 +7,10 @@ class RecipeIngredient < ApplicationRecord
   validates :quantity_amount,
             format: { with: %r{((\A\d*/\d*)|(\A\d*[.]\d*)|(\A\d*,\d*)|(\A\d*))},
                       message: 'Nieprawidłowa ilość, proszę wpisz ilość w formacie liczbowym' }
-  validate :quantity_unit_in_whitelist
+  validates :quantity_unit, quantity_unit_in_whitelist: true
   delegate :name, to: :ingredient, allow_nil: true
 
   before_create :split_quantity
-
-  def quantity_unit_in_whitelist
-    return if whitelist_conditions?
-
-    errors.add(:quantity_unit, 'Nieprawidłowa jednostka, dozwolone: g, ml, łyżka, łyżeczka, ząbek, kawałek, puszka,
-                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki')
-  end
-
-  def whitelist_conditions? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
-    quantity_unit =~ /łyż.*/ || quantity_unit =~ /szt.*/ || quantity_unit =~ /ząb.*/ || quantity_unit =~ /pusz.*/ ||
-      quantity_unit =~ /kawał.*/ || quantity_unit =~ /pęcz.*/ || quantity_unit =~ /szkl.*/ ||
-      quantity_unit =~ /garś.*/ || quantity_unit =~ /szcz.*/ || quantity_unit == 'g' || quantity_unit == 'ml' ||
-      quantity_unit == 'do smaku' || quantity_unit.nil?
-  end
 
   def split_quantity # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     quantity = self.quantity.strip
@@ -45,9 +31,9 @@ class RecipeIngredient < ApplicationRecord
 end
 
 def standardize_quantity_unit(unit)
-  acceptable_matches = [[/łyżecz.*/, 'łyżcz.'], [/łyż.*/, 'łyż.'], [/szt.*/, 'szt.'], [/ząb.*/, 'ząb.'],
-                        [/pusz.*/, 'pusz.'], [/pęcz.*/, 'pęcz.'], [/szkl.*/, 'szkl.'], [/garś.*/, 'garść.'],
-                        [/szcz.*/, 'szczypt.'], [/kawał.*/, 'kawał.'], [/opak.*/, 'opak.']]
+  acceptable_matches = [[/łyżecz.*/, 'łyżcz'], [/łyż.*/, 'łyż'], [/szt.*/, 'szt'], [/ząb.*/, 'ząb'],
+                        [/pusz.*/, 'pusz'], [/pęcz.*/, 'pęcz'], [/szkl.*/, 'szkl'], [/garś.*/, 'garść'],
+                        [/szcz.*/, 'szczypt'], [/kawał.*/, 'kawał'], [/opak.*/, 'opak']]
   return unit if unit.in? ['g', 'do smaku', 'ml']
   return nil if unit.nil? || unit == ''
 

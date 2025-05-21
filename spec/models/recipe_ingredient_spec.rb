@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe RecipeIngredient, type: :model do
-  let(:recipe_ingredient) { create(:recipe_ingredient) }
   let(:recipe) { create(:recipe) }
 
   it 'is valid with valid attributes' do
