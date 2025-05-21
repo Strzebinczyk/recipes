@@ -49,7 +49,7 @@ def standardize_quantity_unit(unit)
                         [/pusz.*/, 'pusz.'], [/pęcz.*/, 'pęcz.'], [/szkl.*/, 'szkl.'], [/garś.*/, 'garść.'],
                         [/szcz.*/, 'szczypt.'], [/kawał.*/, 'kawał.'], [/opak.*/, 'opak.']]
   return unit if unit.in? ['g', 'do smaku', 'ml']
-  return nil if unit.nil?
+  return nil if unit.nil? || unit == ''
 
   acceptable_matches.map do |match, abbr|
     return abbr if unit =~ (match)

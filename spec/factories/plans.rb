@@ -5,13 +5,8 @@ FactoryBot.define do
     user
     name { Faker::Restaurant.type }
 
-    transient do
-      recipes_count { 2 }
-    end
-
-    after(:create) do |plan, evaluator|
-      create_list(:recipe, evaluator.recipes_count, plans: [plan])
-
+    after(:create) do |plan|
+      create_list(:shopping_list, 1, plan: plan)
       plan.reload
     end
   end

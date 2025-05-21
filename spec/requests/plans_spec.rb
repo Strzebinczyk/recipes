@@ -101,6 +101,11 @@ RSpec.describe 'Plans', type: :request do
       end
 
       it "deletes plan with it's recipe_plans" do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post add_recipe_plans_path, params: {
+          plan_id: plan.id,
+          recipe_id: recipe.id
+        }
+
         recipe_plan_id = plan.recipe_plans.first.id
         plan_id = plan.id
         delete plan_path(plan.id)
@@ -120,7 +125,7 @@ RSpec.describe 'Plans', type: :request do
 
     describe 'GET /plans/new_recipe' do
       it 'gets new recipe modal' do
-        get new_recipe_plans_path(recipe_id: recipe.id)
+        get new_recipe_plans_path(recipe: recipe.id)
 
         expect(response).to have_http_status(:ok)
       end
@@ -143,6 +148,11 @@ RSpec.describe 'Plans', type: :request do
 
     describe 'DELETE /plans/:id/remove_recipe' do
       it 'removes recipe from plan' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post add_recipe_plans_path, params: {
+          plan_id: plan.id,
+          recipe_id: recipe.id
+        }
+
         recipe_plan = plan.recipe_plans.first
         recipe_plan_id = recipe_plan.id
         recipe_id = recipe_plan.recipe_id
@@ -158,6 +168,15 @@ RSpec.describe 'Plans', type: :request do
   end
 
   context 'when user is not authenticated' do
+    before do
+      sign_in user
+      post add_recipe_plans_path, params: {
+        plan_id: plan.id,
+        recipe_id: recipe.id
+      }
+      sign_out user
+    end
+
     describe 'GET /index' do
       it 'redirects to log in page' do # rubocop:disable RSpec/MultipleExpectations
         get plans_path

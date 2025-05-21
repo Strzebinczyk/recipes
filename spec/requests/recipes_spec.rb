@@ -157,16 +157,14 @@ RSpec.describe 'Recipes', type: :request do
 
         put recipe_path(recipe.id), params: { recipe: {
           recipe_ingredients_attributes:
-          { recipe_ingredient.id => { id: recipe_ingredient.id, ingredient_id: ingredient.id,
-                                      name: 'Updated ingredient', quantity: 'Updated quantity' } }
+          { recipe_ingredient.id => { id: recipe_ingredient.id, name: 'Updated ingredient', quantity: '87g' } }
         } }
-
-        ingredient = recipe.ingredients.last
+        ingredient = recipe.ingredients.first
 
         expect(ingredient.reload).to be_present
         expect(recipe_ingredient.reload).to be_present
         expect(ingredient.name).to eq('Updated ingredient')
-        expect(recipe_ingredient.quantity).to eq('Updated quantity')
+        expect(recipe_ingredient.quantity).to eq('87g')
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipe_path(recipe))
       end

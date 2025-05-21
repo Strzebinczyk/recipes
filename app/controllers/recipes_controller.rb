@@ -51,10 +51,6 @@ class RecipesController < ApplicationController
 
   private
 
-  def require_login
-    redirect_to new_user_session_path unless current_user.logged_in?
-  end
-
   def recipe_params
     params
       .require(:recipe)
