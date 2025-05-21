@@ -51,7 +51,7 @@ class PlansController < ApplicationController
   end
 
   def new_recipe
-    @recipe_plan, @recipe, @recipe_id, @shopping_list_ingredient = Plans::NewRecipe.run(recipe_id: params[:recipe]).result
+    @recipe_plan, @recipe, @recipe_id, @shopping_list_ingredient = Plans::NewRecipe.run(recipe_id: params[:recipe]).result # rubocop:disable Layout/LineLength
   end
 
   def add_recipe

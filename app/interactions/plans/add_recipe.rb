@@ -5,7 +5,7 @@ module Plans
     hash :params, strip: false
     object :user
 
-    def execute
+    def execute # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       plan = user.plans.find(params[:plan_id])
       recipe_plan = plan.recipe_plans.build(plan_id: plan.id, recipe_id: params[:recipe_id])
       recipe = Recipe.find(params[:recipe_id])
