@@ -33,7 +33,7 @@ class ShoppingListComponent < ViewComponent::Base
     shopping_list_ingredients_hash
   end
 
-  def create_ingredients_hash(shopping_list_ingredients_hash)
+  def create_ingredients_hash(shopping_list_ingredients_hash) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     ingredients_hash = {}
 
     shopping_list_ingredients_hash.each do |ingredient, shopping_list_ingridient_array|
