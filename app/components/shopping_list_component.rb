@@ -1,30 +1,12 @@
 # frozen_string_literal: true
 
 class ShoppingListComponent < ViewComponent::Base
-  def initialize(shopping_list:) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def initialize(shopping_list:)
     super()
 
     @shopping_list = shopping_list
     shopping_list_ingredients_hash = create_shopping_list_ingredient_hash(@shopping_list)
-    @ingredients_hash = {}
-
-    shopping_list_ingredients_hash.each do |ingredient, shopping_list_ingridient_array|
-      quantities = {}
-      quantities_readable = {}
-
-      shopping_list_ingridient_array.each do |shopping_list_ingredient|
-        quantities[shopping_list_ingredient.quantity_unit] = (quantities[shopping_list_ingredient.quantity_unit] || 0) +
-                                                             shopping_list_ingredient.quantity_amount
-      end
-
-      quantities.each do |unit, amount|
-        unit = unit_declention(unit, amount)
-        amount = amount.to_i if (amount % 1).zero?
-        quantities_readable[unit] = amount
-      end
-
-      @ingredients_hash[ingredient.name] = quantities_readable
-    end
+    @ingredients_hash = create_ingredients_hash(shopping_list_ingredients_hash)
   end
 
   def unit_declention(unit, amount)
@@ -49,5 +31,29 @@ class ShoppingListComponent < ViewComponent::Base
     end
 
     shopping_list_ingredients_hash
+  end
+
+  def create_ingredients_hash(shopping_list_ingredients_hash)
+    ingredients_hash = {}
+
+    shopping_list_ingredients_hash.each do |ingredient, shopping_list_ingridient_array|
+      quantities = {}
+      quantities_readable = {}
+
+      shopping_list_ingridient_array.each do |shopping_list_ingredient|
+        quantities[shopping_list_ingredient.quantity_unit] = (quantities[shopping_list_ingredient.quantity_unit] || 0) +
+                                                             shopping_list_ingredient.quantity_amount
+      end
+
+      quantities.each do |unit, amount|
+        unit = unit_declention(unit, amount)
+        amount = amount.to_i if (amount % 1).zero?
+        quantities_readable[unit] = amount
+      end
+
+      ingredients_hash[ingredient.name] = quantities_readable
+    end
+
+    ingredients_hash
   end
 end
