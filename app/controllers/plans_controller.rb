@@ -14,7 +14,6 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @shopping_list = @plan.build_shopping_list
   end
 
   def edit
@@ -22,11 +21,10 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = current_user.plans.build(plan_params)
-    @shopping_list = @plan.build_shopping_list
+    outcome = Plans::Create.run(user: current_user, params: plan_params)
+    @plan, @shopping_list = outcome.result
 
-    if @plan.save
-      @shopping_list.save
+    if outcome.valid?
       redirect_to plans_url, notice: 'Plan was successfully created.'
     else
       render :new, status: :unprocessable_entity

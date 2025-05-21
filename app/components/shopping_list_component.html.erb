@@ -5,13 +5,13 @@
         <label class="form-check-label" for="flexCheckDefault">
           <%= name %>
           <span> - </span>
-          <% quantities.each do |unit, amount| %>
-            <%= amount unless amount == 0 %>
-            <%= unit %>
-              <% if unit != quantities.keys.last %>
-                <span> + </span>
-              <% end %>
-          <% end %>
+          <%= quantities.map do|unit, amount| %>
+                <% if unit == 'do smaku' %>
+                  <% "#{unit}" %>
+                <% else %>
+                  <% "#{amount} #{unit}" %>
+                <% end %>
+          <% end.join(' + ') %>
         </label>
       </div>
     <% end %>

@@ -2,5 +2,5 @@
   <div class="text-center mb-4">
     <h1 class='display-4 fw-normal py-2'>Lista dla planu <%= @shopping_list.plan.name %></h1>
   </div>
-  <%= render(ShoppingListComponent.new(shopping_list: @shopping_list)) %>
+  <%= render(ShoppingListComponent.new(shopping_list: @shopping_list, sl_ingredients_hash: @sl_ingredients_hash)) %>
 </div>
