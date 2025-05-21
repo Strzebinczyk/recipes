@@ -26,7 +26,8 @@ recipe1_params = { name: 'Biszkopt bezowy z galaretką i kremem mascarpone', 'ta
 recipe1 = user1.recipes.build(recipe1_params)
 
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Jajka').id, quantity: '3' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier puder').id, quantity: '1 szklanka + 2 łyżki' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier puder').id, quantity: '1 szklanka' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier puder').id, quantity: '2 łyżki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '50g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka ziemniaczana').id, quantity: '50g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mascarpone').id, quantity: '250g' },
@@ -123,9 +124,12 @@ recipe4_params = { name: 'Drożdżówka', 'tag_ids' => ['', '2', '7', '12', '14'
 recipe4 = user1.recipes.build(recipe4_params)
 
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Żółtka').id, quantity: '3' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier').id, quantity: '80g + 50g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '500g + 70g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '100g + 50g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier').id, quantity: '80g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier').id, quantity: '50g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '500g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '70g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '100g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '50g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Drożdże').id, quantity: '30g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mleko').id, quantity: '250ml' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Owoce').id, quantity: '500g' },
@@ -167,7 +171,7 @@ recipe5 = user2.recipes.build(recipe5_params)
  { ingredient_id: Ingredient.find_or_create_by(name: 'Por').id, quantity: '1' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Cukinia').id, quantity: '1' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Ziemniaki').id, quantity: '3' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Koperek').id, quantity: 'mały pęczek' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Koperek').id, quantity: '1 pęczek' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Śmietana 18').id, quantity: '100g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Sól i pieprz').id, quantity: 'do smaku' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Olej').id, quantity: '6 łyżek' }]
@@ -373,11 +377,13 @@ recipe11 = user2.recipes.build(recipe11_params)
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Mąka przenna').id, quantity: '350g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Drożdże').id, quantity: '25g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Cukier').id, quantity: '1 łyżka' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Sól').id, quantity: '1 łyżeczka + do smaku' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Sól').id, quantity: 'do smaku' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Sól i pieprz').id, quantity: 'do smaku' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mleko').id, quantity: '170ml' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Jajko').id, quantity: '2' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '50g + 300g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Natka pietruszki').id, quantity: 'mały pęczek' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '50g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Masło').id, quantity: '300g' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Natka pietruszki').id, quantity: '1 pęczek' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Musztarda dijon').id, quantity: '1 łyżka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Czosnek').id, quantity: '2 ząbki' }]
   .each do |recipe_ingredient|
@@ -420,7 +426,7 @@ recipe12 = user2.recipes.build(recipe12_params)
  { ingredient_id: Ingredient.find_or_create_by(name: 'Mąka pszenna').id, quantity: '2 łyżeczki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Musztarda').id, quantity: '1 łyżeczka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Parmezan').id, quantity: '50g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Natka pietruszki').id, quantity: 'mały pęczek' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Natka pietruszki').id, quantity: '1 pęczek' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Nasiona słonecznika').id, quantity: '20g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Sól i pieprz').id, quantity: 'do smaku' }]
   .each do |recipe_ingredient|
@@ -558,7 +564,7 @@ recipe16_params = { name: 'Kurczak w sosie marchewkowym', 'tag_ids' => ['', '4',
 recipe16 = user2.recipes.build(recipe16_params)
 
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Pierś z kurczaka').id, quantity: '500g' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Imbir świeży').id, quantity: '3cm' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Imbir świeży').id, quantity: '1 łyżka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Garam masala').id, quantity: '1 łyżeczka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Cytryna').id, quantity: '2 łyżki soku' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Oliwa z oliwek').id, quantity: '4 łyżki' },

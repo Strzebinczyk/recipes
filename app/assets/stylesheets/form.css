@@ -5,7 +5,7 @@ body:has(.background-gradient) {
   background-attachment: fixed;
 }
 
-.devise-form {
+body:has(.devise-form) {
   background-image: url("session-background.jpg");
   background-size: cover;
   background-position: center bottom;

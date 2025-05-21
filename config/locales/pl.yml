@@ -9,6 +9,12 @@ pl:
         recipe_ingredients: Pole składniki
         steps: Pole instrukcje
         image: Obraz
+      recipe_ingredient:
+        quantity: Pole ilość
+        name: Pole nazwa
+        ingredient: Pole składnik
+        quantity_unit: ''
+        quantity_amount: ''
       user:
         current_password: Aktualne hasło
         email: E-mail
@@ -167,7 +173,7 @@ pl:
       odd: musi być nieparzyste
       other_than: musi być inne niż %{count}
       present: musi być puste
-      required: musi istnieć
+      required: musi być wypełnione
       taken: został już zajęty
       too_long:
         one: jest za długie (maksymalnie jeden znak)
@@ -260,3 +266,54 @@ pl:
       long: "%-d %B %Y %H:%M"
       short: "%-d %b %H:%M"
     pm: po południu
+  units:
+    tsp:
+      fraction: 'łyżeczki'
+      one: 'łyżeczka'
+      '2_4': 'łyżeczki'
+      '5_21': 'łyżeczek'
+    tbsp:
+      fraction: 'łyżki'
+      one: 'łyżka'
+      '2_4': 'łyżki'
+      '5_21': 'łyżek'
+    piece:
+      fraction: 'kawałka'
+      one: 'kawałek'
+      '2_4': 'kawałki'
+      '5_21': 'kawałków'
+    unit:
+      fraction: 'sztuki'
+      one: 'sztuka'
+      '2_4': 'sztuki'
+      '5_21': 'sztuk'
+    clove:
+      fraction: 'ząbka'
+      one: 'ząbek'
+      '2_4': 'ząbki'
+      '5_21': 'ząbków'
+    can:
+      fraction: 'puszki'
+      one: 'puszka'
+      '2_4': 'puszki'
+      '5_21': 'puszek'
+    bunch:
+      fraction: 'pęczka'
+      one: 'pęczek'
+      '2_4': 'pęczki'
+      '5_21': 'pęczków'
+    cup:
+      fraction: 'szklanki'
+      one: 'szklanka'
+      '2_4': 'szklanki'
+      '5_21': 'szklanek'
+    handful:
+      fraction: 'garści'
+      one: 'garść'
+      '2_4': 'garście'
+      '5_21': 'garści'
+    pinch:
+      fraction: 'szczypty'
+      one: 'szczypta'
+      '2_4': 'szczypty'
+      '5_21': 'szczypt'

@@ -7,5 +7,11 @@
       <%= ff.hidden_field :_destroy, class: "destroy-ingredient" %>
       <%= link_to "", "", data: {action: "click->delete-ingredient#delete"}, id: "delete-ingredient", class: "btn-close" %>
     </div>
+    <% recipe_ingredient.errors.full_messages.each do |message| %>
+      <div class='invalid-feedback d-block' data-controller="errors">
+        <%= message %>
+      </div>
+    <% end %>
+
   </fieldset>
 <% end %>

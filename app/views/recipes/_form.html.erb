@@ -40,7 +40,6 @@
             <div>
               <%= link_to "Dodaj składnik", new_recipe_ingredient_path, data: { turbo_stream: true }, class: "btn btn-light text-dark mb-2" %>
             </div>
-            <%= render "/shared/errors", object: @recipe, field: :recipe_ingredients %>
             <div id="steps">
               <div>
                 <p class="form-label">Instrukcje:</p>

@@ -1,13 +1,18 @@
-<ul>
+<div class='container mx-5 px-5'>
   <% @ingredients_hash.each do |name, quantities| %>
-    <li class='mb-1'>
-      <%= name %>
-      <span> - </span>
-      <% quantities[0..-2].each do |quantity| %>
-        <%= quantity %>
-          <span> + </span>
-      <% end %>
-      <%= quantities[-1] %>
-    </li>
-  <% end %>
-</ul>
+      <div class='mb-1 form-check'>
+        <input class="form-check-input" type="checkbox" value="" checked>
+        <label class="form-check-label" for="flexCheckDefault">
+          <%= name %>
+          <span> - </span>
+          <% quantities.each do |unit, amount| %>
+            <%= amount unless amount == 0 %>
+            <%= unit %>
+              <% if unit != quantities.keys.last %>
+                <span> + </span>
+              <% end %>
+          <% end %>
+        </label>
+      </div>
+    <% end %>
+</div>

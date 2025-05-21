@@ -8,75 +8,127 @@ class ShoppingListComponent < ViewComponent::Base
     @ingredients_hash = {}
 
     @shopping_list.ingredients.distinct.each do |ingredient|
-      quantities = []
+      quantities = {}
+      quantities_readable = {}
+
       ingredient.shopping_list_ingredients.where(@shopping_list.id == :shopping_list_id).find_each do |shopping_list_ingredient|
-        quantities.append(shopping_list_ingredient.quantity)
+        quantities[shopping_list_ingredient.quantity_unit] =
+          (quantities[shopping_list_ingredient.quantity_unit] || 0) + shopping_list_ingredient.quantity_amount
       end
-      quantities = recalculate(quantities: quantities)
-      @ingredients_hash[ingredient.name] = quantities
+
+      quantities.each do |unit, amount|
+        unit = unit_declention(unit, amount)
+        amount = amount.to_i if (amount % 1).zero?
+        quantities_readable[unit] = amount
+      end
+
+      @ingredients_hash[ingredient.name] = quantities_readable
     end
   end
 
-  def recalculate(quantities:) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-    quantities_recalculated = []
-    count_hash = { 'g' => 0, 'ml' => 0, 'no unit' => 0 }
-    conversion_table = [[%w[g gram gramy gramów], %w[kg kilo kilogram kilogramy kilogramów], 1000],
-                        [%w[g gram gramy gramów], %w[dkg deko dag dekagram dekagramy dekagramów], 10],
-                        [%w[ml mil mililitr mililitrów], %w[l litr litry litrów], 1000],
-                        [%w[ml mil mililitr mililitrów], %w[dl decylitr decylitry decylitrów], 100]]
-
-    quantities.each do |quantity| # rubocop:disable Metrics/BlockLength
-      quantity = quantity.strip.downcase
-
-      if quantity == 'do smaku'
-        quantities_recalculated.append 'do smaku' unless quantities_recalculated.include? 'do smaku'
-        next
-      end
-
-      amount = if quantity =~ (%r{\d*/\d*})
-                 quantity.split('/')[0].to_f / quantity.split('/')[1].to_i
-               elsif quantity =~ (/\d*[.]\d*/)
-                 quantity[/\d*[.]\d*/].to_f
-               elsif quantity =~ (/\d*,\d*/)
-                 quantity.split(',')[0].to_1 + (quantity.split(',')[1].to_f / 10)
-               else
-                 quantity[/\d*/]
-               end
-
-      unit = quantity[/([a-z]|ł)+.*/]
-      unit = unit.strip unless unit.nil?
-
-      if unit.nil?
-        count_hash['no unit'] = (count_hash['no unit'] || 0) + amount.to_f
-      elsif conversion_table.flatten.include? unit
-        conversion_table.each do |record|
-          if record[1].include? unit
-            amount *= record[2]
-            unit = record[0][0]
-            count_hash[unit] = (count_hash[unit] || 0) + amount.to_f
-            break
-          elsif record[0].include? unit
-            unit = record[0][0]
-            count_hash[unit] = (count_hash[unit] || 0) + amount.to_f
-            break
-          end
-        end
+  def unit_declention(unit, amount)
+    if unit.in? ['g', 'do smaku', 'ml', nil]
+      unit
+    elsif unit == 'łyżcz.'
+      if amount % 1 != 0
+        I18n.t 'units.tsp.fraction'
+      elsif amount == 1
+        I18n.t 'units.tsp.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.tsp.5_21'
       else
-        count_hash[unit] = (count_hash[unit] || 0) + amount.to_f
+        I18n.t 'units.tsp.2_4'
+      end
+    elsif unit == 'łyż.'
+      if amount % 1 != 0
+        I18n.t 'units.tbsp.fraction'
+      elsif amount == 1
+        I18n.t 'units.tbsp.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.tbsp.5_21'
+      else
+        I18n.t 'units.tbsp.2_4'
+      end
+    elsif unit == 'szt.'
+      if amount % 1 != 0
+        I18n.t 'units.unit.fraction'
+      elsif amount == 1
+        I18n.t 'units.unit.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.unit.5_21'
+      else
+        I18n.t 'units.unit.2_4'
+      end
+    elsif unit == 'ząb.'
+      if amount % 1 != 0
+        I18n.t 'units.clove.fraction'
+      elsif amount == 1
+        I18n.t 'units.clove.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.clove.5_21'
+      else
+        I18n.t 'units.clove.2_4'
+      end
+    elsif unit == 'pusz.'
+      if amount % 1 != 0
+        I18n.t 'units.can.fraction'
+      elsif amount == 1
+        I18n.t 'units.can.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.can.5_21'
+      else
+        I18n.t 'units.can.2_4'
+      end
+    elsif unit == 'pęcz.'
+      if amount % 1 != 0
+        I18n.t 'units.bunch.fraction'
+      elsif amount == 1
+        I18n.t 'units.bunch.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.bunch.5_21'
+      else
+        I18n.t 'units.bunch.2_4'
+      end
+    elsif unit == 'szkl.'
+      if amount % 1 != 0
+        I18n.t 'units.cup.fraction'
+      elsif amount == 1
+        I18n.t 'units.cup.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.cup.5_21'
+      else
+        I18n.t 'units.cup.2_4'
+      end
+    elsif unit == 'garść.'
+      if amount % 1 != 0
+        I18n.t 'units.handful.fraction'
+      elsif amount == 1
+        I18n.t 'units.handful.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.handful.5_21'
+      else
+        I18n.t 'units.handful.2_4'
+      end
+    elsif unit == 'szczypt'
+      if amount % 1 != 0
+        I18n.t 'units.pinch.fraction'
+      elsif amount == 1
+        I18n.t 'units.pinch.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.pinch.5_21'
+      else
+        I18n.t 'units.pinch.2_4'
+      end
+    elsif unit == 'kawał.'
+      if amount % 1 != 0
+        I18n.t 'units.piece.fraction'
+      elsif amount == 1
+        I18n.t 'units.piece.one'
+      elsif (amount.in? 5..21) || ((amount % 10).in? [0, 1, 5..9])
+        I18n.t 'units.piece.5_21'
+      else
+        I18n.t 'units.piece.2_4'
       end
     end
-
-    count_hash.each do |key, value|
-      value = value.to_i if (value % 1).zero?
-      if value.zero?
-        next
-      elsif key == 'no unit'
-        quantities_recalculated.append(value.to_s)
-      else
-        quantities_recalculated.append("#{value} #{key}")
-      end
-    end
-
-    quantities_recalculated
   end
 end

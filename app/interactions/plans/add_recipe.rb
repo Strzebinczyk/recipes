@@ -12,10 +12,11 @@ module Plans
       shopping_list = plan.shopping_list
       ActiveRecord::Base.transaction do
         recipe.recipe_ingredients.each do |recipe_ingredient|
-          shopping_list_ingredient = shopping_list
-                                     .shopping_list_ingredients.build(quantity: recipe_ingredient.quantity,
-                                                                      ingredient_id: recipe_ingredient.ingredient.id)
-          errors.merge!(shopping_list_ingredient.errors) unless shopping_list_ingredient.save
+          shopping_list_ingr = shopping_list
+                               .shopping_list_ingredients.build(quantity_amount: recipe_ingredient.quantity_amount,
+                                                                quantity_unit: recipe_ingredient.quantity_unit,
+                                                                ingredient_id: recipe_ingredient.ingredient.id)
+          errors.merge!(shopping_list_ingr.errors) unless shopping_list_ingr.save
         end
       end
 
