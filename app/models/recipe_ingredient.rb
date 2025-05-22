@@ -5,7 +5,7 @@ class RecipeIngredient < ApplicationRecord
   belongs_to :ingredient
   validates :quantity, presence: true
   validates :quantity,
-            format: { with: /(\A\d|(do smaku))/,
+            format: { with: /((\A\d)|(\Ado smaku))/,
                       message: 'nieprawidłowe , proszę wpisz ilość w formacie liczbowym' }
   validates :quantity_unit, quantity_unit_in_whitelist: true
   delegate :name, to: :ingredient, allow_nil: true

@@ -2,13 +2,14 @@
 
 module Plans
   class AddRecipe < ActiveInteraction::Base
-    hash :params, strip: false
+    string :recipe_id
+    string :plan_id
     object :user
 
     def execute # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-      plan = user.plans.find(params[:plan_id])
-      recipe_plan = plan.recipe_plans.build(plan_id: plan.id, recipe_id: params[:recipe_id])
-      recipe = Recipe.find(params[:recipe_id])
+      plan = user.plans.find(plan_id)
+      recipe_plan = plan.recipe_plans.build(plan_id: plan.id, recipe_id: recipe_id)
+      recipe = Recipe.find(recipe_id)
       shopping_list = plan.shopping_list
       ActiveRecord::Base.transaction do
         recipe.recipe_ingredients.each do |recipe_ingredient|

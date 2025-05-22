@@ -53,7 +53,7 @@ class PlansController < ApplicationController
   end
 
   def add_recipe
-    outcome = Plans::AddRecipe.run(user: current_user, params: params.permit!)
+    outcome = Plans::AddRecipe.run(user: current_user, recipe_id: params[:recipe_id], plan_id: params[:plan_id])
     @plan = outcome.result
 
     if outcome.valid?

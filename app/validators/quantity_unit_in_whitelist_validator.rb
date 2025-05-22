@@ -2,7 +2,7 @@
 
 class QuantityUnitInWhitelistValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    record.errors.add(attribute, (:not_on_whitelist || 'Hello')) unless whitelist_conditions? value
+    record.errors.add(attribute, :not_on_whitelist) unless whitelist_conditions? value
   end
 
   def whitelist_conditions?(quantity_unit)
