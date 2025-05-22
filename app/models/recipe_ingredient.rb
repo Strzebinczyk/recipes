@@ -16,11 +16,12 @@ class RecipeIngredient < ApplicationRecord
     return if quantity.nil?
 
     quantity = self.quantity.strip
-    quantity_amount = if quantity =~ (%r{^\d*/\d*})
+    quantity_amount = case quantity
+                      when %r{^\d*/\d*}
                         quantity.split('/')[0].to_f / quantity.split('/')[1].to_i
-                      elsif quantity =~ (/^\d*[.]\d*/)
+                      when /^\d*[.]\d*/
                         quantity[/^\d*[.]\d*/].to_f
-                      elsif quantity =~ (/^\d*,\d*/)
+                      when /^\d*,\d*/
                         quantity.split(',')[0].to_i + (quantity.split(',')[1].to_f / 10)
                       else
                         quantity[/^\d*/]
@@ -42,6 +43,6 @@ def standardize_quantity_unit(unit)
   return nil if unit.nil? || unit == ''
 
   acceptable_matches.map do |match, abbr|
-    return abbr if unit =~ (match)
+    return abbr if unit =~ match
   end
 end
