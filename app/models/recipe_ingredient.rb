@@ -5,7 +5,7 @@ class RecipeIngredient < ApplicationRecord
   belongs_to :ingredient
   validates :quantity, presence: true
   validates :quantity,
-            format: { with: /\A\d/,
+            format: { with: /(\A\d|(do smaku))/,
                       message: 'nieprawidłowe , proszę wpisz ilość w formacie liczbowym' }
   validates :quantity_unit, quantity_unit_in_whitelist: true
   delegate :name, to: :ingredient, allow_nil: true
@@ -13,6 +13,8 @@ class RecipeIngredient < ApplicationRecord
   before_validation :split_quantity
 
   def split_quantity # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    return if quantity.nil?
+
     quantity = self.quantity.strip
     quantity_amount = if quantity =~ (%r{^\d*/\d*})
                         quantity.split('/')[0].to_f / quantity.split('/')[1].to_i

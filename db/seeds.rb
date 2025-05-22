@@ -463,7 +463,7 @@ recipe13 = user2.recipes.build(recipe13_params)
  { ingredient_id: Ingredient.find_or_create_by(name: 'Czosnek').id, quantity: '3 ząbki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Pomidor').id, quantity: '1' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Oregano').id, quantity: '1 łyżeczka' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Szczypiorek').id, quantity: 'pół pęczku' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Szczypiorek').id, quantity: '1/2 pęczka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Bazylia').id, quantity: '1 łyżka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Sól i pieprz').id, quantity: 'do smaku' }]
   .each do |recipe_ingredient|
