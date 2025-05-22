@@ -20,9 +20,10 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = current_user.plans.build(plan_params)
+    outcome = Plans::Create.run(user: current_user, params: plan_params)
+    @plan = outcome.result
 
-    if @plan.save
+    if outcome.valid?
       redirect_to plans_url, notice: 'Plan was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -47,16 +48,14 @@ class PlansController < ApplicationController
   end
 
   def new_recipe
-    @recipe_plan = RecipePlan.new
-    @recipe_id = request.url.partition('=').last
-    @recipe = Recipe.find(@recipe_id)
+    @recipe = Recipe.find(params[:recipe])
   end
 
   def add_recipe
-    @plan = current_user.plans.find(params[:plan_id])
-    @recipe_plan = @plan.recipe_plans.build(plan_id: @plan.id, recipe_id: params[:recipe_id])
+    outcome = Plans::AddRecipe.run(user: current_user, recipe_id: params[:recipe_id], plan_id: params[:plan_id])
+    @plan = outcome.result
 
-    if @recipe_plan.save
+    if outcome.valid?
       redirect_back fallback_location: root_path, notice: 'RecipePlan was successfully created.'
     else
       redirect_back fallback_location: root_path, alert: 'User did not create any plans.'
@@ -64,7 +63,7 @@ class PlansController < ApplicationController
   end
 
   def remove_recipe
-    @recipe_plan = RecipePlan.find(params[:id])
+    @recipe_plan = Plans::RemoveRecipe.run(recipe_plan_id: params[:id]).result
 
     if current_user.plans.find(@recipe_plan.plan_id)
       @recipe_plan.destroy
@@ -77,6 +76,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :plan_id, :recipe_id)
+    params.require(:plan).permit(:name, :plan_id, :recipe_id, :recipe)
   end
 end

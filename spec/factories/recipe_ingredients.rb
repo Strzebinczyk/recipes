@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :recipe_ingredient do
     ingredient
-    quantity { Faker::Food.measurement }
+    quantity { Faker::Number.decimal(l_digits: 2) }
   end
 end

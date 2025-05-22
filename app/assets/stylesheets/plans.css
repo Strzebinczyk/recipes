@@ -28,7 +28,7 @@
   visibility: visible;
 }
 
-.plan-index {
+body:has(.plan-index) {
   background-image: url("meal-plan-background.jpg");
   background-size: cover;
   background-position: center bottom;

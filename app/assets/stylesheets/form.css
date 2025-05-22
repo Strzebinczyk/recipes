@@ -1,12 +1,12 @@
-body:has(.background-gradient) {
-  background: linear-gradient(45deg, var(--dark-accent-color), var(--accent-color));
+body:has(.devise-form) {
+  background-image: url("session-background.jpg");
   background-size: cover;
   background-position: center bottom;
-  background-attachment: fixed;
+  background-attachment: fixed;	
 }
 
-.devise-form {
-  background-image: url("session-background.jpg");
+body:has(#recipe-form) {
+  background-image: url("recipe-form-background.jpg");
   background-size: cover;
   background-position: center bottom;
   background-attachment: fixed;	

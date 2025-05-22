@@ -34,8 +34,8 @@ RSpec.describe 'User adds recipe' do
 
       click_link 'Dodaj instrukcję'
 
-      find_all(:field)[-2].set('Boil water')
-      find_all(:field).last.set('Chop sausage')
+      find_all('.step').first.set('Boil water')
+      find_all('.step').last.set('Chop sausage')
 
       click_button 'Prześlij'
 

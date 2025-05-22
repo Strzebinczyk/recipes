@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
     t.integer "ingredient_id", null: false
     t.integer "recipe_id", null: false
     t.string "quantity"
+    t.float "quantity_amount"
+    t.string "quantity_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
@@ -79,6 +81,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "shopping_list_ingredients", force: :cascade do |t|
+    t.integer "ingredient_id", null: false
+    t.integer "shopping_list_id", null: false
+    t.float "quantity_amount"
+    t.string "quantity_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_shopping_list_ingredients_on_ingredient_id"
+    t.index ["shopping_list_id"], name: "index_shopping_list_ingredients_on_shopping_list_id"
+  end
+
+  create_table "shopping_lists", force: :cascade do |t|
+    t.integer "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_shopping_lists_on_plan_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -125,6 +145,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_083141) do
   add_foreign_key "recipe_plans", "plans"
   add_foreign_key "recipe_plans", "recipes"
   add_foreign_key "recipes", "users"
+  add_foreign_key "shopping_list_ingredients", "ingredients"
+  add_foreign_key "shopping_list_ingredients", "shopping_lists"
+  add_foreign_key "shopping_lists", "plans"
   add_foreign_key "steps", "recipes"
   add_foreign_key "taggings", "recipes"
   add_foreign_key "taggings", "tags"

@@ -18,7 +18,7 @@ RSpec.describe 'User edits recipe' do
       find_field('Nazwa').set 'Updated name'
       find_field('Liczba porcji').set 10
       find_all('.name')[0].fill_in with: 'Updated ingredient'
-      find_all('.quantity')[0].fill_in with: 'Updated amount'
+      find_all('.quantity')[0].fill_in with: '1200 g'
       find_all(:field)[-3].set('First updated instruction')
       find_all(:field)[-2].set('Second updated instruction')
       find_all(:field).last.set('Third updated instruction')
@@ -27,7 +27,7 @@ RSpec.describe 'User edits recipe' do
 
       expect(page).to have_content('Updated name')
       expect(page).to have_content('Updated ingredient')
-      expect(page).to have_content('Updated amount')
+      expect(page).to have_content('1200 g')
       expect(page).to have_content('10')
       expect(page).to have_content('First updated instruction')
       expect(page).to have_content('Second updated instruction')

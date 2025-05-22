@@ -12,6 +12,7 @@ module Recipes
         .transform_values do |recipe_ingredient|
           name = recipe_ingredient.delete('name')
           ingredient = Ingredient.find_by(name:) || Ingredient.create(name:)
+
           { **recipe_ingredient, 'ingredient_id' => ingredient.id }
         end
 

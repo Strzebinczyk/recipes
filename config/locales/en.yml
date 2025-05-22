@@ -29,3 +29,31 @@
 
 en:
   hello: "Hello world"
+units:
+    tsp:
+      one: 'teaspoon'
+      many: 'teaspoons'
+    tbsp:
+      one: 'tablespoon'
+      many: 'tablespoons'
+    piece:
+      one: 'piece'
+      many: 'pieces'
+    clove:
+      one: 'clove'
+      many: 'cloves'
+    can:
+      one: 'can'
+      many: 'cans'
+    bunch:
+      one: 'bunch'
+      many: 'bunches'
+    cup:
+      one: 'cup'
+      many: 'cups'
+    handful:
+      one: 'handful'
+      many: 'handfuls'
+    pinch:
+      one: 'pinch'
+      many: 'pinches'

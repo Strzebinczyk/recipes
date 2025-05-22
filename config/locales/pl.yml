@@ -9,6 +9,12 @@ pl:
         recipe_ingredients: Pole składniki
         steps: Pole instrukcje
         image: Obraz
+      recipe_ingredient:
+        quantity: Pole ilość
+        name: Pole nazwa
+        ingredient: Pole składnik
+        quantity_unit: ''
+        quantity_amount: ''
       user:
         current_password: Aktualne hasło
         email: E-mail
@@ -28,6 +34,12 @@ pl:
         restrict_dependent_destroy:
           has_one: Nie można usunąć, gdyż istnieje zależny od niego %{record}
           has_many: Nie można usunąć, gdyż istnieją zależne od niego %{record}
+      models:
+        recipe_ingredient:
+          attributes:
+            quantity_unit:
+              not_on_whitelist: 'Nieprawidłowa jednostka, dozwolone: g, ml, łyżka, łyżeczka, ząbek, kawałek, puszka,
+                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki'
   date:
     abbr_day_names:
     - nie
@@ -167,7 +179,7 @@ pl:
       odd: musi być nieparzyste
       other_than: musi być inne niż %{count}
       present: musi być puste
-      required: musi istnieć
+      required: musi być wypełnione
       taken: został już zajęty
       too_long:
         one: jest za długie (maksymalnie jeden znak)
@@ -260,3 +272,59 @@ pl:
       long: "%-d %B %Y %H:%M"
       short: "%-d %b %H:%M"
     pm: po południu
+  units:
+    łyżcz:
+      other: 'łyżeczki'
+      one: 'łyżeczka'
+      few: 'łyżeczki'
+      many: 'łyżeczek'
+    łyż:
+      other: 'łyżki'
+      one: 'łyżka'
+      few: 'łyżki'
+      many: 'łyżek'
+    kawał:
+      other: 'kawałka'
+      one: 'kawałek'
+      few: 'kawałki'
+      many: 'kawałków'
+    szt:
+      other: 'sztuki'
+      one: 'sztuka'
+      few: 'sztuki'
+      many: 'sztuk'
+    ząb:
+      other: 'ząbka'
+      one: 'ząbek'
+      few: 'ząbki'
+      many: 'ząbków'
+    pusz:
+      other: 'puszki'
+      one: 'puszka'
+      many: 'puszki'
+      many: 'puszek'
+    pęcz:
+      other: 'pęczka'
+      one: 'pęczek'
+      few: 'pęczki'
+      many: 'pęczków'
+    szkl:
+      other: 'szklanki'
+      one: 'szklanka'
+      few: 'szklanki'
+      many: 'szklanek'
+    garść:
+      other: 'garści'
+      one: 'garść'
+      few: 'garście'
+      many: 'garści'
+    szczypt:
+      other: 'szczypty'
+      one: 'szczypta'
+      few: 'szczypty'
+      many: 'szczypt'
+    opak:
+      other: 'opakowania'
+      one: 'opakowanie'
+      few: 'opakowania'
+      many: 'opakowań'
