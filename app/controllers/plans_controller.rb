@@ -22,7 +22,7 @@ class PlansController < ApplicationController
 
   def create
     outcome = Plans::Create.run(user: current_user, params: plan_params)
-    @plan, @shopping_list = outcome.result
+    @plan = outcome.result
 
     if outcome.valid?
       redirect_to plans_url, notice: 'Plan was successfully created.'

@@ -11,7 +11,7 @@ module Plans
 
       errors.merge!(plan.errors) unless plan.save
       errors.merge!(shopping_list.errors) unless shopping_list.save
-      [plan, shopping_list]
+      plan
     end
   end
 end

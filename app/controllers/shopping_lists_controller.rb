@@ -4,10 +4,6 @@ class ShoppingListsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    current_user.plans.each do |plan|
-      if plan.shopping_list.id == params[:id].to_i
-        @shopping_list = ShoppingList.includes(:shopping_list_ingredients, :ingredients).find(plan.shopping_list.id)
-      end
-    end
+    @shopping_list = current_user.shopping_lists.includes(:shopping_list_ingredients, :ingredients).find(params[:id])
   end
 end

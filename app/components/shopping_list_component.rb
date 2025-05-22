@@ -15,22 +15,15 @@ class ShoppingListComponent < ViewComponent::Base
     return unit if unit.in? ['g', 'do smaku', 'ml']
     return nil if unit.nil?
 
-    allowed_misc_units.each do |unit_standardized|
-      next unless unit == unit_standardized
-
-      return I18n.t("units.#{unit_standardized}", count: amount)
-    end
+    I18n.t("units.#{unit}", count: amount) if allowed_misc_units.include?(unit)
   end
 
   def create_shopping_list_ingredient_hash(shopping_list)
-    shopping_list_ingredients_hash = {}
-
-    shopping_list.shopping_list_ingredients.each do |shopping_list_ingredient|
-      shopping_list_ingredients_hash[shopping_list_ingredient.ingredient] =
-        (shopping_list_ingredients_hash[shopping_list_ingredient.ingredient] || []).append shopping_list_ingredient
+    shopping_list.shopping_list_ingredients.each_with_object({}) do |ingredient_item, hash|
+      ingredient = ingredient_item.ingredient
+      hash[ingredient] ||= []
+      hash[ingredient] << ingredient_item
     end
-
-    shopping_list_ingredients_hash
   end
 
   def create_ingredients_hash(shopping_list_ingredients_hash) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength

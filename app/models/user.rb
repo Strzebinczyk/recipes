@@ -11,4 +11,5 @@ class User < ApplicationRecord
 
   has_many :recipes, dependent: :destroy
   has_many :plans, dependent: :destroy
+  has_many :shopping_lists, through: :plans
 end
