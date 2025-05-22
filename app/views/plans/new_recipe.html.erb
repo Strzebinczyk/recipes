@@ -13,7 +13,7 @@
             <div class="form-group">
               <%= f.label :plan_id, 'Wybierz plan:', autofocus: true, class: "form-label" %>
               <%= f.select(:plan_id, current_user.plans.order(:name).map { |plan| [plan.name, plan.id] }, {include_blank: false}, {data: { controller: 'slim' }, id: "plan-select", class: 'form-control'}) %>
-              <%= f.hidden_field :recipe_id, value: @recipe_id %>
+              <%= f.hidden_field :recipe_id, value: @recipe.id %>
             </div>
           </div>
           <div class="modal-footer">

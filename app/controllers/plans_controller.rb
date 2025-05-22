@@ -9,7 +9,6 @@ class PlansController < ApplicationController
 
   def show
     @plan = current_user.plans.find(params[:id])
-    @shopping_list = @plan.shopping_list
   end
 
   def new
@@ -49,7 +48,7 @@ class PlansController < ApplicationController
   end
 
   def new_recipe
-    @recipe_plan, @recipe, @recipe_id, @shopping_list_ingredient = Plans::NewRecipe.run(recipe_id: params[:recipe]).result # rubocop:disable Layout/LineLength
+    @recipe = Recipe.find(params[:recipe])
   end
 
   def add_recipe
