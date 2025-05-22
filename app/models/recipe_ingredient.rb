@@ -32,6 +32,8 @@ class RecipeIngredient < ApplicationRecord
   end
 end
 
+private
+
 def standardize_quantity_unit(unit)
   acceptable_matches = [[/łyżecz.*/, 'łyżcz'], [/łyż.*/, 'łyż'], [/szt.*/, 'szt'], [/ząb.*/, 'ząb'],
                         [/pusz.*/, 'pusz'], [/pęcz.*/, 'pęcz'], [/szkl.*/, 'szkl'], [/garś.*/, 'garść'],
