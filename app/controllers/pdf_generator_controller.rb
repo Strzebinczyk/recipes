@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PdfGeneratorController < ApplicationController
-  def index; end
-
   def generate_pdf
     respond_to do |format|
       format.html

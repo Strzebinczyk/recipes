@@ -4,6 +4,7 @@ class ShoppingListsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @shopping_list = current_user.shopping_lists.includes(:shopping_list_ingredients, :ingredients).find(params[:id])
+    @shopping_list, @ingredients_hash, @shopping_list_ingredients_hash = ShoppingLists::Show.run(user: current_user,
+                                                                                                 id: params[:id]).result
   end
 end

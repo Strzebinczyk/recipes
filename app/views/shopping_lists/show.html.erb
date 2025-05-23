@@ -2,7 +2,6 @@
   <div class="text-center mb-4">
     <h1 class='display-4 fw-normal py-2'>Lista dla planu <%= @shopping_list.plan.name %></h1>
   </div>
-  <%= link_to 'Generuj PDF', generate_pdf_path(name: @shopping_list.plan.name,format: :pdf), class: 'btn btn-primary' %>
-  <%= render(ShoppingListComponent.new(shopping_list: @shopping_list)) %>
+  <%= render(ShoppingListComponent.new(shopping_list: @shopping_list, ingredients_hash: @ingredients_hash)) %>
   <%= render "/shared/img_credit", link: "https://www.vecteezy.com/free-photos/food", text: "Food Stock photos by Vecteezy" %>
 </div>
