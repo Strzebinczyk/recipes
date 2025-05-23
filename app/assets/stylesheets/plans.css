@@ -34,3 +34,17 @@ body:has(.plan-index) {
   background-position: center bottom;
   background-attachment: fixed;	
 }
+
+body:has(.plan-show) {
+  background-image: url("plan-show-background.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  background-attachment: fixed;	
+}
+
+body:has(.shopping-list-show) {
+  background-image: url("shopping-list-background.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  background-attachment: fixed;	
+}
