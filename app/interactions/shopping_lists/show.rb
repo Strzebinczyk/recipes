@@ -10,7 +10,7 @@ module ShoppingLists
       shopping_list_ingredients_hash = create_shopping_list_ingredient_hash(shopping_list)
       ingredients_hash = create_ingredients_hash(shopping_list_ingredients_hash)
 
-      [shopping_list, ingredients_hash, shopping_list_ingredients_hash]
+      [shopping_list, ingredients_hash]
     end
 
     def create_shopping_list_ingredient_hash(shopping_list)
