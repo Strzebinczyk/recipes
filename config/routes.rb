@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
   end
   resources :shopping_lists, only: [:show]
+  get 'generate_pdf', to: 'pdf_generator#generate_pdf'
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
 end
