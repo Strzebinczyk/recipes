@@ -8,7 +8,7 @@ class ShoppingListComponent < ViewComponent::Base
     @ingredients_printable = create_ingredients_printable(ingredients_hash)
   end
 
-  def create_ingredients_printable(ingredients_hash)
+  def create_ingredients_printable(ingredients_hash) # rubocop:disable Metrics/MethodLength
     ingredients_hash.each_with_object([]) do |(ingredient, amounts), array|
       string = "#{ingredient} - "
       string += amounts.map do |unit, amount|
