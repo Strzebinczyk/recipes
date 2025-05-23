@@ -1,4 +1,5 @@
 <div class='container mx-auto'>
+  <%= turbo_frame_tag 'add_recipe_plan' %>
   <div class='row'>
     <div class='col-8'>
       <h1 class='py-2'><%= @recipe.name %></h1>
@@ -16,6 +17,7 @@
       <% if user_signed_in? %>
         <%= link_to "Edytuj", edit_recipe_path(@recipe) %>
         <%= link_to "Usuń", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"} %>
+        <%= link_to "Dodaj do planu posiłków", new_recipe_plans_path(recipe: @recipe.id), data: { turbo_frame: "add_recipe_plan" } %>
       <% end %>
     </div>
   </div>
