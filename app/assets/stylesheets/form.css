@@ -12,6 +12,14 @@ body:has(#recipe-form) {
   background-attachment: fixed;	
 }
 
+.name {
+  max-width: 250px;
+}
+
+.quantity {
+  max-width: 150px;
+}
+
 .hidden {
   display: none;
 }
@@ -105,7 +113,6 @@ body:has(#recipe-form) {
 }
 
 #credit {
-  color: #fff;
   position: absolute;
   bottom: 0;
   left: 10%;
