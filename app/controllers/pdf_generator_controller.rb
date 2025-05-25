@@ -16,6 +16,6 @@ class PdfGeneratorController < ApplicationController
   private
 
   def generator_params
-    params.permit(%i[name format array something])
+    params.permit(%i[name format array])
   end
 end
