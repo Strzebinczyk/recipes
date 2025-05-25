@@ -1,5 +1,5 @@
 <div class='text-center mb-4'>
-     <%= link_to 'Generuj PDF', generate_pdf_path(name: @shopping_list.plan.name, format: :pdf), class: 'btn btn-primary my-4' %>
+     <%= link_to 'Generuj PDF', generate_pdf_path(name: @shopping_list.plan.name, format: :pdf, array: @ingredients_printable), class: 'btn btn-primary my-4' %>
   </div>
   <div class='container mx-5 px-5'>
   <% @ingredients_printable.each do |ingredient| %>

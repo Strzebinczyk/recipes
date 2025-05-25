@@ -6,10 +6,16 @@ class PdfGeneratorController < ApplicationController
       format.html
       format.pdf do
         pdf_service = PdfGeneratorService.new
-        file = pdf_service.generate_pdf
+        file = pdf_service.generate_pdf(params[:array])
 
         send_data file, filename: "#{params[:name]}.pdf", type: 'application/pdf', disposition: 'inline'
       end
     end
+  end
+
+  private
+
+  def generator_params
+    params.permit(%i[name format array something])
   end
 end
