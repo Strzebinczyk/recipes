@@ -2,7 +2,7 @@
  <div class='text-center mb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
   </div>
-  <div class='container mx-5 px-5'>
+  <div class='container mx-5 px-5 pb-3'>
     <div class='mb-3 mx-5'>
       <%= f.collection_check_boxes(:ingredients_array, @ingredients_printable, :to_s, :to_s) do |b| %>
         <div class='mb-1 form-check'>
