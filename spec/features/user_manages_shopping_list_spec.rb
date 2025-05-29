@@ -11,7 +11,7 @@ RSpec.describe 'User manages shopping list' do
     create_plan('Plan 1')
   end
 
-  scenario 'generates pdf', :js do
+  scenario 'generates pdf', :js do # rubocop:disable RSpec/ExampleLength
     plan = Plan.last
     shopping_list = plan.shopping_list
 
@@ -19,6 +19,9 @@ RSpec.describe 'User manages shopping list' do
     visit shopping_list_path(shopping_list.id)
     click_link 'Generuj PDF'
 
-    page.status_code.must_equal 200
+    pdf_embed = find('embed')
+
+    expect(pdf_embed[:type]).to eql 'application/pdf'
+    page.driver.quit
   end
 end

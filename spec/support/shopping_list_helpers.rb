@@ -11,7 +11,7 @@ module Support
       expect(page).to have_content(name)
     end
 
-    def add_recipe_to_plan(recipe_name = 'Biszkopt bezowy z galaretką') # rubocop:disable Metrics/AbcSize
+    def add_recipe_to_plan(recipe_name = 'Biszkopt bezowy z galaretką') # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       visit home_index_path
 
       expect(page).to have_content(recipe_name)
@@ -32,14 +32,6 @@ module Support
 
       expect(page).to have_content('Moje plany posiłków')
       expect(page).to have_content(recipe_name)
-    end
-
-    def convert_pdf_to_page
-      temp_pdf = Tempfile.new('pdf')
-      temp_pdf << page.source.force_encoding('UTF-8')
-      reader = PDF::Reader.new(temp_pdf)
-      pdf_text = reader.pages.map(&:text)
-      page.driver.response.instance_variable_set('@body', pdf_text)
     end
   end
 end

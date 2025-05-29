@@ -1,15 +1,15 @@
-<div class='text-center mb-4'>
-     <%= link_to 'Generuj PDF', generate_pdf_path(name: @shopping_list.plan.name, format: :pdf, array: @ingredients_printable), class: 'btn btn-primary my-4' %>
-</div>
-<div class='container mx-5 px-5'>
-  <div class='mb-3'>
-    <% @ingredients_printable.each do |ingredient| %>
-      <div class='mb-1 form-check'>
-        <input class="form-check-input" type="checkbox" value="" checked>
-        <label class="form-check-label" for="flexCheckDefault">
-          <%= ingredient %>
-        </label>
-      </div>
-    <% end %>
+<%= form_with(url: generate_pdf_path(format: "pdf"), method: :get, format: :pdf) do |f| %>
+ <div class='text-center mb-4'>
+    <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
   </div>
-</div>
+  <div class='container mx-5 px-5'>
+    <div class='mb-3 mx-5'>
+      <%= f.collection_check_boxes(:ingredients_array, @ingredients_printable, :to_s, :to_s) do |b| %>
+        <div class='mb-1 form-check'>
+          <%= b.label(class:"form-check-label") { b.check_box(class: 'form-check-input', checked: true) + b.text } %>
+        </div>
+      <% end %>
+      <%= f.hidden_field :name, value: @shopping_list.plan.name %>
+    </div>
+  </div>
+<% end %>
