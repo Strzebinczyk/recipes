@@ -54,3 +54,7 @@ fieldset {
 ul {
   list-style: none;
 }
+
+html { 
+  height: 100%; 
+}

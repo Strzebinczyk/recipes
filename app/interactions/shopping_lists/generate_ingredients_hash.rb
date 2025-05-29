@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 module ShoppingLists
-  class Show < ActiveInteraction::Base
-    object :user
-    string :id
+  class GenerateIngredientsHash < ActiveInteraction::Base
+    object :shopping_list
 
     def execute
-      shopping_list = user.shopping_lists.includes(:shopping_list_ingredients, :ingredients).find(id)
       shopping_list_ingredients_hash = create_shopping_list_ingredient_hash(shopping_list)
-      ingredients_hash = create_ingredients_hash(shopping_list_ingredients_hash)
-
-      [shopping_list, ingredients_hash]
+      create_ingredients_hash(shopping_list_ingredients_hash)
     end
 
     def create_shopping_list_ingredient_hash(shopping_list)
