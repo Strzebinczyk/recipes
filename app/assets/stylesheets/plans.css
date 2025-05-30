@@ -48,3 +48,10 @@ body:has(.shopping-list-show) {
   background-position: center bottom;
   background-attachment: fixed;	
 }
+
+#credit {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  text-align: right;
+}

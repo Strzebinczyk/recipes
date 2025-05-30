@@ -10,9 +10,7 @@ RSpec.describe 'User manages recipe in a meal plan' do
   before do
     Rails.application.load_seed
     login_as(user, scope: :user, run_callbacks: false)
-    visit new_plan_path
-    fill_in 'Nazwa', with: 'Tydzień 1'
-    click_button 'Zapisz'
+    create_plan('Tydzień 1')
   end
 
   scenario 'adds recipe', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations

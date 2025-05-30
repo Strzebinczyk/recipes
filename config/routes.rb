@@ -30,7 +30,9 @@ Rails.application.routes.draw do
       delete :remove_recipe
     end
   end
-  resources :shopping_lists, only: [:show]
+  resources :shopping_lists, only: %i[show update]
+  resources :shopping_list_ingredients, only: %i[new create]
+  get 'generate_pdf', to: 'pdf_generator#generate_pdf'
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
 end
