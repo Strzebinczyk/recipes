@@ -76,7 +76,6 @@ group :test do
   gem 'selenium-webdriver'
   # Database Cleaner is a set of gems containing strategies for cleaning your database in Ruby. [https://github.com/DatabaseCleaner/database_cleaner]
   gem 'database_cleaner-active_record'
-  gem 'pdf-inspector', require: 'pdf/inspector'
   gem 'simplecov'
 end
 
