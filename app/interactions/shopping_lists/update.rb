@@ -5,7 +5,7 @@ module ShoppingLists
     object :shopping_list
     hash :params, strip: false
 
-    def execute
+    def execute # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       new_shopping_list_ingredients_attributes =
         (params['shopping_list_ingredients_attributes'] || {})
         .reject { _1['name'] == '' || _1['quantity_amount'] == '' }

@@ -17,7 +17,7 @@ module ShoppingLists
       end
     end
 
-    def create_ingredients_hash(shopping_list_ingredients_hash) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity
+    def create_ingredients_hash(shopping_list_ingredients_hash) # rubocop:disable Metrics/PerceivedComplexity,Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
       shopping_list_ingredients_hash.each_with_object({}) do |(ingredient, shopping_list_ingridient_array), hash|
         quantities = shopping_list_ingridient_array.each_with_object({}) do |shopping_list_ingredient, quantities|
           quantities[shopping_list_ingredient.quantity_unit] ||= 0
