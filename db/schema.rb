@@ -86,6 +86,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_123535) do
   create_table "shopping_list_ingredients", force: :cascade do |t|
     t.integer "ingredient_id", null: false
     t.integer "shopping_list_id", null: false
+    t.string "quantity"
     t.float "quantity_amount"
     t.string "quantity_unit"
     t.datetime "created_at", null: false

@@ -1,6 +1,7 @@
 <%= form_with(url: generate_pdf_path(format: "pdf"), method: :get, format: :pdf) do |f| %>
  <div class='text-center mb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
+    <%= link_to "Dodaj składniki", new_shopping_list_ingredient_path(shopping_list_id: @shopping_list.id), data: { turbo_frame: "add_element_to_shopping_list" }, class: "btn btn-secondary" %>
   </div>
   <div class='container mx-5 px-5 pb-3'>
     <div class='mb-3 mx-5'>

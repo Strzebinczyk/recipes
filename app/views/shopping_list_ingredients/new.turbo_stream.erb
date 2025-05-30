@@ -1,0 +1,3 @@
+<%= turbo_stream.append :shopping_list_ingredients do %>
+  <%= render partial: "shopping_list_ingredients/shopping_list_ingredient", locals: { shopping_list_id: params[:shopping_list_id], shopping_list_ingredient: ShoppingListIngredient.new } %>
+<% end %>

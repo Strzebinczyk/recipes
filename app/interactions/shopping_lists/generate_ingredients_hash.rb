@@ -28,6 +28,8 @@ module ShoppingLists
         quantities_readable = quantities.each_with_object({}) do |(unit, amount), quantities_readable|
           unit = unit_declention(unit, amount)
           amount = amount.to_i if !amount.nil? && (amount % 1).zero?
+          next if unit.nil? && (amount.nil? || amount.zero?)
+
           quantities_readable[unit] = amount
         end
 
@@ -41,7 +43,9 @@ module ShoppingLists
       return unit if unit.in? ['g', 'do smaku', 'ml']
       return nil if unit.nil?
 
-      I18n.t("units.#{unit}", count: amount) if allowed_misc_units.include?(unit)
+      return I18n.t("units.#{unit}", count: amount) if allowed_misc_units.include?(unit)
+
+      unit
     end
   end
 end
