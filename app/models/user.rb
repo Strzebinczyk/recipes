@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :shopping_lists, through: :plans
+  has_many :favourite_recipes, dependent: :destroy
+  has_many :favourites, through: :favourite_recipes, source: :recipe
 end

@@ -1,14 +1,21 @@
-.add-to-plan {
+.add-to-favourite, .add-to-plan {
   position: absolute;
   right: 0;
-  bottom: 0;
   max-width: 25px;
   max-height: 25px;
   transition: transform 0.5s;
   visibility: hidden;
 }
 
-.add-to-plan:hover {
+.add-to-plan {
+  bottom: 0;
+}
+
+.add-to-favourite {
+  top: 0;
+}
+
+.add-to-plan:hover, .add-to-favourite:hover {
   transform: scale3d(1.5, 1.5, 1.5);
 }
 
@@ -24,7 +31,7 @@
   object-fit: cover;
 }
 
-.relative:hover .add-to-plan{
+.relative:hover .add-to-plan, .relative:hover .add-to-favourite {
   visibility: visible;
 }
 
