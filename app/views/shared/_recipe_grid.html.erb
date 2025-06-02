@@ -12,11 +12,11 @@
             <% if user_signed_in? %>
               <% if current_user.favourites.all.include? recipe %>
                 <%= link_to favourite_recipe_path(recipe.favourite_recipes.where(user_id: current_user.id)[0]), data: { turbo_method: :delete,  }, title: 'Usuń z ulubionych' do %>
-                  <% image_tag asset_path('full-red-heart.svg'), class: "add-to-favourite bg-body" %>
+                  <% image_tag asset_path('full-red-heart.svg'), class: "remove-from-favourites bg-body" %>
                 <% end %>
               <% else %>
                 <%= link_to favourite_recipes_path(recipe: recipe.id),data: { turbo_method: :post,  }, title: 'Dodaj do ulubionych' do %>
-                  <% image_tag asset_path('red-outline-heart.svg'), class: "add-to-favourite bg-body" %>
+                  <% image_tag asset_path('red-outline-heart.svg'), class: "add-to-favourites bg-body" %>
                 <% end %>
               <% end %>
               <%= link_to new_recipe_plans_path(recipe: recipe.id), data: { turbo_frame: "add_recipe_plan" }, title: 'Dodaj do planu posiłków' do %>

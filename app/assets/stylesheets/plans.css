@@ -1,4 +1,4 @@
-.add-to-favourite, .add-to-plan {
+.add-to-favourites, .add-to-plan, .remove-from-favourites {
   position: absolute;
   right: 0;
   max-width: 25px;
@@ -11,11 +11,11 @@
   bottom: 0;
 }
 
-.add-to-favourite {
+.add-to-favourites, .remove-from-favourites {
   top: 0;
 }
 
-.add-to-plan:hover, .add-to-favourite:hover {
+.add-to-plan:hover, .add-to-favourites:hover, .remove-from-favourites:hover {
   transform: scale3d(1.5, 1.5, 1.5);
 }
 
@@ -31,7 +31,7 @@
   object-fit: cover;
 }
 
-.relative:hover .add-to-plan, .relative:hover .add-to-favourite {
+.relative:hover .add-to-plan, .relative:hover .add-to-favourites, .relative:hover .remove-from-favourites {
   visibility: visible;
 }
 

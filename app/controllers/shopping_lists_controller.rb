@@ -16,7 +16,8 @@ class ShoppingListsController < ApplicationController
     if outcome.valid?
       redirect_to shopping_list_url(@shopping_list), notice: 'Shopping list was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      redirect_back fallback_location: root_path, alert: 'User did not create any shopping list ingredients.',
+                    status: :unprocessable_entity
     end
   end
 

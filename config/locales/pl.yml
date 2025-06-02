@@ -26,6 +26,7 @@ pl:
         recipe: Przepis
         Step: Krok
         Ingredient: Składnik
+        shopping_list_ingredient: ''
       plan:
         name: Pole nazwa
     errors:

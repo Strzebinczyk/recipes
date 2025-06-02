@@ -20,6 +20,7 @@ require 'capybara/rails'
 require_relative './support/session_helpers'
 require_relative './support/slimselect_helpers'
 require_relative './support/shopping_list_helpers'
+require_relative './support/favourite_recipe_helpers'
 Capybara.server = :puma
 
 Capybara.register_driver :chrome do |app|
@@ -55,6 +56,7 @@ RSpec.configure do |config|
   config.include ::Support::SessionHelpers, type: :feature
   config.include ::Support::SlimselectHelpers, type: :feature
   config.include ::Support::ShoppingListHelpers, type: :feature
+  config.include ::Support::FavouriteRecipeHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers, type: :feature

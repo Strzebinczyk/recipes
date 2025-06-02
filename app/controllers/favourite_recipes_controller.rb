@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class FavouriteRecipesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @favourite_recipes = current_user.favourites.all
   end
