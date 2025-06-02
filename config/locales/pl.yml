@@ -19,6 +19,7 @@ pl:
         current_password: Aktualne hasło
         email: E-mail
         password: Hasło
+        username: Nick
         password_confirmation: Potwierdź hasło
         remember_me: Pozostać zalogowanym?
       models:

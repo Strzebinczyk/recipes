@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class='row'>
-    <p>Dodano przez: <%= @recipe.user.email %></p>
+    <p>Dodano przez: <%= link_to @recipe.user.username, user_path(@recipe.user) %></p>
   </div>
   <div class='row'>
     <div class='col-4 border-end'>

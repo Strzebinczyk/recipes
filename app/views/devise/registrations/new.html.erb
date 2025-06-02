@@ -12,6 +12,12 @@
                 </div>
 
                 <div class="form-group">
+                  <%= f.label :username, class: "form-label" %>
+                  <%= f.text_field :username, class: "form-control", required: true %>
+                  <%= render "/shared/errors", object: resource, field: :username %>
+                </div>
+
+                <div class="form-group">
                   <%= f.label :password, 'Hasło', class: "form-label" %>
                   <% if @minimum_password_length %>
                   <em>(minimum <%= @minimum_password_length %> znaków)</em>

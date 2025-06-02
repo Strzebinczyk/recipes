@@ -76,6 +76,7 @@
           <div class="text-end">
             <% if user_signed_in? %>
               <%= link_to "Wyloguj", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>
+              <%= link_to 'Moje przepisy', user_path(current_user), class: "btn btn-primary"%>
             <% else %>
               <%= link_to "Zaloguj", new_user_session_path, class: "btn btn-light text-dark me-2" %>
               <%= link_to "Zarejestruj", new_user_registration_path, class: "btn btn-primary" %>
