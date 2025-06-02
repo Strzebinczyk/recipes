@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
   resources :shopping_lists, only: %i[show update]
   resources :shopping_list_ingredients, only: %i[new create]
-  resources :favourite_recipes, only: %i[index new create]
+  resources :favourite_recipes, only: %i[index new create destroy]
   get 'generate_pdf', to: 'pdf_generator#generate_pdf'
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
