@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Support
   module FavouriteRecipeHelpers
     def add_recipe_to_favourites(recipe_name = 'Biszkopt bezowy z galaretką') # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
