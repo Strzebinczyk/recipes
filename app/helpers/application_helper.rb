@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+  
   def turbo_id_for(obj)
     obj.persisted? ? obj.id : obj.hash
   end

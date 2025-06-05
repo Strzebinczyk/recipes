@@ -4,8 +4,8 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
 
   def index
-    @recipes = params[:tag] ? Recipe.tagged_with(params[:tag]) : Recipe.all.includes(user)
     @tag = params[:tag]
+    @pagy, @recipes = pagy(params[:tag] ? Recipe.tagged_with(params[:tag]) : Recipe.all.includes(user))
   end
 
   def show

@@ -3,7 +3,7 @@
 class FavouriteRecipesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @favourite_recipes = current_user.favourites.all
+    @pagy, @favourite_recipes = pagy(current_user.favourites.all)
   end
 
   def create
