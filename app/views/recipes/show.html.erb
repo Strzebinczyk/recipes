@@ -6,8 +6,19 @@
     </div>
   </div>
   <div class='row'>
-    <div class='col-8'>
+    <div class='col-8 relative'>
       <%= render(ImgComponent.new(recipe: @recipe, class_list: 'recipe-image w-100')) %>
+      <% if user_signed_in? %>
+        <% if current_user.favourites.all.include? @recipe %>
+          <%= link_to favourite_recipe_path(@recipe.favourite_recipes.where(user_id: current_user.id)[0]), data: { turbo_method: :delete,  }, title: 'Usuń z ulubionych' do %>
+            <% image_tag asset_path('full-red-heart.svg'), class: "recipe-show-remove-from-favourites bg-body" %>
+          <% end %>
+        <% else %>
+          <%= link_to favourite_recipes_path(recipe: @recipe.id),data: { turbo_method: :post,  }, title: 'Dodaj do ulubionych' do %>
+            <% image_tag asset_path('red-outline-heart.svg'), class: "recipe-show-add-to-favourites bg-body" %>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
     <div class='col-4'>
       <h4>Liczba porcji: <%= @recipe.serving %></h4>
@@ -15,14 +26,18 @@
         <%= render "/tags/tag_list", {tag_array: @recipe.tag_array} %>
       <% end %>
       <% if user_signed_in? %>
-        <%= link_to "Edytuj", edit_recipe_path(@recipe) %>
-        <%= link_to "Usuń", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"} %>
-        <%= link_to "Dodaj do planu posiłków", new_recipe_plans_path(recipe: @recipe.id), data: { turbo_frame: "add_recipe_plan" } %>
+        <% if current_user.recipes.include? @recipe %>
+          <div class="mb-2">
+            <%= link_to "Edytuj", edit_recipe_path(@recipe), class: 'btn btn-outline-warning' %>
+            <%= link_to "Usuń", recipe_path(@recipe), data: {turbo_method: :delete, turbo_confirm: "Na pewno?"}, class: 'btn btn-outline-danger' %>
+          </div>
+        <% end %>
+        <%= link_to "Dodaj do planu posiłków", new_recipe_plans_path(recipe: @recipe.id), data: { turbo_frame: "add_recipe_plan" }, class: 'btn btn-outline-success' %>
       <% end %>
     </div>
   </div>
   <div class='row'>
-    <p>Dodano przez: <%= @recipe.user.email %></p>
+    <p>Dodano przez: <%= link_to @recipe.user.username, user_path(@recipe.user) %></p>
   </div>
   <div class='row'>
     <div class='col-4 border-end'>

@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'User edits recipe' do
   let(:user) { create(:user) }
-  let(:recipe) { create(:recipe) }
-  let(:recipe_with_tags) { create(:recipe_with_tags) }
+  let(:recipe) { create(:recipe, user: user) }
+  let(:recipe_with_tags) { create(:recipe_with_tags, user: user) }
 
   before do
     Rails.application.load_seed

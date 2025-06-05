@@ -15,9 +15,9 @@
   Tag.find_or_create_by(name: tag_name)
 end
 
-User.create(email: 'cakesbyjosh@gmail.com', password: 'zaq12wsx')
+User.create(email: 'cakesbyjosh@gmail.com', password: 'zaq12wsx', username: 'Josh')
 user1 = User.find_by(email: 'cakesbyjosh@gmail.com')
-User.create(email: 'goodfood@gmail.com', password: 'zaq12wsx')
+User.create(email: 'goodfood@gmail.com', password: 'zaq12wsx', username: 'Ania')
 user2 = User.find_by(email: 'goodfood@gmail.com')
 
 recipe1_params = { name: 'Biszkopt bezowy z galaretką i kremem mascarpone', 'tag_ids' => ['', '2', '7', '12'],

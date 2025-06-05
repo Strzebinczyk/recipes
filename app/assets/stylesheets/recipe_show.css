@@ -2,3 +2,16 @@
   max-height: 400px;
   object-fit: cover;
 }
+
+.recipe-show-add-to-favourites, .recipe-show-remove-from-favourites {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  max-width: 40px;
+  max-height: 40px;
+  transition: transform 0.5s;
+}
+
+.recipe-show-add-to-favourites:hover, .recipe-show-remove-from-favourites:hover {
+  transform: scale3d(1.5, 1.5, 1.5);
+}
