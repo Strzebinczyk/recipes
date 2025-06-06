@@ -5,7 +5,9 @@ require 'rails_helper'
 RSpec.describe 'ShoppingLists', type: :request do
   let(:user) { create(:user) }
   let(:plan) { create(:plan, user: user) }
+  let(:other_plan) { create(:plan) }
   let(:shopping_list) { create(:shopping_list, plan: plan) }
+  let(:other_shopping_list) { create(:shopping_list, plan: other_plan) }
 
   describe 'GET /shopping_lists/:id' do
     context 'when user is authenticated' do
@@ -64,6 +66,14 @@ RSpec.describe 'ShoppingLists', type: :request do
         put shopping_list_path(shopping_list.id), params: { shopping_list: {} }
 
         expect(response).to have_http_status(:bad_request)
+      end
+
+      it 'shopping list not updated when it does not belong to user' do
+        put shopping_list_path(other_shopping_list.id), params: { shopping_list: {
+          shopping_list_ingredients_attributes: { ShoppingListIngredient.new.hash => { name: 'Carrot', quantity: '3' } }
+        } }
+
+        expect(response).to have_http_status(:not_found)
       end
     end
 

@@ -4,7 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Plans', type: :request do
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
   let(:plan) { create(:plan, user: user) }
+  let(:other_plan) { create(:plan) }
   let(:recipe) { create(:recipe) }
 
   context 'when user is authenticated' do
@@ -83,6 +85,14 @@ RSpec.describe 'Plans', type: :request do
         expect(response).to have_http_status(:not_found)
       end
 
+      it 'does not update plan when plan does not belong to user' do
+        put plan_path(other_plan.id), params: { plan: {
+          name: 'Updated plan'
+        } }
+
+        expect(response).to have_http_status(:not_found)
+      end
+
       it 'plan not updated when details not provided' do
         put plan_path(plan.id), params: { plan: {} }
 
@@ -121,6 +131,12 @@ RSpec.describe 'Plans', type: :request do
 
         expect(response).to have_http_status(:not_found)
       end
+
+      it 'does not delete plan when plan does not belong to user' do
+        delete plan_path(other_plan.id)
+
+        expect(response).to have_http_status(:not_found)
+      end
     end
 
     describe 'GET /plans/new_recipe' do
@@ -143,6 +159,19 @@ RSpec.describe 'Plans', type: :request do
         expect(recipe_plan.plan_id).to eq(plan.id)
         expect(recipe_plan.recipe_id).to eq(recipe.id)
         expect(response.status).to be 302
+      end
+
+      it 'bad requests if user does not have plans created' do
+        sign_in other_user
+
+        post add_recipe_plans_path, params: {
+          plan_id: plan.id,
+          recipe_id: recipe.id
+        }
+        recipe_plan = RecipePlan.last
+
+        expect(recipe_plan).not_to be_present
+        expect(response.status).to be 404
       end
     end
 

@@ -4,11 +4,14 @@
   max-width: 25px;
   max-height: 25px;
   transition: transform 0.5s;
-  visibility: hidden;
 }
 
 .add-to-plan {
   bottom: 0;
+}
+
+.add-to-plan, .add-to-favourites {
+  visibility: hidden;
 }
 
 .add-to-favourites, .remove-from-favourites {

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Recipe < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 60 }
   validates :serving, presence: true
   validates :recipe_ingredients, presence: true
   validates :steps, presence: true

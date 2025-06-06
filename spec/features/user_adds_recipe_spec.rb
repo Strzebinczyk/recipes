@@ -148,5 +148,18 @@ RSpec.describe 'User adds recipe' do
 
       expect(page).to have_content('Pole instrukcje nie może być puste')
     end
+
+    scenario 'with an invalid image' do # rubocop:disable RSpec/ExampleLength
+      fill_in 'Nazwa', with: 'Lazanki'
+      fill_in 'Liczba porcji', with: 1
+      find('.name').fill_in with: 'Pasta'
+      find('.quantity').fill_in with: '200g'
+      find('.step').fill_in with: 'Boil it'
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/add.svg').to_s)
+
+      click_button 'Prześlij'
+
+      expect(page).to have_content('Obraz musi być formatu JPEG lub PNG')
+    end
   end
 end

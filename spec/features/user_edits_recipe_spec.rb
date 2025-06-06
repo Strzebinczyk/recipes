@@ -148,5 +148,13 @@ RSpec.describe 'User edits recipe' do
 
       expect(page).to have_content('Pole instrukcje nie może być puste')
     end
+
+    scenario 'with an invalid image' do
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/add.svg').to_s)
+
+      click_button 'Prześlij'
+
+      expect(page).to have_content('Obraz musi być formatu JPEG lub PNG')
+    end
   end
 end

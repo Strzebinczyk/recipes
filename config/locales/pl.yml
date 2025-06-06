@@ -30,6 +30,8 @@ pl:
         shopping_list_ingredient: ''
       plan:
         name: Pole nazwa
+      step:
+        instructions: Pole instrukcje
     errors:
       messages:
         record_invalid: 'Znaleziono błędy: %{errors}'
@@ -41,7 +43,7 @@ pl:
           attributes:
             quantity_unit:
               not_on_whitelist: 'Nieprawidłowa jednostka, dozwolone: g, ml, łyżka, łyżeczka, ząbek, kawałek, puszka,
-                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść, do smaku i brak jednostki'
+                                  opakowanie, pęczek, szklanka, sztuka, szczypta, garść i do smaku'
   date:
     abbr_day_names:
     - nie

@@ -10,7 +10,7 @@ RSpec.describe 'User manages favourite recipes' do
     login_as(user, scope: :user, run_callbacks: false)
   end
 
-  scenario 'adds a recipe to favourites' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+  scenario 'adds a recipe to favourites', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
     visit home_index_path
 
     expect(page).to have_content('Biszkopt bezowy z galaretką')
@@ -24,7 +24,7 @@ RSpec.describe 'User manages favourite recipes' do
     expect(page).to have_content('Biszkopt bezowy z galaretką')
   end
 
-  scenario 'removes recipe from favourites' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+  scenario 'removes recipe from favourites', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
     add_recipe_to_favourites('Biszkopt bezowy z galaretką')
 
     visit favourite_recipes_path

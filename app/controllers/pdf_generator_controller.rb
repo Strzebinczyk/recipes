@@ -12,10 +12,4 @@ class PdfGeneratorController < ApplicationController
       end
     end
   end
-
-  private
-
-  def generator_params
-    params.permit(%i[name format ingredients_array])
-  end
 end

@@ -47,15 +47,22 @@ RSpec.describe 'User manages shopping list' do
 
     click_link 'Dodaj składniki'
     click_link 'Dodaj składnik'
+    click_link 'Dodaj składnik'
+    click_link 'Dodaj składnik'
 
     find_all('.name').first.fill_in with: 'Pasta'
-    find_all('.quantity').first.fill_in with: '200g'
+    find_all('.quantity').first.fill_in with: '1/2 g'
+    find_all('.name')[1].fill_in with: 'Beetroot'
+    find_all('.quantity')[1].fill_in with: '1.5'
+    find_all('.name')[2].fill_in with: 'Beetroot'
+    find_all('.quantity')[2].fill_in with: '1,5'
     find_all('.name').last.fill_in with: 'Butter'
     find_all('.quantity').last.fill_in with: '1 stick'
 
     click_button 'Zapisz'
 
-    expect(page).to have_content 'Pasta - 200 g'
+    expect(page).to have_content 'Pasta - 0.5 g'
+    expect(page).to have_content 'Beetroot - 3 sztuki'
     expect(page).to have_content 'Butter - 1 stick'
   end
 end
