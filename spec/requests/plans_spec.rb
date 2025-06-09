@@ -161,7 +161,7 @@ RSpec.describe 'Plans', type: :request do
         expect(response.status).to be 302
       end
 
-      it 'bad requests if user does not have plans created' do
+      it 'bad requests if user does not have plans created' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         sign_in other_user
 
         post add_recipe_plans_path, params: {

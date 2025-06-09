@@ -7,7 +7,7 @@ module ShoppingLists
     string :ingredient_quantities
     string :ingredient_name_to_edit
 
-    def execute
+    def execute # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       ingredient = Ingredient.find_by(name: ingredient_name_to_edit)
       shopping_list_ingredients_array = shopping_list.shopping_list_ingredients.where(ingredient_id: ingredient.id)
 
@@ -17,8 +17,8 @@ module ShoppingLists
         end
         ingredient = Ingredient.find_by(name: ingredient_name) || Ingredient.create(name: ingredient_name)
         shopping_list_ingredient = shopping_list
-                                     .shopping_list_ingredients.build(quantity: ingredient_quantities,
-                                                                      ingredient_id: ingredient.id)
+                                   .shopping_list_ingredients.build(quantity: ingredient_quantities,
+                                                                    ingredient_id: ingredient.id)
         errors.merge!(shopping_list_ingredient.errors) unless shopping_list_ingredient.save
       end
     end

@@ -27,9 +27,12 @@ class ShoppingListsController < ApplicationController
     @ingredient_name, @ingredient_quantities = outcome.result
   end
 
-  def update_ingredient
+  def update_ingredient # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @shopping_list = current_user.shopping_lists.find(params[:id])
-    outcome = ShoppingLists::UpdateIngredient.run(shopping_list: @shopping_list, ingredient_name: params[:ingredient_name], ingredient_quantities: params[:ingredient_quantities], ingredient_name_to_edit: params[:ingredient_name_to_edit])
+    outcome = ShoppingLists::UpdateIngredient.run(shopping_list: @shopping_list,
+                                                  ingredient_name: params[:ingredient_name],
+                                                  ingredient_quantities: params[:ingredient_quantities],
+                                                  ingredient_name_to_edit: params[:ingredient_name_to_edit])
 
     if outcome.valid?
       redirect_to shopping_list_url(@shopping_list), notice: 'Ingredient was successfully updated.'
