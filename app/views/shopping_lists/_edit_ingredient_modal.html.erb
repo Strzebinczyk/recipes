@@ -7,7 +7,7 @@
       <%= form_with url: update_ingredient_shopping_list_path, method: :patch do |f| %>
         <div class="modal-body">
           <%= f.text_field :ingredient_name, value: @ingredient_name, class: "form-control mb-2 name", placeholder: "Składnik", 'data-controller'=>"autocomplete", 'data-list' => ingredient_autocomplete, autocomplete: "off" %>
-          <%= f.text_field :ingredient_quantities, value: @ingredient_quantities, class: "form-control mx-2 mb-2 quantity", placeholder: "Ilość" %>
+          <%= f.text_field :ingredient_quantities, value: @ingredient_quantities, class: "form-control mx-2 mb-2 quantity", placeholder: "Ilość", autocomplete: "off" %>
           <%= f.hidden_field :shopping_list_id, value: params[:id] %>
           <%= f.hidden_field :ingredient_name_to_edit, value: @ingredient_name %>
         </div>

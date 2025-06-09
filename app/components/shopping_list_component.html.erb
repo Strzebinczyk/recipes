@@ -2,7 +2,7 @@
  <div class='text-center mb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
   </div>
-  <div class='container mx-5 px-5 pb-3'>
+  <div class='container mx-5 px-5'>
     <div class='mb-3 mx-5 px-5'>
       <table class="table mx-5">
         <thead>
@@ -30,9 +30,6 @@
         </tbody>
       </table>
       <%= f.hidden_field :name, value: @shopping_list.plan.name %>
-      <%= link_to new_shopping_list_ingredient_path(shopping_list_id: @shopping_list.id), data: { turbo_frame: "add_element_to_shopping_list" } do %>
-        <% image_tag asset_path('add-white.svg'), class: "btn btn-secondary mx-5" %>
-      <% end %>
     </div>
   </div>
 <% end %>

@@ -1,9 +1,21 @@
-<%= turbo_frame_tag 'add_element_to_shopping_list' %>
 <%= turbo_frame_tag "edit_element_in_shopping_list" %>
 <div class='container mx-auto shopping-list-show'>
   <div class="text-center mb-4">
     <h1 class='display-4 fw-normal py-2'>Lista dla planu <%= @shopping_list.plan.name %></h1>
   </div>
   <%= render(ShoppingListComponent.new(shopping_list: @shopping_list, ingredients_hash: @ingredients_hash)) %>
+  <div class='mx-5 px-5 pb-3'>
+    <div class='mx-5 px-5'>
+      <%= form_with model: @shopping_list do |f| %>
+        <div id='shopping_list_ingredients' class='mx-5' data-controller='new-shopping-list-ingredient'>
+        </div>
+        <%= link_to new_shopping_list_ingredient_path(shopping_list_id: @shopping_list.id), data: { turbo_stream: true } do %>
+          <% image_tag asset_path('add-white.svg'), class: "btn btn-secondary mx-5" %>
+        <% end %>
+
+        <%= f.submit "Zapisz", class: "d-none btn btn-primary", id: 'submit_btn' %>
+      <% end %>
+    </div>
+  </div>
   <%= render "/shared/img_credit", link: "https://www.vecteezy.com/free-photos/food", text: "Food Stock photos by Vecteezy" %>
 </div>
