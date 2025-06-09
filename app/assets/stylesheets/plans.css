@@ -1,3 +1,13 @@
+a .icon-btn {
+  max-height: 32px;
+  padding: 6px;
+}
+
+th > input.form-check-input {
+  width: 1.3em; 
+  height: 1.3em;
+}
+
 .add-to-favourites, .add-to-plan, .remove-from-favourites {
   position: absolute;
   right: 0;

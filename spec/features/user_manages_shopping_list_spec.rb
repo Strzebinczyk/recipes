@@ -30,7 +30,7 @@ RSpec.describe 'User manages shopping list' do
     shopping_list = plan.shopping_list
     visit shopping_list_path(shopping_list.id)
 
-    click_link 'Dodaj składniki'
+    find_all('a img').last.click
 
     find('.name').fill_in with: 'Pasta'
     find('.quantity').fill_in with: '200g'
@@ -45,7 +45,7 @@ RSpec.describe 'User manages shopping list' do
     shopping_list = plan.shopping_list
     visit shopping_list_path(shopping_list.id)
 
-    click_link 'Dodaj składniki'
+    find_all('a img').last.click
     click_link 'Dodaj składnik'
     click_link 'Dodaj składnik'
     click_link 'Dodaj składnik'

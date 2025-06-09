@@ -15,7 +15,7 @@
                   <% image_tag asset_path('full-red-heart.svg'), class: "remove-from-favourites bg-body" %>
                 <% end %>
               <% else %>
-                <%= link_to favourite_recipes_path(recipe: recipe.id),data: { turbo_method: :post,  }, title: 'Dodaj do ulubionych' do %>
+                <%= link_to favourite_recipes_path(recipe: recipe.id), data: { turbo_method: :post }, title: 'Dodaj do ulubionych' do %>
                   <% image_tag asset_path('red-outline-heart.svg'), class: "add-to-favourites bg-body" %>
                 <% end %>
               <% end %>

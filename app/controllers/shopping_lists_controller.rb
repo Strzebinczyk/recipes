@@ -21,6 +21,36 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def edit_ingredient
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    outcome = ShoppingLists::EditIngredient.run(shopping_list: @shopping_list, text: params[:ingredient_printable])
+    @ingredient_name, @ingredient_quantities = outcome.result
+  end
+
+  def update_ingredient
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    outcome = ShoppingLists::UpdateIngredient.run(shopping_list: @shopping_list, ingredient_name: params[:ingredient_name], ingredient_quantities: params[:ingredient_quantities], ingredient_name_to_edit: params[:ingredient_name_to_edit])
+
+    if outcome.valid?
+      redirect_to shopping_list_url(@shopping_list), notice: 'Ingredient was successfully updated.'
+    else
+      redirect_back fallback_location: root_path, alert: 'User did not update any shopping list ingredients.',
+                    status: :unprocessable_entity
+    end
+  end
+
+  def remove_ingredient
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    outcome = ShoppingLists::RemoveIngredient.run(shopping_list: @shopping_list, text: params[:ingredient_printable])
+
+    if outcome.valid?
+      redirect_to shopping_list_url(@shopping_list), notice: 'Ingredient was successfully deleted.'
+    else
+      redirect_back fallback_location: root_path, alert: 'User did not delete any shopping list ingredients.',
+                    status: :unprocessable_entity
+    end
+  end
+
   private
 
   def shopping_list_params
