@@ -95,8 +95,16 @@ RSpec.describe 'Recipes', type: :request do
   end
 
   describe 'GET /recipes/:id/edit' do
-    it 'gets recipe edit page' do
+    it 'gets recipe edit page' do # rubocop:disable RSpec/ExampleLength
       sign_in user
+      post recipes_path, params: { recipe: {
+        name: 'Valid recipe',
+        serving: 2,
+        steps_attributes: [instructions: 'Boil water'],
+        recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+      } }
+      recipe = Recipe.last
+
       get edit_recipe_path(recipe)
 
       expect(response).to have_http_status(:ok)
@@ -111,6 +119,14 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'updates recipe successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
+
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           serving: 10,
@@ -118,7 +134,7 @@ RSpec.describe 'Recipes', type: :request do
           recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Updated ingredient',
                                                                           quantity: '1200 g' } }
         } }
-        recipe = Recipe.last
+        recipe = Recipe.find(recipe.id)
         step = Step.last
         ingredient = Ingredient.last
         recipe_ingredient = RecipeIngredient.last
@@ -135,11 +151,19 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'adds an ingredient in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
+
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Carrot', quantity: '3' } }
         } }
-        recipe = Recipe.last
+        recipe = Recipe.find(recipe.id)
         ingredient = Ingredient.last
         recipe_ingredient = RecipeIngredient.last
 
@@ -152,6 +176,14 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'edits an existing ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+
+        recipe = Recipe.last
         ingredient = recipe.ingredients.first
         recipe_ingredient = ingredient.recipe_ingredients.first
 
@@ -159,6 +191,7 @@ RSpec.describe 'Recipes', type: :request do
           recipe_ingredients_attributes:
           { recipe_ingredient.id => { id: recipe_ingredient.id, name: ingredient.name, quantity: '87 g' } }
         } }
+        recipe = Recipe.find(recipe.id)
         ingredient = recipe.ingredients.first
 
         expect(ingredient.reload).to be_present
@@ -169,6 +202,14 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'deletes an ingredient in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' },
+                                           RecipeIngredient.new.hash => { name: 'garlic', quantity: '2' } }
+        } }
+        recipe = Recipe.last
         recipe_ingredient = recipe.recipe_ingredients.first
         recipe_ingredient_id = recipe_ingredient.id
         ingredient_id = recipe_ingredient.ingredient_id
@@ -189,11 +230,18 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'adds a step in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
         put recipe_path(recipe.id), params: { recipe: {
           name: 'Updated recipe',
           steps_attributes: [instructions: 'Boil a pot of water']
         } }
-        recipe = Recipe.last
+        recipe = Recipe.find(recipe.id)
         step = Step.last
 
         expect(step).to be_present
@@ -205,7 +253,15 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'edits an existing step in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
         step = recipe.steps.first
+
         put recipe_path(recipe.id), params: { recipe: {
           steps_attributes: [id: step.id, instructions: 'Updated step']
         } }
@@ -218,7 +274,16 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'deletes a step in a recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: { Step.new.hash => { instructions: 'Boil water' },
+                              Step.new.hash => { instructions: 'Peel carrots' } },
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
         step = recipe.steps.first
+
         put recipe_path(recipe.id), params: { recipe: {
           steps_attributes: [id: step.id, _destroy: true]
         } }
@@ -229,6 +294,14 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'adds a tag in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
+
         put recipe_path(recipe.id), params: { recipe: {
           tag_ids: ['', '2']
         } }
@@ -239,13 +312,22 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it 'deletes a tag in an existing recipe' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-        put recipe_path(recipe_with_tags.id), params: { recipe: {
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          tag_ids: ['', '2'],
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
+
+        put recipe_path(recipe.id), params: { recipe: {
           tag_ids: ['']
         } }
 
-        expect(recipe_with_tags.tags).to eq []
+        expect(recipe.tags).to eq []
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(recipe_path(recipe_with_tags))
+        expect(response).to redirect_to(recipe_path(recipe))
       end
 
       it 'does not update recipe when recipe id is not found' do # rubocop:disable RSpec/ExampleLength
@@ -258,10 +340,29 @@ RSpec.describe 'Recipes', type: :request do
         expect(response).to have_http_status(:not_found)
       end
 
-      it 'recipe not updated when details not provided' do
+      it 'recipe not updated when details not provided' do # rubocop:disable RSpec/ExampleLength
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          tag_ids: ['', '2'],
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
+
         put recipe_path(recipe.id), params: { recipe: {} }
 
         expect(response).to have_http_status(:bad_request)
+      end
+
+      it 'does not update recipe when recipe does not belong to current user' do # rubocop:disable RSpec/ExampleLength
+        put recipe_path(recipe.id), params: { recipe: {
+          name: 'Updated recipe',
+          serving: 10,
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -285,7 +386,14 @@ RSpec.describe 'Recipes', type: :request do
         sign_in user
       end
 
-      it 'delete recipe successfully' do # rubocop:disable RSpec/MultipleExpectations
+      it 'delete recipe successfully' do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
         recipe_id = recipe.id
         delete recipe_path(recipe.id)
 
@@ -295,6 +403,13 @@ RSpec.describe 'Recipes', type: :request do
       end
 
       it "deletes recipe with it's steps" do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+        post recipes_path, params: { recipe: {
+          name: 'Valid recipe',
+          serving: 2,
+          steps_attributes: [instructions: 'Boil water'],
+          recipe_ingredients_attributes: { RecipeIngredient.new.hash => { name: 'Fish', quantity: '1' } }
+        } }
+        recipe = Recipe.last
         step_id = recipe.steps.first.id
         recipe_id = recipe.id
         delete recipe_path(recipe.id)

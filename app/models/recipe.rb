@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Recipe < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 60 }
   validates :serving, presence: true
   validates :recipe_ingredients, presence: true
   validates :steps, presence: true
@@ -15,6 +15,8 @@ class Recipe < ApplicationRecord
   has_many :ingredients, through: :recipe_ingredients
   has_many :recipe_plans, dependent: :destroy
   has_many :plans, through: :recipe_plans
+  has_many :favourite_recipes, dependent: :destroy
+  has_many :users, through: :favourite_recipes
   has_one_attached :image, dependent: :destroy
 
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank

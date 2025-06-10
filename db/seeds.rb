@@ -15,9 +15,9 @@
   Tag.find_or_create_by(name: tag_name)
 end
 
-User.create(email: 'cakesbyjosh@gmail.com', password: 'zaq12wsx')
+User.create(email: 'cakesbyjosh@gmail.com', password: 'zaq12wsx', username: 'Josh')
 user1 = User.find_by(email: 'cakesbyjosh@gmail.com')
-User.create(email: 'goodfood@gmail.com', password: 'zaq12wsx')
+User.create(email: 'goodfood@gmail.com', password: 'zaq12wsx', username: 'Ania')
 user2 = User.find_by(email: 'goodfood@gmail.com')
 
 recipe1_params = { name: 'Biszkopt bezowy z galaretką i kremem mascarpone', 'tag_ids' => ['', '2', '7', '12'],
@@ -566,7 +566,7 @@ recipe16 = user2.recipes.build(recipe16_params)
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Pierś z kurczaka').id, quantity: '500g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Imbir świeży').id, quantity: '1 łyżka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Garam masala').id, quantity: '1 łyżeczka' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Cytryna').id, quantity: '2 łyżki soku' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cytryna').id, quantity: '2 łyżki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Oliwa z oliwek').id, quantity: '4 łyżki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Jogurt naturalny').id, quantity: '200g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Czosnek').id, quantity: '3 ząbki' },

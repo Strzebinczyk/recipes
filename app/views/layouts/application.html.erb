@@ -39,7 +39,7 @@
                   <%= render(NavElementComponent.new(path: new_recipe_path, img_path: asset_path('plus-circle.svg'), text: 'Dodaj przepis')) %>
                 </li>
                 <li class='d-flex align-items-center'>
-                  <%= render(NavElementComponent.new(img_path: asset_path('heart.svg'), text: 'Ulubione')) %>
+                  <%= render(NavElementComponent.new(path: favourite_recipes_path, img_path: asset_path('heart.svg'), text: 'Ulubione')) %>
                 </li>
                 <li class='d-flex align-items-center'>
                   <%= render(NavElementComponent.new(path: plans_path, img_path: asset_path('plan.svg'), text: 'Plany posiłków')) %>
@@ -76,6 +76,7 @@
           <div class="text-end">
             <% if user_signed_in? %>
               <%= link_to "Wyloguj", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light text-dark me-2" %>
+              <%= link_to 'Moje przepisy', user_path(current_user), class: "btn btn-primary" %>
             <% else %>
               <%= link_to "Zaloguj", new_user_session_path, class: "btn btn-light text-dark me-2" %>
               <%= link_to "Zarejestruj", new_user_registration_path, class: "btn btn-primary" %>

@@ -5,7 +5,7 @@ class ShoppingListComponent < ViewComponent::Base
     super()
 
     @shopping_list = shopping_list
-    @ingredients_printable = create_ingredients_printable(ingredients_hash)
+    @ingredients_printable = create_ingredients_printable(ingredients_hash).sort
   end
 
   def create_ingredients_printable(ingredients_hash) # rubocop:disable Metrics/MethodLength

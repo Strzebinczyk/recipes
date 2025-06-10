@@ -3,7 +3,7 @@
 class RecipeIngredient < ApplicationRecord
   belongs_to :recipe
   belongs_to :ingredient
-  validates :quantity, presence: true
+  validates :quantity, presence: true, length: { maximum: 60 }
   validates :quantity,
             format: { with: /\A((\d.*)|(do smaku.*))\z/,
                       message: 'nieprawidłowe , proszę wpisz ilość w formacie liczbowym' }
@@ -40,7 +40,7 @@ def standardize_quantity_unit(unit)
                         [/pusz.*/, 'pusz'], [/pęcz.*/, 'pęcz'], [/szkl.*/, 'szkl'], [/garś.*/, 'garść'],
                         [/szcz.*/, 'szczypt'], [/kawał.*/, 'kawał'], [/opak.*/, 'opak']]
   return unit if unit.in? ['g', 'do smaku', 'ml']
-  return nil if unit.nil? || unit == ''
+  return 'szt' if unit.nil? || unit == ''
 
   acceptable_matches.map do |match, abbr|
     return abbr if unit =~ match

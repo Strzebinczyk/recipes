@@ -2,9 +2,9 @@
   <fieldset id="<%= turbo_id_for(shopping_list_ingredient) %>" data-controller="delete-ingredient">
     <div class="d-flex">
       <%= ff.text_field :name, class: "form-control mb-2 name", placeholder: "Składnik", 'data-controller'=>"autocomplete", 'data-list' => ingredient_autocomplete, autocomplete: "off" %>
-      <%= ff.text_field :quantity, class: "form-control mx-2 mb-2 quantity", placeholder: "Ilość" %>
+      <%= ff.text_field :quantity, class: "form-control mx-2 mb-2 quantity", placeholder: "Ilość", autocomplete: "off" %>
       <%= ff.hidden_field :id %>
-      <%= ff.hidden_field :shopping_list_id, value: shopping_list_id %>
+      <%= ff.hidden_field :shopping_list_id, value: params[:id] %>
       <%= ff.hidden_field :_destroy, class: "destroy-ingredient" %>
       <%= link_to "", "", data: {action: "click->delete-ingredient#delete"}, id: "delete-ingredient", class: "btn-close" %>
     </div>

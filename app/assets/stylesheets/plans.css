@@ -1,14 +1,34 @@
-.add-to-plan {
+a .icon-btn {
+  max-height: 32px;
+  padding: 6px;
+}
+
+th > input.form-check-input {
+  width: 1.3em; 
+  height: 1.3em;
+}
+
+.add-to-favourites, .add-to-plan, .remove-from-favourites {
   position: absolute;
   right: 0;
-  bottom: 0;
   max-width: 25px;
   max-height: 25px;
   transition: transform 0.5s;
+}
+
+.add-to-plan {
+  bottom: 0;
+}
+
+.add-to-plan, .add-to-favourites {
   visibility: hidden;
 }
 
-.add-to-plan:hover {
+.add-to-favourites, .remove-from-favourites {
+  top: 0;
+}
+
+.add-to-plan:hover, .add-to-favourites:hover, .remove-from-favourites:hover {
   transform: scale3d(1.5, 1.5, 1.5);
 }
 
@@ -24,7 +44,7 @@
   object-fit: cover;
 }
 
-.relative:hover .add-to-plan{
+.relative:hover .add-to-plan, .relative:hover .add-to-favourites {
   visibility: visible;
 }
 

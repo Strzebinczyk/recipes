@@ -44,8 +44,8 @@ class PdfGeneratorService
                     else
                       item_pair[1]
                     end
-      @pdf.move_down 22 * (longer_item.length / 37) if longer_item.length >= 37
-      @pdf.move_down 22
+      @pdf.move_down 26 * (longer_item.length / 37) if longer_item.length >= 37
+      @pdf.move_down 26
     end
   end
 

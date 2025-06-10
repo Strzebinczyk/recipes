@@ -11,7 +11,7 @@ RSpec.describe 'ShoppingListIngredients', type: :request do
     it 'gets new shopping list ingredient partial, format html' do
       sign_in user
 
-      get new_shopping_list_ingredient_path(shopping_list_id: shopping_list.id)
+      get new_shopping_list_ingredient_path(shopping_list_id: shopping_list.id, format: :turbo_stream)
 
       expect(response).to have_http_status(:ok)
     end

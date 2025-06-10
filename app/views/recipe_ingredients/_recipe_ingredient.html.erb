@@ -7,6 +7,6 @@
       <%= ff.hidden_field :_destroy, class: "destroy-ingredient" %>
       <%= link_to "", "", data: {action: "click->delete-ingredient#delete"}, id: "delete-ingredient", class: "btn-close" %>
     </div>
-    <%= render "/shared/errors", object: recipe_ingredient, field: '' %>
+    <%= render "/shared/errors", object: recipe_ingredient, field: :name %>
   </fieldset>
 <% end %>

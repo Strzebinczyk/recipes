@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'User edits recipe' do
   let(:user) { create(:user) }
-  let(:recipe) { create(:recipe) }
-  let(:recipe_with_tags) { create(:recipe_with_tags) }
+  let(:recipe) { create(:recipe, user: user) }
+  let(:recipe_with_tags) { create(:recipe_with_tags, user: user) }
 
   before do
     Rails.application.load_seed
@@ -147,6 +147,14 @@ RSpec.describe 'User edits recipe' do
       click_button 'Prześlij'
 
       expect(page).to have_content('Pole instrukcje nie może być puste')
+    end
+
+    scenario 'with an invalid image' do
+      page.attach_file('recipe_image', Rails.root.join('app/assets/images/add.svg').to_s)
+
+      click_button 'Prześlij'
+
+      expect(page).to have_content('Obraz musi być formatu JPEG lub PNG')
     end
   end
 end

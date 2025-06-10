@@ -84,6 +84,7 @@ gem 'better_html'
 gem 'devise', '~> 4.9'
 gem 'erb_lint', require: false
 gem 'faker'
+gem 'pagy', '~> 9.3'
 gem 'prawn'
 gem 'rails-i18n', '~> 8.0.0'
 gem 'view_component'

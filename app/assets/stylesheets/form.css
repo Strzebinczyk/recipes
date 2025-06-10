@@ -128,3 +128,9 @@ body:has(#recipe-form) {
 #tag-select + .form-control, #plan-select + .form-control  {
   display: flex;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+.field_with_errors {
+  width: 100%;
+  margin-right: .5rem !important;
+}

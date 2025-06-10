@@ -1,15 +1,36 @@
 <%= form_with(url: generate_pdf_path(format: "pdf"), method: :get, format: :pdf) do |f| %>
  <div class='text-center mb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
-    <%= link_to "Dodaj składniki", new_shopping_list_ingredient_path(shopping_list_id: @shopping_list.id), data: { turbo_frame: "add_element_to_shopping_list" }, class: "btn btn-secondary" %>
   </div>
-  <div class='container mx-5 px-5 pb-3'>
-    <div class='mb-3 mx-5'>
-      <%= f.collection_check_boxes(:ingredients_array, @ingredients_printable, :to_s, :to_s) do |b| %>
-        <div class='mb-1 form-check'>
-          <%= b.label(class:"form-check-label") { b.check_box(class: 'form-check-input', checked: true) + b.text } %>
-        </div>
-      <% end %>
+  <div class='container mx-5 px-5'>
+    <div class='mb-3 mx-5 px-5'>
+      <table class="table mx-5 px-5">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Składnik</th>
+            <th scope="col">Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.collection_check_boxes(:ingredients_array, @ingredients_printable, :to_s, :to_s) do |b| %>
+            <tr>
+              <th scope="row"><%= b.check_box(class: 'form-check-input', checked: true) %></th>
+              <%= content_tag :td, id: b.text.delete(' ') do %>
+                <%= b.label(class:"form-check-label") { b.text } %></td>
+              <% end %>
+              <td>
+                <%= link_to edit_ingredient_shopping_list_path(ingredient_printable: b.text, td_id: b.text.delete(' ')), data: { turbo_stream: true }, title: 'Edytuj pozycję z listy zakupów' do %>
+                  <% image_tag asset_path('edit-pencil.svg'), class: "icon-btn btn btn-success mx-2" %>
+                <% end %>
+                <%= link_to remove_ingredient_shopping_list_path(ingredient_printable: b.text), data: { turbo_method: :delete, turbo_confirm: "Na pewno?" }, title: 'Usuń z listy zakupów' do %>
+                  <% image_tag asset_path('trash.svg'), class: "icon-btn btn btn-danger mx-1" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
       <%= f.hidden_field :name, value: @shopping_list.plan.name %>
     </div>
   </div>

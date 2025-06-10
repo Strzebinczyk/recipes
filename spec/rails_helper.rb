@@ -20,6 +20,7 @@ require 'capybara/rails'
 require_relative './support/session_helpers'
 require_relative './support/slimselect_helpers'
 require_relative './support/shopping_list_helpers'
+require_relative './support/favourite_recipe_helpers'
 Capybara.server = :puma
 
 Capybara.register_driver :chrome do |app|
@@ -55,6 +56,7 @@ RSpec.configure do |config|
   config.include ::Support::SessionHelpers, type: :feature
   config.include ::Support::SlimselectHelpers, type: :feature
   config.include ::Support::ShoppingListHelpers, type: :feature
+  config.include ::Support::FavouriteRecipeHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers, type: :feature
@@ -103,14 +105,30 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    if config.use_transactional_fixtures?
+      raise(<<-MSG)
+        Delete line `config.use_transactional_fixtures = true` from rails_helper.rb
+        (or set it to false) to prevent uncommitted transactions being used in
+        JavaScript-dependent specs.
+
+        During testing, the app-under-test that the browser driver connects to
+        uses a different database connection to the database connection used by
+        the spec. The app's database connection would not be able to access
+        uncommitted transaction data setup over the spec's database connection.
+      MSG
+    end
+
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+  config.before do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+  end
+
+  config.append_after do
+    DatabaseCleaner.clean
   end
 end

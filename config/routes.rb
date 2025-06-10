@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get 'search', to: 'search#index'
   get 'home/index'
   devise_for :users
@@ -30,8 +30,16 @@ Rails.application.routes.draw do
       delete :remove_recipe
     end
   end
-  resources :shopping_lists, only: %i[show update]
+  resources :shopping_lists, only: %i[show update] do
+    member do
+      get :edit_ingredient
+      patch :update_ingredient
+      put :update_ingredient
+      delete :remove_ingredient
+    end
+  end
   resources :shopping_list_ingredients, only: %i[new create]
+  resources :favourite_recipes, only: %i[index create destroy]
   get 'generate_pdf', to: 'pdf_generator#generate_pdf'
 
   get 'tags/:tag', to: 'recipes#index', as: :tag
