@@ -31,7 +31,7 @@ RSpec.describe 'ShoppingLists', type: :request do
     end
   end
 
-  describe 'PUT /shopping_lists/:id' do
+  describe 'PUT /shopping_lists/:id' do # rubocop:disable RSpec/MultipleMemoizedHelpers
     let(:other_plan) { create(:plan) }
     let(:other_shopping_list) { create(:shopping_list, plan: other_plan) }
 

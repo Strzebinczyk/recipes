@@ -44,7 +44,7 @@ th > input.form-check-input {
   object-fit: cover;
 }
 
-.relative:hover .add-to-plan, .relative:hover .add-to-favourites, .relative:hover .remove-from-favourites {
+.relative:hover .add-to-plan, .relative:hover .add-to-favourites {
   visibility: visible;
 }
 
