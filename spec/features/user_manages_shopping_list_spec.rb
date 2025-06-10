@@ -46,9 +46,9 @@ RSpec.describe 'User manages shopping list' do
     visit shopping_list_path(shopping_list.id)
 
     find_all('a img').last.click
-    click_link 'Dodaj składnik'
-    click_link 'Dodaj składnik'
-    click_link 'Dodaj składnik'
+    find_all('a img').last.click
+    find_all('a img').last.click
+    find_all('a img').last.click
 
     find_all('.name').first.fill_in with: 'Pasta'
     find_all('.quantity').first.fill_in with: '1/2 g'
@@ -64,5 +64,39 @@ RSpec.describe 'User manages shopping list' do
     expect(page).to have_content 'Pasta - 0.5 g'
     expect(page).to have_content 'Beetroot - 3 sztuki'
     expect(page).to have_content 'Butter - 1 stick'
+  end
+
+  scenario 'removes ingredient', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    plan = Plan.last
+    shopping_list = plan.shopping_list
+
+    add_recipe_to_plan('Kurczak w sosie marchewkowym')
+
+    visit shopping_list_path(shopping_list.id)
+    expect(page).to have_content 'Bulion - 0.5 szklanki'
+
+    accept_alert do
+      find_all('.btn-danger').first.click
+    end
+
+    expect(page).not_to have_content 'Bulion - 0.5 szklanki'
+  end
+
+  scenario 'edits ingredient', :js do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    plan = Plan.last
+    shopping_list = plan.shopping_list
+
+    add_recipe_to_plan('Kurczak w sosie marchewkowym')
+
+    visit shopping_list_path(shopping_list.id)
+    expect(page).to have_content 'Bulion - 0.5 szklanki'
+
+    find_all('.btn-success').first.click
+    find_all('.name').first.fill_in with: 'Rosół'
+    find_all('.name')[1].fill_in with: '2 kostki'
+    click_button 'Zapisz'
+
+    expect(page).not_to have_content 'Bulion - 0.5 szklanki'
+    expect(page).to have_content 'Rosół - 2 kostki'
   end
 end

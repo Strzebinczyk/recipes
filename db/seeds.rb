@@ -566,7 +566,7 @@ recipe16 = user2.recipes.build(recipe16_params)
 [{ ingredient_id: Ingredient.find_or_create_by(name: 'Pierś z kurczaka').id, quantity: '500g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Imbir świeży').id, quantity: '1 łyżka' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Garam masala').id, quantity: '1 łyżeczka' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Cytryna').id, quantity: '2 łyżki soku' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Cytryna').id, quantity: '2 łyżki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Oliwa z oliwek').id, quantity: '4 łyżki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Jogurt naturalny').id, quantity: '200g' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Czosnek').id, quantity: '3 ząbki' },

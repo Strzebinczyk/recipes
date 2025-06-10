@@ -23,7 +23,7 @@ class ShoppingListIngredient < ApplicationRecord
                       end
     self.quantity_amount = quantity_amount.to_f unless quantity_amount == ''
     self.quantity_amount = nil if quantity_amount == ''
-    quantity_unit = quantity[/([a-z]|ł)+.*/]
+    quantity_unit = quantity[/[[a-z]|ł]+.*/]
     quantity_unit = quantity_unit.strip unless quantity_unit.nil?
     self.quantity_unit = standardize_quantity_unit(quantity_unit)
   end
@@ -32,9 +32,10 @@ end
 private
 
 def standardize_quantity_unit(unit)
-  acceptable_matches = [[/łyżecz.*/, 'łyżcz'], [/łyż.*/, 'łyż'], [/szt.*/, 'szt'], [/ząb.*/, 'ząb'],
-                        [/pusz.*/, 'pusz'], [/pęcz.*/, 'pęcz'], [/szkl.*/, 'szkl'], [/garś.*/, 'garść'],
-                        [/szcz.*/, 'szczypt'], [/kawał.*/, 'kawał'], [/opak.*/, 'opak']]
+  acceptable_matches = [[/\Ałyżecz.{0,2}\z/, 'łyżcz'], [/\Ałyż.{0,2}\z/, 'łyż'], [/\Aszt.{0,3}\z/, 'szt'],
+                        [/\Aząb.{0,3}\z/, 'ząb'], [/\Apusz.{0,2}\z/, 'pusz'], [/\Apęcz.{0,3}\z/, 'pęcz'],
+                        [/\Aszkl.{0,4}\z/, 'szkl'], [/\Agarś.{0,2}\z/, 'garść'], [/\Aszczypt.{0,2}\z/, 'szczypt'],
+                        [/\Akawał.{0,3}\z/, 'kawał'], [/\Aopakowa.{0,3}\z/, 'opak']]
   return unit if unit.in? ['g', 'do smaku', 'ml']
   return 'szt' if unit.nil? || unit == ''
 

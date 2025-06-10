@@ -4,7 +4,7 @@
   </div>
   <div class='container mx-5 px-5'>
     <div class='mb-3 mx-5 px-5'>
-      <table class="table mx-5">
+      <table class="table mx-5 px-5">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -16,12 +16,14 @@
           <%= f.collection_check_boxes(:ingredients_array, @ingredients_printable, :to_s, :to_s) do |b| %>
             <tr>
               <th scope="row"><%= b.check_box(class: 'form-check-input', checked: true) %></th>
-              <td><%= b.label(class:"form-check-label") { b.text } %></td>
-              <td class='d-flex'>
-                <%= link_to edit_ingredient_shopping_list_path(ingredient_printable: b.text), title: 'Edytuj pozycję z listy zakupów' do %>
+              <%= content_tag :td, id: b.text.delete(' ') do %>
+                <%= b.label(class:"form-check-label") { b.text } %></td>
+              <% end %>
+              <td>
+                <%= link_to edit_ingredient_shopping_list_path(ingredient_printable: b.text, td_id: b.text.delete(' ')), data: { turbo_stream: true }, title: 'Edytuj pozycję z listy zakupów' do %>
                   <% image_tag asset_path('edit-pencil.svg'), class: "icon-btn btn btn-success mx-2" %>
                 <% end %>
-                <%= link_to remove_ingredient_shopping_list_path(ingredient_printable: b.text), data: { turbo_method: :delete }, title: 'Usuń z listy zakupów' do %>
+                <%= link_to remove_ingredient_shopping_list_path(ingredient_printable: b.text), data: { turbo_method: :delete, turbo_confirm: "Na pewno?" }, title: 'Usuń z listy zakupów' do %>
                   <% image_tag asset_path('trash.svg'), class: "icon-btn btn btn-danger mx-1" %>
                 <% end %>
               </td>

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace params[:td_id] do %>
+  <%= render partial: "shopping_lists/edit_ingredient", locals: {name: @ingredient_name, quantity: @ingredient_quantities} %>
+<% end %>

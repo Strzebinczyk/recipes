@@ -25,6 +25,9 @@ class ShoppingListsController < ApplicationController
     @shopping_list = current_user.shopping_lists.find(params[:id])
     outcome = ShoppingLists::EditIngredient.run(shopping_list: @shopping_list, text: params[:ingredient_printable])
     @ingredient_name, @ingredient_quantities = outcome.result
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def update_ingredient # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
