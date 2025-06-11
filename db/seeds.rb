@@ -278,7 +278,7 @@ recipe8 = user2.recipes.build(recipe8_params)
  { ingredient_id: Ingredient.find_or_create_by(name: 'Bulion').id, quantity: '350ml' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Szpinak').id, quantity: '1 garść' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Śmietana 30').id, quantity: '4 łyżki' },
- { ingredient_id: Ingredient.find_or_create_by(name: 'Parmezan').id, quantity: '1 garść, tarty' },
+ { ingredient_id: Ingredient.find_or_create_by(name: 'Parmezan tarty').id, quantity: '1 garść' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Słodka papryka').id, quantity: '1/2 łyżeczki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Pieprz cayenne').id, quantity: '1/4 łyżeczki' },
  { ingredient_id: Ingredient.find_or_create_by(name: 'Tymianek').id, quantity: '1/2 łyżeczki' },

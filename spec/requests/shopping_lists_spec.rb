@@ -206,6 +206,8 @@ RSpec.describe 'ShoppingLists', type: :request do
 
         shopping_list_ingredient_id = ShoppingListIngredient.last.id
 
+        expect(ShoppingListIngredient.exists?(shopping_list_ingredient_id)).to be true
+
         delete remove_ingredient_shopping_list_path(shopping_list.id),
                params: { ingredient_printable: 'Carrot - 3 sztuki' }
 
@@ -225,6 +227,8 @@ RSpec.describe 'ShoppingLists', type: :request do
 
         shopping_list_ingredient_id = ShoppingListIngredient.last.id
 
+        expect(ShoppingListIngredient.exists?(shopping_list_ingredient_id)).to be true
+
         sign_out user
 
         delete remove_ingredient_shopping_list_path(shopping_list.id),
@@ -233,6 +237,93 @@ RSpec.describe 'ShoppingLists', type: :request do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(new_user_session_path)
         expect(ShoppingListIngredient.exists?(shopping_list_ingredient_id)).to be true
+      end
+    end
+  end
+
+  describe 'GET /shopping_lists/:id/edit_name' do
+    context 'when user is authenticated' do
+      before do
+        sign_in user
+      end
+
+      it 'edit name partial is rendered' do
+        get edit_name_shopping_list_path(shopping_list, format: :turbo_stream)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when user is not authenticated' do
+      it 'redirects to log in page' do # rubocop:disable RSpec/MultipleExpectations
+        get edit_name_shopping_list_path(shopping_list, format: :turbo_stream)
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe 'PATCH /shopping_lists/:id/update_name' do
+    context 'when user is authenticated' do
+      before do
+        sign_in user
+      end
+
+      it 'updates name of shopping list' do # rubocop:disable RSpec/MultipleExpectations
+        put update_name_shopping_list_path(shopping_list), params: { name: 'Updated name' }
+
+        shopping_list = ShoppingList.last
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to shopping_list_path(shopping_list.id)
+        expect(shopping_list.name).to eq 'Updated name'
+      end
+    end
+
+    context 'when user is not authenticated' do
+      it 'redirects to log in page' do # rubocop:disable RSpec/MultipleExpectations
+        put update_name_shopping_list_path(shopping_list), params: { name: 'Updated name' }
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe 'PATCH /shopping_lists/:id/reset_list' do
+    before do
+      sign_in user
+      put shopping_list_path(shopping_list.id), params: { shopping_list: {
+        shopping_list_ingredients_attributes: { ShoppingListIngredient.new.hash => { name: 'Carrot', quantity: '3' } }
+      } }
+    end
+
+    context 'when user is authenticated' do
+      it 'resets shopping list' do # rubocop:disable RSpec/MultipleExpectations
+        shopping_list_ingredient_id = ShoppingListIngredient.last.id
+        expect(ShoppingListIngredient.exists?(shopping_list_ingredient_id)).to be true
+
+        put reset_list_shopping_list_path(shopping_list)
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to shopping_list_path(shopping_list.id)
+      end
+    end
+
+    context 'when user is not authenticated' do
+      before do
+        sign_out user
+      end
+
+      it 'redirects to log in page' do # rubocop:disable RSpec/MultipleExpectations
+        shopping_list_ingredient_id = ShoppingListIngredient.last.id
+        expect(ShoppingListIngredient.exists?(shopping_list_ingredient_id)).to be true
+
+        put reset_list_shopping_list_path(shopping_list)
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

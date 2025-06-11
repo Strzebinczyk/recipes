@@ -1,6 +1,19 @@
 <%= form_with(url: generate_pdf_path(format: "pdf"), method: :get, format: :pdf) do |f| %>
- <div class='text-center mb-4'>
+  <div class="mb-2 d-flex justify-content-center align-items-center py-2">
+    <div id='shopping_list_name'>
+      <% if @shopping_list.name %>
+        <h1 class='display-4 fw-normal'><%= @shopping_list.name %></h1>
+      <% else%>
+        <h1 class='display-4 fw-normal'>Lista dla planu <%= @shopping_list.plan.name %></h1>
+      <% end %>
+    </div>
+    <%= link_to edit_name_shopping_list_path(@shopping_list), data: { turbo_stream: true }, title: 'Edytuj nazwę listy zakupów' do %>
+      <% image_tag asset_path('edit-pencil.svg'), class: "icon-btn btn btn-success mx-3" %>
+    <% end %>
+  </div>
+  <div class='text-center mb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
+    <%= link_to 'Resetuj listę zakupów', reset_list_shopping_list_path(@shopping_list), data: { turbo_method: :patch, turbo_confirm: "Na pewno?" }, title: 'Resetuj listę zakupów', class: 'btn btn-outline-danger' %>
   </div>
   <div class='container mx-5 px-5'>
     <div class='mb-3 mx-5 px-5'>
@@ -31,7 +44,8 @@
           <% end %>
         </tbody>
       </table>
-      <%= f.hidden_field :name, value: @shopping_list.plan.name %>
+      <%= f.hidden_field :plan_name, value: @shopping_list.plan.name %>
+      <%= f.hidden_field :shopping_list_name, value: @shopping_list.name %>
     </div>
   </div>
 <% end %>

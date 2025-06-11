@@ -17,9 +17,13 @@ class PdfGeneratorService
     )
   end
 
-  def header
+  def header(name)
     @pdf.font 'Stylish Calligraphy', style: :normal
-    @pdf.text('Lista zakupów', align: :center, size: 36)
+    if name
+      @pdf.text(name, align: :center, size: 36)
+    else
+      @pdf.text('Lista zakupów', align: :center, size: 36)
+    end
     @pdf.move_down 30
   end
 
@@ -49,8 +53,8 @@ class PdfGeneratorService
     end
   end
 
-  def generate_pdf(list_items_array)
-    header
+  def generate_pdf(list_items_array, name)
+    header(name)
     content(list_items_array)
     @pdf.render
   end

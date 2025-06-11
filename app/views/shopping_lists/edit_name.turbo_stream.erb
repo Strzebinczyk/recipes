@@ -1,0 +1,3 @@
+<%= turbo_stream.replace :shopping_list_name do %>
+  <%= render partial: "shopping_lists/edit_name", locals: {shopping_list: @shopping_list} %>
+<% end %>

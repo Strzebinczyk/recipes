@@ -36,6 +36,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       patch :update_ingredient
       put :update_ingredient
       delete :remove_ingredient
+      patch :reset_list
+      put :reset_list
+      get :edit_name
+      patch :update_name
+      put :update_name
     end
   end
   resources :shopping_list_ingredients, only: %i[new create]
