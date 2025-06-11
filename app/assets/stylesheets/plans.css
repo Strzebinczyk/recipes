@@ -75,3 +75,12 @@ body:has(.shopping-list-show) {
   right: 5%;
   text-align: right;
 }
+
+.table-bkg {
+    background-color : rgb(255 255 255 / 75%);
+    box-shadow: 0 0 25px 25px rgb(255 255 255 / 75%);
+}
+
+table {
+  max-width: 950px;
+}

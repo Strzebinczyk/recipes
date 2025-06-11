@@ -1,0 +1,5 @@
+<% if shopping_list.name %>
+  <h1 class='display-4 fw-normal'><%= shopping_list.name %></h1>
+<% else %>
+  <h1 class='display-4 fw-normal'>Lista dla planu <%= shopping_list.plan.name %></h1>
+<% end %>

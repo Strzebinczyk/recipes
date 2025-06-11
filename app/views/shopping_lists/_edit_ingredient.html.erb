@@ -6,6 +6,7 @@
       <%= f.hidden_field :shopping_list_id, value: params[:id] %>
       <%= f.hidden_field :ingredient_name_to_edit, value: @ingredient_name %>
       <%= f.submit "Zapisz", class: "btn btn-outline-primary btn-sm" %>
+      <%= link_to "", "", id: "delete-ingredient", class: "btn-close mx-2" %>
     </div>
   <% end %>
 </td>
