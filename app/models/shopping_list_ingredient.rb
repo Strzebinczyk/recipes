@@ -12,8 +12,20 @@ class ShoppingListIngredient < ApplicationRecord
 
     quantity = self.quantity.strip
     quantity_amount = case quantity
+                      when %r{^\d* i \d*/\d*}
+                        whole_num = quantity[%r{^\d* i \d*/\d*}].split(' ')[0].to_f
+                        numerator = quantity[%r{^\d* i \d*/\d*}].split(' ')[2].split('/')[0].to_f
+                        denominator = quantity[%r{^\d* i \d*/\d*}].split(' ')[2].split('/')[1].to_f
+
+                        whole_num + (numerator / denominator)
+                      when %r{^\d* \d*/\d*}
+                        whole_num = quantity[%r{^\d* \d*/\d*}].split(' ')[0].to_f
+                        numerator = quantity[%r{^\d* \d*/\d*}].split(' ')[1].split('/')[0].to_f
+                        denominator = quantity[%r{^\d* \d*/\d*}].split(' ')[1].split('/')[1].to_f
+
+                        whole_num + (numerator / denominator)
                       when %r{^\d*/\d*}
-                        quantity.split('/')[0].to_f / quantity.split('/')[1].to_i
+                        quantity[%r{^\d*/\d*}].split('/')[0].to_f / quantity[%r{^\d*/\d*}].split('/')[1].to_i
                       when /^\d*[.]\d*/
                         quantity[/^\d*[.]\d*/].to_f
                       when /^\d*,\d*/
@@ -23,7 +35,7 @@ class ShoppingListIngredient < ApplicationRecord
                       end
     self.quantity_amount = quantity_amount.to_f unless quantity_amount == ''
     self.quantity_amount = nil if quantity_amount == ''
-    quantity_unit = quantity[/[[a-z]|ł]+.*/]
+    quantity_unit = quantity[/do smaku/] || quantity[/[[a-z]|ł]+[[a-z]|ł|ą|ę|ż|ź|ś|ć|ń|ó]*\z/]
     quantity_unit = quantity_unit.strip unless quantity_unit.nil?
     self.quantity_unit = standardize_quantity_unit(quantity_unit)
   end

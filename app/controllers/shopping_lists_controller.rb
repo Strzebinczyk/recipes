@@ -57,6 +57,36 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def reset_list
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    outcome = ShoppingLists::ResetList.run(shopping_list: @shopping_list)
+
+    if outcome.valid?
+      redirect_to shopping_list_url(@shopping_list), notice: 'List reset successfull.'
+    else
+      redirect_back fallback_location: root_path, alert: 'List could not be reset.',
+                    status: :unprocessable_entity
+    end
+  end
+
+  def edit_name
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def update_name
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+
+    if @shopping_list.update(name: params[:name])
+      redirect_to shopping_list_url(@shopping_list), notice: 'List name update successfull.'
+    else
+      redirect_back fallback_location: root_path, alert: 'List name could not be updated.',
+                    status: :unprocessable_entity
+    end
+  end
+
   private
 
   def shopping_list_params

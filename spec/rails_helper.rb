@@ -25,7 +25,9 @@ Capybara.server = :puma
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new app, browser: :chrome,
-                                      options: Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu])
+                                      options: Selenium::WebDriver::Chrome::Options.new(
+                                        args: %w[headless disable-gpu disable-dev-shm-usage]
+                                      )
 end
 
 Capybara.javascript_driver = :chrome

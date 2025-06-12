@@ -1,0 +1,10 @@
+<div class='pb-4'>
+    <%= form_with model: shopping_list do |f| %>
+      <div id='shopping_list_ingredients' class='mx-5' data-controller='new-shopping-list-ingredient'>
+      </div>
+      <%= link_to new_shopping_list_ingredient_path(shopping_list_id: shopping_list.id), data: { turbo_stream: true } do %>
+        <% image_tag asset_path('add-white.svg'), class: "btn btn-secondary mx-5" %>
+      <% end %>
+      <%= f.submit "Zapisz", class: "d-none btn btn-primary", id: 'submit_btn' %>
+    <% end %>
+</div>

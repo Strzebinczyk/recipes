@@ -1,15 +1,25 @@
+
+<div class="mb-2 d-flex justify-content-center align-items-center py-2">
+    <div id='shopping_list_name'>
+      <%= render '/shopping_lists/name', shopping_list: @shopping_list %>
+    </div>
+  <%= link_to edit_name_shopping_list_path(@shopping_list), data: { turbo_stream: true }, title: 'Edytuj nazwę listy zakupów' do %>
+    <% image_tag asset_path('edit-pencil.svg'), class: "icon-btn btn btn-success mx-3" %>
+  <% end %>
+</div>
 <%= form_with(url: generate_pdf_path(format: "pdf"), method: :get, format: :pdf) do |f| %>
- <div class='text-center mb-4'>
+  <div class='text-center pb-4'>
     <%= f.submit 'Generuj PDF', class: 'btn btn-primary my-4' %>
+    <%= link_to 'Resetuj listę zakupów', reset_list_shopping_list_path(@shopping_list), data: { turbo_method: :patch, turbo_confirm: "Na pewno?" }, title: 'Resetuj listę zakupów', class: 'btn btn-outline-danger' %>
   </div>
-  <div class='container mx-5 px-5'>
+  <div class='container mx-5 px-5 mb-4'>
     <div class='mb-3 mx-5 px-5'>
-      <table class="table mx-5 px-5">
+      <table class="table mx-5 px-5 table-bkg">
         <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col">Składnik</th>
-            <th scope="col">Akcje</th>
+            <th scope="col" style="width: 10%"></th>
+            <th scope="col" style="width: 75%">Składnik</th>
+            <th scope="col" style="width: 15%">Akcje</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +41,13 @@
           <% end %>
         </tbody>
       </table>
-      <%= f.hidden_field :name, value: @shopping_list.plan.name %>
+      <%= f.hidden_field :plan_name, value: @shopping_list.plan.name %>
+      <%= f.hidden_field :shopping_list_name, value: @shopping_list.name %>
     </div>
   </div>
 <% end %>
+<div class='mb-3 mx-5 px-5'>
+  <div class='mx-5 px-5'>
+    <%= render '/shopping_list_ingredients/add_shopping_list_ingredients', shopping_list: @shopping_list %>
+  </div>
+</div>

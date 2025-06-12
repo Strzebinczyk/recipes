@@ -106,6 +106,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_30_152825) do
 
   create_table "shopping_lists", force: :cascade do |t|
     t.integer "plan_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_shopping_lists_on_plan_id"

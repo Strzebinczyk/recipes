@@ -4,6 +4,9 @@ module Support
   module ShoppingListHelpers
     def create_plan(name = 'Plan')
       visit new_plan_path
+
+      expect(page).to have_content('Plan posiłków')
+
       fill_in 'Nazwa', with: name
 
       click_button 'Zapisz'
