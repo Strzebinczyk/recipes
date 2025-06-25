@@ -19,7 +19,7 @@ class PdfGeneratorService
 
   def header(name)
     @pdf.font 'Stylish Calligraphy', style: :normal
-    if name
+    if name != ''
       @pdf.text(name, align: :center, size: 36)
     else
       @pdf.text('Lista zakupów', align: :center, size: 36)
