@@ -1,10 +1,16 @@
 <%= turbo_frame_tag "edit_plan" %>
 <div class='container mx-auto plan-show'>
-  <div class="text-center mb-4">
-    <h1 class='display-4 fw-normal py-2'><%= @plan.name %></h1>
+  <div class="mb-2 d-flex justify-content-center align-items-center py-2">
+    <div id='plan_name'>
+      <h1 class='display-4 fw-normal py-2'><%= @plan.name %></h1>
+    </div>
+  <%= link_to edit_plan_path(@plan), data: { turbo_stream: true }, title: 'Edytuj nazwę planu posiłków' do %>
+    <% image_tag asset_path('edit-pencil.svg'), class: "icon-btn btn btn-success mx-3" %>
+  <% end %>
   </div>
-  <%= link_to "Lista zakupów", shopping_list_path(@plan.shopping_list), class: "btn btn-primary my-4" %>
-  <%= link_to "Edytuj", edit_plan_path(@plan), data: { turbo_frame: "edit_plan" }, class: "btn btn-secondary my-4" %>
+  <div class="text-center pb-4">
+    <%= link_to "Lista zakupów", shopping_list_path(@plan.shopping_list), class: "btn btn-primary my-4" %>
+  </div>
   <div class='container'>
     <% @plan.recipe_plans.each do |recipe_plan| %>
       <div class='row d-flex justify-content-center'>

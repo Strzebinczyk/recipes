@@ -58,7 +58,7 @@ RSpec.describe 'Plans', type: :request do
 
     describe 'GET /plans/:id/edit' do
       it 'gets plans edit page' do
-        get edit_plan_path(plan)
+        get edit_plan_path(plan, format: :turbo_stream)
 
         expect(response).to have_http_status(:ok)
       end
@@ -66,9 +66,9 @@ RSpec.describe 'Plans', type: :request do
 
     describe 'PUT /plans/:id' do
       it 'updates plan successfully' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
-        put plan_path(plan.id), params: { plan: {
+        put plan_path(plan.id, format: :turbo_stream), params: {
           name: 'Updated plan'
-        } }
+        }
         plan = Plan.last
 
         expect(plan).to be_present
@@ -78,7 +78,7 @@ RSpec.describe 'Plans', type: :request do
       end
 
       it 'does not update plan when plan id is not found' do
-        put plan_path(200), params: { plan: {
+        put plan_path(200, format: :turbo_stream), params: { plan: {
           name: 'Updated plan'
         } }
 
@@ -86,7 +86,7 @@ RSpec.describe 'Plans', type: :request do
       end
 
       it 'does not update plan when plan does not belong to user' do
-        put plan_path(other_plan.id), params: { plan: {
+        put plan_path(other_plan.id, format: :turbo_stream), params: { plan: {
           name: 'Updated plan'
         } }
 
@@ -94,9 +94,9 @@ RSpec.describe 'Plans', type: :request do
       end
 
       it 'plan not updated when details not provided' do
-        put plan_path(plan.id), params: { plan: {} }
+        put plan_path(plan.id, format: :turbo_stream), params: {}
 
-        expect(response).to have_http_status(:bad_request)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 
