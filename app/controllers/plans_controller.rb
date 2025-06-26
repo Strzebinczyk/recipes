@@ -17,6 +17,9 @@ class PlansController < ApplicationController
 
   def edit
     @plan = current_user.plans.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def create
@@ -33,7 +36,7 @@ class PlansController < ApplicationController
   def update
     @plan = current_user.plans.find(params[:id])
 
-    if @plan.update(plan_params)
+    if @plan.update(name: params[:name])
       redirect_to plan_url(@plan), notice: 'Plan was successfully updated.'
     else
       render :edit, status: :unprocessable_entity

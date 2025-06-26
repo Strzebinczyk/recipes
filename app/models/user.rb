@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :password, presence: true, length: { maximum: 60 }
   validates :email, uniqueness: true, length: { maximum: 60 }
-  validates :username, uniqueness: true, length: { maximum: 60 }
+  validates :username, uniqueness: true, length: { minimum: 1, maximum: 60 }
 
   has_many :recipes, dependent: :destroy
   has_many :plans, dependent: :destroy

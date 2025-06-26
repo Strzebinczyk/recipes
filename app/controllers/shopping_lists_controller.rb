@@ -5,7 +5,6 @@ class ShoppingListsController < ApplicationController
 
   def show
     @shopping_list = current_user.shopping_lists.includes(:shopping_list_ingredients, :ingredients).find(params[:id])
-    @shopping_list_ingredient = ShoppingListIngredient.new
     @ingredients_hash = ShoppingLists::GenerateIngredientsHash.run(shopping_list: @shopping_list).result
   end
 
